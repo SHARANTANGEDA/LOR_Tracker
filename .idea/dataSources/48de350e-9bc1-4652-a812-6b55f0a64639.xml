@@ -12,6 +12,7 @@
     </schema>
     <schema id="3" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
+      <Substituted>1</Substituted>
     </schema>
     <schema id="4" parent="1" name="lor_tracker">
       <Current>1</Current>

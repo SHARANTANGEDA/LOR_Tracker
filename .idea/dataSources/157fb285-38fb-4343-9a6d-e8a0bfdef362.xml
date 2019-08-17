@@ -12,11 +12,12 @@
     </schema>
     <schema id="3" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
+      <Substituted>1</Substituted>
     </schema>
     <schema id="4" parent="1" name="lor_tracker">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>latin1_swedish_ci</Collation>
+      <Visible>1</Visible>
     </schema>
     <schema id="5" parent="1" name="lvpei">
       <Collation>latin1_swedish_ci</Collation>

@@ -49,19 +49,14 @@ class UserManager(BaseUserManager):
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
-	USER_TYPE_CHOICES = (
-		(1, 'faculty'),
-		(2, 'hod'),
-		(3, 'admin')
-	)
-	id = models.AutoField(primary_key=True, default=1)
+	id = models.AutoField(primary_key=True)
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	email = models.EmailField(null=False, unique=True)
 	department_name = models.CharField(max_length=120)
 	role = models.CharField(max_length=10, null=False)
-	created_at = models.DateTimeField(auto_now_add=True)
-	updated_at = models.DateTimeField(auto_now=True)
+	created_at = models.DateTimeField(auto_now_add=True, null=False)
+	updated_at = models.DateTimeField(auto_now=True, null=False)
 	USERNAME_FIELD = 'email'
 	objects = UserManager()
 	# password = models.CharField(max_length=250)
@@ -79,7 +74,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
 class Lor(models.Model):
 	id = models.AutoField(primary_key=True)
-	studentId = models.CharField(max_length=50, null=False)
+	student_id = models.CharField(max_length=50, null=False)
 	college = models.CharField(max_length=300, null=False)
 	dead_line = models.DateTimeField(null=False)
 	country = models.CharField(max_length=250)
@@ -88,13 +83,7 @@ class Lor(models.Model):
 	cgpa = models.FloatField(null=False)
 	portal_address = models.URLField(null=False)
 	important = models.BooleanField(null=False, default=False)
-
-	class Meta:
-		permissions = (
-			("faculty", "Can access only their entries"),
-			("admin", "Can access  department entries"),
-			("hod", "Can access all Entries")
-		)
+	faculty = models.ForeignKey(AppUser, on_delete=models.CASCADE)
 
 # class blog(models.Model):
 # 	title = models.CharField(max_length=100, unique=True)
