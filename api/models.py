@@ -1,9 +1,4 @@
 from django.db import models
-from django.urls import reverse
-from django.shortcuts import render, get_object_or_404
-# from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -53,6 +48,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	email = models.EmailField(null=False, unique=True)
+	student_id = models.CharField(max_length=50)
 	department_name = models.CharField(max_length=120)
 	role = models.CharField(max_length=10, null=False)
 	created_at = models.DateTimeField(auto_now_add=True, null=False)
@@ -72,18 +68,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 		return full_name.strip()
 
 
-class Lor(models.Model):
-	id = models.AutoField(primary_key=True)
-	student_id = models.CharField(max_length=50, null=False)
-	college = models.CharField(max_length=300, null=False)
-	dead_line = models.DateTimeField(null=False)
-	country = models.CharField(max_length=250)
-	email = models.EmailField(null=False)
-	phone = models.CharField(max_length=20)
-	cgpa = models.FloatField(null=False)
-	portal_address = models.URLField(null=False)
-	important = models.BooleanField(null=False, default=False)
-	faculty = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+
 
 # class blog(models.Model):
 # 	title = models.CharField(max_length=100, unique=True)

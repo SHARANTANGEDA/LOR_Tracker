@@ -4,39 +4,58 @@ from django.shortcuts import render
 from rest_framework import permissions, generics
 from rest_framework.response import Response
 from .serializers import *
-from django.contrib.auth.decorators import user_passes_test
 from rest_framework.views import APIView
-# from knox.auth import TokenAuthentication
 from .models import *
+from .permissions import HasGroupPermission
 
 
-# @login_required
-# @user_passes_test(lambda u: u.groups.filter(name='faculty').count() == 0, login_url='/api/auth')
-class GetAllUsers(APIView):
+class GetMyEntries(APIView):
 	# print('here', TokenAuthentication.)
 	# authentication_classes = (TokenAuthentication,)
 	permission_classes = [
 		permissions.IsAuthenticated,
+		HasGroupPermission
 	]
-	serializer_class = AllUsersSerializer
+	required_groups = {
+		'GET': ['faculty'],
+	}
+	serializer_class = AllEntriesSerializer
 
 	def get(self, request):
-		users = AppUser.objects.all()
-		user_passes_test(lambda u: u.groups.filter(name='faculty').count() == 0, login_url='/api/auth')
-		return Response(AllUsersSerializer(users, many=True).data)
+		entries = Lor.objects.filter(faculty_id=self.request.user.id)
+		return Response(AllEntriesSerializer(entries, many=True).data)
 
 
 class AddEntry(generics.GenericAPIView):
 	permission_classes = [
 		permissions.IsAuthenticated,
+		HasGroupPermission
 	]
+	required_groups = {
+		'POST': ['faculty'],
+	}
 	serializer_class = AddEntrySerializer
 
 	def post(self, request, *args, **kwargs):
-		user_passes_test(lambda u: u.groups.filter(name='faculty').count() == 0, login_url='/api/auth')
 		serializer = self.get_serializer(data=request.data)
 		serializer.is_valid(raise_exception=True)
 		lor_entry = serializer.save()
 		return Response({
 			"Entry": AddEntrySerializer(lor_entry, context=self.get_serializer_context()).data,
 		})
+
+
+class GetAllEntries(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ['admin'],
+	}
+	serializer_class = AllEntriesSerializer
+
+	def get(self, request):
+		entries = Lor.objects.all()
+		print(entries)
+		return Response(AllEntriesSerializer(entries, many=True).data)

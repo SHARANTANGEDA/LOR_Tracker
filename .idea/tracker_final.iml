@@ -18,6 +18,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@types/axios-case-converter" level="application" />
+    <orderEntry type="library" name="@types/axios-token-interceptor" level="application" />
+    <orderEntry type="library" name="@types/create-react-class" level="application" />
+    <orderEntry type="library" name="@types/react" level="application" />
+    <orderEntry type="library" name="@types/react-autocomplete" level="application" />
+    <orderEntry type="library" name="@types/react-bootstrap" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
