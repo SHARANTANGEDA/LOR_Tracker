@@ -1,5 +1,5 @@
 from django.urls import path
-from .auth import LoginView, RegisterFaculty, RegisterHod, RegisterAdmin, Logout
+from .auth import *
 # from lor.api import AddEntry
 
 # url('^api-auth/', include('rest_framework.urls'))
@@ -10,7 +10,7 @@ urlpatterns = [
 	path('api/auth/registerFaculty', RegisterFaculty.as_view()),
 	path('api/auth/registerHod', RegisterHod.as_view()),
 	path('api/auth/registerAdmin', RegisterAdmin.as_view()),
-
+	path('api/auth/registerStudent', RegisterStudent.as_view()),
 	# path('api/lor/getAllUsers', GetAllUsers.as_view()),
 	# path('api/lor/AddEntry', AddEntry.as_view()),
 

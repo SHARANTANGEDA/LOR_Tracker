@@ -2,174 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7022dd86-529b-4f3e-99a4-b2159242c198" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/android-icon-144x144.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/android-icon-192x192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/android-icon-36x36.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/android-icon-48x48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/android-icon-72x72.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/android-icon-96x96.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-114x114.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-120x120.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-144x144.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-152x152.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-180x180.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-57x57.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-60x60.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-72x72.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-76x76.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon-precomposed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/apple-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/browserconfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/favicon-16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/favicon-32x32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/favicon-96x96.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/ms-icon-144x144.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/ms-icon-150x150.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/ms-icon-310x310.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/favicons/ms-icon-70x70.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/accountActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/authActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/dAActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/homeActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/profileActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/sAActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/ChangePassword.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/is-empty.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/ContactUs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/PrivateRoute.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Spinner.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/TextAreaGroupField.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/TextFieldGroup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/UploadSuccess.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/downloading.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/plugins/addLinkPlugin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/spinner.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchResults.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/StudentHomeFeed.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/EnterPin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/FilterLanding.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Footer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/ForgotPassword.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Landing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/ModalLogin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NotFound.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/SearchNotFound.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Warning.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/upload/Success.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadFiles.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/404.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/BIts_Logo-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/SAIcons/centerUser.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/SAIcons/customers.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/SAIcons/doctor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/SAIcons/medical-history.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/SAIcons/patient.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/audioBack.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/bitsLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/bitslogoFull.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/checked.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/cloudSuccess.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/droid404.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/file.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/folder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/alpha.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/audioBook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/competitveExam.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/graduate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/hammer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/others.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/psy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/school.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/stories.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/icons/world.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/images.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/invertedEye.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/landingIcons/admin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/landingIcons/bitsfinal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/landingIcons/hod.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/landingIcons/professor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/landingIcons/student.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/logo2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/accountReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/authReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/errorReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/homeReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/resetPasswordReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/searchReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/serviceWorker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/store.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/utils/URL.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/utils/getAge.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/utils/getLocalDate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/utils/setAuthToken.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/validation/is-empty.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/yarn.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/permissions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lor/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tracker_final/custom_jwt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/lorActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditAccount.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/switch.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/DatePickerInputField.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/CreateLor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/DateCustomInput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/FacultySelector.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/LorSelector.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/SubmitLor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/SavedLorItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/ViewSavedLor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/datePicker.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/img/insert-picture-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/checkboxReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/lorReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/utils/convertToBackendFormat.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/utils/convertToSelectArray.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/utils/headers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/migrations/0002_auto_20190917_0637.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/migrations/0003_auto_20190917_0639.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/migrations/0004_auto_20190917_0640.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/migrations/0005_auto_20190919_1916.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/permissions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student_lor/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/tracker_final.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tracker_final.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/lor.py" beforeDir="false" afterPath="$PROJECT_DIR$/lor/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/0002_lor_faculty.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/0003_auto_20190817_1650.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/djreact_2019-04-17.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/accountActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/accountActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/authActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/homeActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/homeActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/StudentHomeFeed.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/studentDashboard/StudentHomeFeedTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lor/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tracker_final/custom_jwt.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker_final/custom_jwt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tracker_final/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker_final/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tracker_final/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker_final/urls.py" afterDir="false" />
     </list>
@@ -209,6 +103,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Less File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -223,13 +119,17 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1PY67IduBcH5etPhPbo89CrO44p" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql.8" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="11.10.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../git_projects/new/ult/lead_manager_react_django" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/frontend/src/reducers" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -237,16 +137,20 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.textmate.bundles" />
+    <property name="ts.external.directory.path" value="/usr/local/lib/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/reducers" />
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/utils" />
+      <recent name="$PROJECT_DIR$/student_lor" />
       <recent name="$PROJECT_DIR$/frontend/frontend/public" />
       <recent name="$PROJECT_DIR$/frontend/frontend/src/img/landingIcons" />
-      <recent name="$PROJECT_DIR$/frontend/frontend/src" />
-      <recent name="$PROJECT_DIR$/lor" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor" />
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor" />
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/student_dashboard" />
       <recent name="$PROJECT_DIR$/tracker_final" />
       <recent name="$PROJECT_DIR$/lor" />
     </key>
@@ -367,7 +271,16 @@
       <workItem from="1567241816875" duration="57000" />
       <workItem from="1567673261800" duration="723000" />
       <workItem from="1568133631487" duration="508000" />
-      <workItem from="1568134166868" duration="318000" />
+      <workItem from="1568134166868" duration="1467000" />
+      <workItem from="1568299506237" duration="73000" />
+      <workItem from="1568299636054" duration="5701000" />
+      <workItem from="1568336508798" duration="7525000" />
+      <workItem from="1568513854061" duration="9767000" />
+      <workItem from="1568546215652" duration="18753000" />
+      <workItem from="1568601619286" duration="19973000" />
+      <workItem from="1568685410470" duration="23331000" />
+      <workItem from="1568794413769" duration="588000" />
+      <workItem from="1568875050691" duration="13000000" />
     </task>
     <task id="LOCAL-00001" summary="#Initial Commit&#10;#Completed Authentication&#10;#Created add_lor and User Models">
       <created>1565873737853</created>
@@ -383,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566062572359</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="#Removed Knox token auth and implemented Rest Token Auth&#10;#Added Add Entry form Backend API&#10;#Fixed some minor bugs">
+      <created>1568134653586</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1568134653586</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,6 +323,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="#Initial Commit&#10;#Completed Authentication&#10;#Created add_lor and User Models" />
     <MESSAGE value="#Removed Knox token auth and implemented Rest Token Auth&#10;#Added Add Entry form Backend API&#10;#Fixed some minor bugs" />
     <option name="LAST_COMMIT_MESSAGE" value="#Removed Knox token auth and implemented Rest Token Auth&#10;#Added Add Entry form Backend API&#10;#Fixed some minor bugs" />

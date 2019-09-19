@@ -3,8 +3,6 @@ import {
   ENTER_OTP,
   ENTER_PASSWORD,
   GET_ERRORS,
-  GET_LANDING_CATALOGUE,
-  GET_LANDING_HOME,
   HOME_LOADING,
   SET_AUTH_LOADING,
   SET_CURRENT_USER
@@ -169,4 +167,5 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem('jwtToken');
   setAuthToken(false);
   dispatch(setCurrentUser({}));
+
 };

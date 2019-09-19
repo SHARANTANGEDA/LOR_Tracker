@@ -51,6 +51,8 @@ class RegisterStudentSerializer(serializers.ModelSerializer):
 			email=validated_data['email'],
 			password=validated_data['password'],
 			department_name=validated_data['department_name'],
+			# graduation_status=validated_data['graduation_status'],
+			# cgpa=validated_data['cgpa'],
 			role='student'
 		)
 		group, created = Group.objects.get_or_create(name='student')

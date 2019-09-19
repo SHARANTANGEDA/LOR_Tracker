@@ -5,6 +5,8 @@ import homeReducer from './homeReducer'
 import searchReducer from './searchReducer'
 import accountReducer from './accountReducer'
 import resetPasswordReducer from './resetPasswordReducer'
+import lorReducer from "./lorReducer";
+import checkboxReducer from "./checkboxReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +14,7 @@ export default combineReducers({
   home: homeReducer,
   search: searchReducer,
   account: accountReducer,
-  reset: resetPasswordReducer
+  reset: resetPasswordReducer,
+  lor: lorReducer,
+  checkbox: checkboxReducer
 })

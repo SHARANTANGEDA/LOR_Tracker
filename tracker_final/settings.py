@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import datetime
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -29,27 +29,27 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_framework_jwt',
-    'api',
-    'lor',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'rest_framework',
+	'rest_framework.authtoken',
+	'rest_framework_jwt',
+	'api',
+	'student_lor',
 ]
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lor_tracker',
-        'USER': 'lor',
-        'PASSWORD': '69791928',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': 'lor_tracker',
+		'USER': 'lor',
+		'PASSWORD': '69791928',
+		'HOST': 'localhost',
+		'PORT': '',
+	}
 }
 
 # DATABASES = {
@@ -62,32 +62,33 @@ AUTH_USER_MODEL = 'api.AppUser'
 
 #         'rest_framework.authentication.TokenAuthentication',
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+	),
+	'DEFAULT_PERMISSION_CLASSES': (
+		'rest_framework.permissions.IsAuthenticated',
+	)
 }
 
 JWT_AUTH = {
-    'JWT_SECRET_KEY': 'lor_tracker',
-    'JWT_GET_USER_SECRET_KEY': None,
-    'JWT_PUBLIC_KEY': None,
-    'JWT_PRIVATE_KEY': None,
-    'JWT_ALGORITHM': 'HS256',
-    'JWT_VERIFY': True,
-    'JWT_VERIFY_EXPIRATION': True,
-    'JWT_LEEWAY': 0,
-    'JWT_AUDIENCE': None,
-    'JWT_ISSUER': None,
-    'JWT_ALLOW_REFRESH': False,
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
-    'JWT_AUTH_COOKIE': None,
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'tracker_final.custom_jwt.jwt_response_payload_handler',
-    'JWT_PAYLOAD_HANDLER': 'tracker_final.custom_jwt.jwt_payload_handler',
+	'JWT_SECRET_KEY': 'lor_tracker',  # TODO Change it
+	'JWT_GET_USER_SECRET_KEY': None,
+	'JWT_PUBLIC_KEY': None,
+	'JWT_PRIVATE_KEY': None,
+	'JWT_ALGORITHM': 'HS256',
+	'JWT_VERIFY': True,
+	'JWT_VERIFY_EXPIRATION': True,
+	'JWT_LEEWAY': 0,
+	'JWT_AUDIENCE': None,
+	'JWT_ISSUER': None,
+	'JWT_ALLOW_REFRESH': False,
+	'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+	'JWT_AUTH_COOKIE': None,
+	'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+	'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+	'JWT_RESPONSE_PAYLOAD_HANDLER': 'tracker_final.custom_jwt.jwt_response_payload_handler',
+	'JWT_PAYLOAD_HANDLER': 'tracker_final.custom_jwt.jwt_payload_handler',
+	'JWT_PAYLOAD_GET_USERNAME_HANDLER': 'tracker_final.custom_jwt.jwt_get_username_from_payload_handler'
 }
 # 'JWT_PAYLOAD_HANDLER': 'custom_jwt.jwt_payload_handler'
 
@@ -116,61 +117,57 @@ JWT_AUTH = {
 # }
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'tracker_final.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [os.path.join(BASE_DIR, 'templates')]
+		,
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
+			],
+		},
+	},
 ]
 
 WSGI_APPLICATION = 'tracker_final.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-
 
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+	{
+		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+	},
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -184,7 +181,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

@@ -170,20 +170,45 @@ Link:focus {
 /*  background: #ffe100;*/
 /*}*/
 
+/*.nav-link:hover {*/
+/*  background: #ff9100;*/
+/*  color: #ffec96;*/
+/*  border: #ffec96;*/
+/*}*/
+/*.nav-item:hover {*/
+/*  background: #ff9100;*/
+/*  color: #ffec96;*/
+/*  border: #ffec96;}*/
+/*.dropdown:hover {*/
+/*  background: #ff9100;*/
+/*  color: #ffec96;*/
+/*  border: #ffec96;}*/
+/*.nav-link {*/
+/*  background:#ffec96;*/
+/*  color: #ff9100;*/
+/*  border: #ff9100;*/
+/*}*/
+
 .nav-link:hover {
-  background: #030000;
+  background: #ff9100;
+  color: #ffec96;
+  border: #ffec96;
 }
 .nav-item:hover {
-  background: #030000;
-}
+  background: #ff9100;
+  color: #ffec96;
+  border: #ffec96;}
 .dropdown:hover {
-  background: #030000;
-}
+  background: #ff9100;
+  color: #ffec96;
+  border: #ffec96;}
 .nav-link {
-background:#008cff;
+  background:#ffb76f;
+  color: #000d69;
+  border: #000d69;
 }
 .ul {
-  background:#008cff;
+  background:#ffec96;
 
 }
 .dropdown:hover .dropdown-menu {

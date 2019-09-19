@@ -48,11 +48,16 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	email = models.EmailField(null=False, unique=True)
-	student_id = models.CharField(max_length=50)
 	department_name = models.CharField(max_length=120)
 	role = models.CharField(max_length=10, null=False)
 	created_at = models.DateTimeField(auto_now_add=True, null=False)
 	updated_at = models.DateTimeField(auto_now=True, null=False)
+	# # Student Additional
+	# student_id = models.CharField(max_length=50 )
+	# graduation_status = models.BooleanField(default=False)
+	# cgpa = models.FloatField(null=False)
+	# degree = models.CharField(max_length=50)
+
 	USERNAME_FIELD = 'email'
 	objects = UserManager()
 	# password = models.CharField(max_length=250)
@@ -61,9 +66,9 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 		ordering = ['id', 'email', 'role', 'first_name', 'last_name', 'department_name', 'created_at', 'password']
 
 	def get_full_name(self):
-		'''
+		"""
 		Returns the first_name plus the last_name, with a space in between.
-		'''
+		"""
 		full_name = '%s %s' % (self.first_name, self.last_name)
 		return full_name.strip()
 
