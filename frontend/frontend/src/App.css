@@ -7,6 +7,16 @@ img {
 div {
   white-space: pre-wrap;
 }
+
+.verticalLine {
+  border-left: 1px solid white;
+  height: 100%;
+}
+
+hr.horizontalLine {
+  border: 5px solid green;
+  border-radius: 5px;
+}
 /*.DateInput {*/
 /*  font-size: 12px;*/
 /*  !*font-weight: normal;*!*/
@@ -190,25 +200,25 @@ Link:focus {
 /*}*/
 
 .nav-link:hover {
-  background: #ff9100;
+  background: #ffc643;
   color: #ffec96;
   border: #ffec96;
 }
 .nav-item:hover {
-  background: #ff9100;
+  background: #ffc643;
   color: #ffec96;
   border: #ffec96;}
 .dropdown:hover {
-  background: #ff9100;
+  background: #ffc643;
   color: #ffec96;
   border: #ffec96;}
 .nav-link {
-  background:#ffb76f;
+  background:#ffe36b;
   color: #000d69;
   border: #000d69;
 }
 .ul {
-  background:#ffec96;
+  background:#ffc643;
 
 }
 .dropdown:hover .dropdown-menu {

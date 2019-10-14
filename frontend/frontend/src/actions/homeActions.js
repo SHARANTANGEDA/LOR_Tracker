@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {
-  CLEAR_ERRORS, GET_NAME_RESULTS, GET_STUDENT_HOME, HOME_LOADING, SEARCH_LOADING,
+  CLEAR_ERRORS, GET_FACULTY_HOME, GET_NAME_RESULTS, GET_STUDENT_HOME, HOME_LOADING, SEARCH_LOADING,
 } from './types'
 import { tokenHeader } from '../utils/headers';
 
@@ -16,6 +16,16 @@ export const studentHome=() => dispatch => {
   )
 };
 
+export const facultyHome=() => dispatch => {
+  axios.get('api/faculty/home', tokenHeader()).then(res => {
+    dispatch({
+        type: GET_FACULTY_HOME,
+        payload: res.data
+      })
+  }).catch(err =>
+      console.log(err)
+  )
+};
 export const favourite=(id) => dispatch => {
   axios.get(`/api/upload/favourite/${id}`)
     .then(res => {

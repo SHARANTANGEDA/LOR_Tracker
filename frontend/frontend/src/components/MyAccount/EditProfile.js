@@ -47,10 +47,12 @@ class EditProfile extends Component {
 					phone: nextProps.account.details.phone,
 					cgpa: nextProps.account.details.cgpa,
 					graduationStatus: nextProps.account.details.graduation_status,
-					degree: {value: nextProps.account.details.degree, label: nextProps.account.details.degree}
-
 				})
-
+				if(nextProps.account.details.graduation_status) {
+					this.setState({degree: {value: nextProps.account.details.degree, label: nextProps.account.details.degree}})
+				}else {
+					this.setState({degree: nextProps.account.details.degree})
+				}
 			}
 
 		}
@@ -70,6 +72,11 @@ class EditProfile extends Component {
 	}
 
 	onSwitch(e) {
+		if(!this.state.graduationStatus) {
+			this.setState({degree: null})
+		}else {
+			this.setState({degree: ''})
+		}
 		this.setState({graduationStatus: !this.state.graduationStatus})
 	}
 
@@ -91,7 +98,21 @@ class EditProfile extends Component {
 					degree: this.state.degree
 				}
 			})
-			const profileData = {
+			console.log(this.state.degree, this.state.degree.length);
+			if(this.state.degree.length) {
+				const profileData = {
+				student_id: this.state.studentId,
+				full_name: this.state.fullName,
+				email: this.state.emailPersonal,
+				phone: this.state.phone,
+				cgpa: this.state.cgpa,
+				graduation_status: this.state.graduationStatus.toString(),
+				degree: this.state.degree
+			};
+			this.props.updateInfo(profileData);
+			console.log(profileData)
+			}else {
+				const profileData = {
 				student_id: this.state.studentId,
 				full_name: this.state.fullName,
 				email: this.state.emailPersonal,
@@ -102,6 +123,8 @@ class EditProfile extends Component {
 			};
 			this.props.updateInfo(profileData);
 			console.log(profileData)
+			}
+
 		}
 	}
 
@@ -112,12 +135,14 @@ class EditProfile extends Component {
 				...base,
 				height: '50px',
 				'min-height': '34px',
-				'max-height': '50px'
+				'max-height': '50px',
+				'min-width':'250px'
 			}),
 			menuList: base => ({
 				...base,
 				minHeight: '200px',
-				height: '200px'
+				height: '200px',
+				minWidth:'250px'
 			}),
 		};
 		const degreeOptions = [
@@ -131,6 +156,42 @@ class EditProfile extends Component {
 			profileContent = (<Spinner/>)
 		} else {
 			if (this.props.auth.user.role === 'student') {
+				let graduationSelect;
+				if(this.state.graduationStatus) {
+					graduationSelect= (
+						<div className='form-group row'>
+															{/*<label className='d-flex justify-content-start */}
+                              {/*                           '></label>*/}
+							<label className='d-flex justify-content-start align-items-center'
+																	 htmlFor="degree"><h6>Select your highest degree{' '}</h6></label>
+															<Select options={degreeOptions}
+																			className={classnames('isSearchable', {'is-invalid': errors.degree})}
+																			styles={customSelectStyles}
+																			placeholder="Select your graduation degree"
+																			name="degree" value={this.state.degree}
+																			onChange={this.onCatChange}>
+															</Select>
+						</div>
+					)
+				}else {
+					graduationSelect = (
+						<div className='row form-group'>
+														{/*<div className='col-md-6 '>*/}
+														{/*	<h6 className='d-flex justify-content-start*/}
+                            {/*                                 align-items-center'>Expected Year of Graduation</h6>*/}
+														{/*</div>*/}
+															<label className='d-flex justify-content-start align-items-center'
+																	 htmlFor="degree"><h6>Expected Year of Graduation:{' '}</h6></label>
+															<TextFieldGroup
+															placeholder="Ex. 2021"
+															error={errors.degree}
+															type="text" onChange={this.onChange}
+															value={this.state.degree}
+															name="degree"
+														/>
+						</div>
+					)
+				}
 				console.log({errors: errors});
 				profileContent = (
 					<div className='d-flex justify-content-center'>
@@ -198,7 +259,7 @@ class EditProfile extends Component {
 																						name="studentId"
 														/>
 													</div>
-													<div className="col-md-3">
+													<div className="col-md-4">
 														<label className='d-flex justify-content-start'
 																	 htmlFor="phone"><h6>Mobile No</h6></label>
 
@@ -208,9 +269,11 @@ class EditProfile extends Component {
 																						value={this.state.phone} name="phone"
 														/>
 													</div>
-													<div className="col-md-5">
-														<label className='d-flex justify-content-start'
-																	 htmlFor="phone"><h6>Graduation Status</h6></label>
+												</div>
+												<div className="row">
+													<div className='col-md-6'>
+														<h6 className='d-flex justify-content-start'
+																	 htmlFor="phone"><h6>Graduation Status</h6></h6>
 														<MDBFormInline>
 															<MDBInput gap onClick={this.onSwitch}
 																				checked={this.state.graduationStatus}
@@ -223,30 +286,12 @@ class EditProfile extends Component {
 															/>
 														</MDBFormInline>
 													</div>
-												</div>
-												<div className="form-group row">
-													<div className="row col-md-6 text-center">
-														<div className='col-md-4 '>
-															<h6 className='d-flex justify-content-start
-                                                             align-items-center'>Select your degree</h6>
-														</div>
-														<div className='col-md-8 '>
-															<Select options={degreeOptions}
-																			className={classnames('isSearchable', {'is-invalid': errors.degree})}
-																			styles={customSelectStyles}
-																			placeholder="Select your graduation degree"
-																			name="country" value={this.state.degree}
-																			onChange={this.onCatChange}>
-															</Select>
-														</div>
-
-
+													{graduationSelect}
 													</div>
-													<div className="col-md-6 d-flex justify-content-end">
+												<div className="form-group row d-flex justify-content-end">
 														<button className="btn btn-primary w-30 my-1"
 																		type="submit">Update Information
 														</button>
-													</div>
 												</div>
 											</form>
 										</Collapse>

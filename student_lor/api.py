@@ -8,6 +8,9 @@ from rest_framework.views import APIView
 from .models import *
 from .permissions import HasGroupPermission
 from django.core.exceptions import ObjectDoesNotExist
+from .validations.validate_lor_submission import validate_lor_submission
+import json
+from django.core.serializers import serialize
 
 
 # Edit my profile
@@ -95,8 +98,24 @@ class AddFacultyForLOR(generics.GenericAPIView):
 
 	def post(self, request, *args, **kwargs):
 		serializer = self.get_serializer(data=request.data, many=True)
-		serializer.is_valid(raise_exception=True)
-		lor_details = serializer.save()
+		print('received:', request.data)
+		validate_lor_submission(data=request.data)
+		entries = []
+		# TODO Check for Integrity Errors
+		for validated_data in request.data:
+			entry = FacultyListLor.objects.create(
+				lor_id=validated_data['lor_id'],
+				faculty_id=validated_data['faculty_id'],
+				courses_done=validated_data['courses_done'],
+				projects_done=validated_data['projects_done'],
+				thesis_done=validated_data['thesis_done'],
+				status=validated_data['status'],
+				others=validated_data['others']
+			)
+			entries.append(entry)
+		# serializer.is_valid(raise_exception=True)
+		# lor_details = serializer.save()
+		print('SUCCESS')
 		return Response({"success": True})
 
 
@@ -116,6 +135,36 @@ class GetMySavedLor(APIView):
 		return Response(ViewSavedLor(entries, many=True).data)
 
 
+class GetAppliedLor(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ['student'],
+	}
+	serializer_class = ViewAppliedFacultyListSerializer
+
+	def get(self, request):
+		entries = Lor.objects.filter(user=self.request.user.id)
+		result = []
+		for entry in entries:
+			str_data = serialize('json', FacultyListLor.objects.filter(lor=entry.id))
+			data = json.loads(str_data)
+			for item in data:
+				item["fields"]["lor"] = json.loads(serialize('json', Lor.objects.filter(id=item["fields"]["lor"])))[0]["fields"]
+				# item["fields"]["faculty"] = json.loads(
+				# 	serialize('json',
+				# 			  AppUser.objects.values("id", "email", "first_name", "last_name", "department_name")
+				# 			  .filter(id=item["fields"]["faculty"])))[0]["fields"]
+				item["fields"]["faculty"] = AppUser.objects.values("id",
+							"email", "first_name", "last_name", "department_name").filter(id=item["fields"]["faculty"])[0]
+				result.append(item["fields"])
+
+		print(result)
+		return Response(result)
+
+
 # List of Universities in database
 class GetUnivList(APIView):
 	permission_classes = [
@@ -130,7 +179,7 @@ class GetUnivList(APIView):
 	def get(self, request):
 		entries = Lor.objects.order_by('university_name').values('university_name').distinct()
 		print('University: ', entries)
-		entries=list(entries)
+		entries = list(entries)
 		print('UniversityList: ', entries)
 		# return Response(GetUnivListSerializer(entries, many=True).data)
 		return Response(entries)
@@ -153,23 +202,3 @@ class GetFacultyList(APIView):
 		return Response(GetFacultyListSerializer(entries, many=True).data)
 
 
-# View Saved Lor
-class GetAppliedLor(APIView):
-	permission_classes = [
-		permissions.IsAuthenticated,
-		HasGroupPermission
-	]
-	# permission_classes = (permissions.AllowAny,)
-	required_groups = {
-		'GET': ["student"],
-	}
-	serializer_class = ViewAppliedFacultyListSerializer
-
-	def get(self, request):
-		print(request.user.id)
-		entries = Lor.objects.filter(user=self.request.user.id)
-		result = []
-		for entry in entries:
-			applied = FacultyListLor.objects.filter(lor_id=entry.id)
-			result.append(applied)
-		return Response(ViewAppliedFacultyListSerializer(result, many=True).data)

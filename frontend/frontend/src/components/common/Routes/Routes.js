@@ -9,6 +9,7 @@ import EditProfile from '../../MyAccount/EditProfile'
 import CreateLor from '../../student/CreateLor'
 import ViewSavedLor from '../../student/ViewSavedLor/ViewSavedLor'
 import SubmitLor from '../../student/SubmitLor/SubmitLor'
+import ViewLorRequestsStatus from '../../student/ViewLorRequestsStatus/ViewLorRequestsStatus'
 const Routes = () => {
   return (
 
@@ -21,6 +22,7 @@ const Routes = () => {
         <PrivateRoute exact path='/fillLor' component={CreateLor}/>
         <PrivateRoute exact path='/viewMyLor' component={ViewSavedLor}/>
         <PrivateRoute exact path='/submitLor' component={SubmitLor}/>
+        <PrivateRoute exact path='/viewAppliedLor' component={ViewLorRequestsStatus}/>
         <Route path="*" component={NotFound} />
       </Switch>
     </div>

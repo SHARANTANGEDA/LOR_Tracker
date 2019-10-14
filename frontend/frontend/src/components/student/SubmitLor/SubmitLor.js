@@ -29,7 +29,8 @@ class SubmitLor extends Component {
 			lorId: null,
 			isLorSelectorOpen: true,
 			isFacultySelectorOpen: false,
-			lorWarning:null,
+			lorWarning: null,
+			makeLorSelectorInvisible: false,
 			errors: {}
 		};
 
@@ -50,30 +51,34 @@ class SubmitLor extends Component {
 	toggleLorSelector() {
 		this.setState({isLorSelectorOpen: !this.state.isLorSelectorOpen})
 	}
+
 	toggleFacultySelector() {
-				this.setState({isFacultySelectorOpen: !this.state.isFacultySelectorOpen})
+		this.setState({isFacultySelectorOpen: !this.state.isFacultySelectorOpen})
 	}
+
 	changeHandler(e) {
 		this.setState({[e.target.name]: e.target.value})
 	}
 
 	onSelectLor(e) {
-		this.setState({isLorSelectorOpen: false, lorId: this.props.lor.selectLor, lorWarning: null,
-			isFacultySelectorOpen: true})
+		this.setState({
+			isLorSelectorOpen: false, lorId: this.props.lor.selectLor, lorWarning: null,
+			isFacultySelectorOpen: true, makeLorSelectorInvisible: true
+		})
 	}
 
 
 	onSubmit(e) {
 		this.setState({isFacultySelectorOpen: false})
-		if(this.props.checkbox.selected.length===0) {
+		if (this.props.checkbox.selected.length === 0) {
 			this.setState({facultyWarning: 'Please select at least one faculty'})
 		}
-		if(this.state.lorId===null) {
-						this.setState({lorWarning: 'Please an Lor'})
+		if (this.state.lorId === null) {
+			this.setState({lorWarning: 'Please an Lor'})
 		}
 		e.preventDefault();
-		let dataArray=convertToBackendFormat(this.state.lorId, this.props.checkbox.selected);
-		console.log({data:dataArray})
+		let dataArray = convertToBackendFormat(this.state.lorId, this.props.checkbox.selected);
+		console.log({data: dataArray})
 		this.props.submitLor(dataArray);
 	}
 
@@ -82,51 +87,65 @@ class SubmitLor extends Component {
 		if (this.props.auth.user.role !== 'student') {
 			window.location.href = '/404';
 		}
+		let selectLorCode = null, selectFacultyCode = null;
+		if (!this.state.makeLorSelectorInvisible) {
+			selectLorCode = (
+				<div className='row col-md-8 d-flex justify-content-center'>
+					<button onClick={this.toggleLorSelector}
+									className="rounded border
+                                                d-flex justify-content-between align-items-center
+                                                flex-grow-1 pl-1 w-100 my-3"
+									style={{
+										boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
+											'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+										fontSize: '25px', background: '#000d69', color: 'white'
+									}}>
+						Step-1: Select the LOR You want to use<i className="fas fa-angle-down"/></button>
+					<Collapse isOpened={this.state.isLorSelectorOpen} style={{listStyleType: 'none'}}>
+						<div className='row'>
+							<LorSelector/>
+						</div>
+						<div className='row d-flex justify-content-end' style={{margin: '5px'}}>
+							<button onClick={this.onSelectLor} className='btn btn-primary d-flex justify-content-end'>Confirm Lor
+							</button>
+						</div>
+					</Collapse>
+				</div>
+			)
+		} else {
+			selectFacultyCode = (
+				<div className='row col-md-8 d-flex justify-content-center'>
+					<button onClick={this.toggleFacultySelector}
+									className="rounded border
+                                                d-flex justify-content-between align-items-center
+                                                flex-grow-1 pl-1 w-100 my-3"
+									style={{
+										boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
+											'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+										fontSize: '25px', background: '#000d69', color: 'white'
+									}}>
+						Step-2: Select the faculty(You can choose multiple)<i className="fas fa-angle-down"/></button>
+					<Collapse isOpened={this.state.isFacultySelectorOpen} style={{listStyleType: 'none'}}>
+
+						<FacultySelector/>
+						<div className='row d-flex justify-content-end' style={{margin: '5px'}}>
+							<button onClick={this.onSubmit} className='btn btn-primary d-flex justify-content-end'>Confirm Faculty
+							</button>
+						</div>
+					</Collapse>
+				</div>
+			)
+		}
+
 		return (
 			<div className="display uploadForm">
-				<div className='App-content row ' style={{minWidth:'100%'}}>
+				<div className='App-content row ' style={{minWidth: '100%'}}>
 					<nav className='navbar navbar-expand-sm  col-md-12' style={{background: '#ffa726', width: '100%'}}>
 						<SearchBar/>
 					</nav>
 					<div className='row d-flex justify-content-center'>
-						<div className='row col-md-8 d-flex justify-content-center'>
-						<button onClick={this.toggleLorSelector}
-														className="rounded border
-                                                d-flex justify-content-between align-items-center
-                                                flex-grow-1 pl-1 w-100 my-3"
-														style={{
-															boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
-																'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-															fontSize: '25px', background: '#000d69', color: 'white'
-														}}>
-											Step-1: Select the LOR You want to use<i className="fas fa-angle-down"/></button>
-										<Collapse isOpened={this.state.isLorSelectorOpen} style={{listStyleType: 'none'}}>
-											<div className='row'>
-											<LorSelector/>
-											</div>
-											<div className='row d-flex justify-content-end' style={{margin:'5px'}}>
-												<button onClick={this.onSelectLor} className='btn btn-primary d-flex justify-content-end'>Confirm Lor</button>
-											</div>
-										</Collapse>
-					</div>
-					<div className='row col-md-8 d-flex justify-content-center'>
-						<button onClick={this.toggleFacultySelector}
-														className="rounded border
-                                                d-flex justify-content-between align-items-center
-                                                flex-grow-1 pl-1 w-100 my-3"
-														style={{
-															boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
-																'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-															fontSize: '25px', background: '#000d69', color: 'white'
-														}}>
-											Step-2: Select the faculty(You can choose multiple)<i className="fas fa-angle-down"/></button>
-										<Collapse isOpened={this.state.isFacultySelectorOpen} style={{listStyleType: 'none'}}>
-											<FacultySelector/>
-											<div className='row d-flex justify-content-end' style={{margin:'5px'}}>
-												<button onClick={this.onSubmit} className='btn btn-primary d-flex justify-content-end'>Confirm Faculty</button>
-											</div>
-										</Collapse>
-					</div>
+						{selectLorCode}
+						{selectFacultyCode}
 					</div>
 
 				</div>
@@ -152,4 +171,4 @@ const mapStateToProps = state => ({
 	lor: state.lor
 });
 
-export default connect(mapStateToProps,{getFacultyList, getSavedLor,submitLor})(SubmitLor)
+export default connect(mapStateToProps, {getFacultyList, getSavedLor, submitLor})(SubmitLor)

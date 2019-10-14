@@ -1,4 +1,5 @@
 import {
+  GET_FACULTY_HOME,
   GET_SA_HOME, GET_STUDENT_HOME,
   HOME_LOADING
 } from '../actions/types'
@@ -7,11 +8,12 @@ const initialState = {
   home: null,
   loading: true,
   studentHome:null,
-  invalid: false
+  invalid: false,
+  facultyHome: null,
+  facLoading: true
 };
 
 export default function(state = initialState, action) {
-  // console.log({'HomeReducer':action.payload});
   switch (action.type) {
     case HOME_LOADING:
       return {
@@ -19,7 +21,9 @@ export default function(state = initialState, action) {
         loading: true,
         home: null,
         studentHome: null,
-        invalid: false
+        invalid: false,
+        facultyHome: null,
+        facLoading: true
       };
 
     case GET_SA_HOME:
@@ -33,6 +37,12 @@ export default function(state = initialState, action) {
         ...state,
         studentHome: action.payload,
         loading: false
+      };
+    case GET_FACULTY_HOME:
+      return {
+        ...state,
+        facultyHome: action.payload,
+        facLoading: false
       };
     default:
       return state;

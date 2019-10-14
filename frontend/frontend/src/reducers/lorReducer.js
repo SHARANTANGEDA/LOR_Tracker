@@ -5,6 +5,7 @@ import {LOR_LOADING} from "../actions/types";
 import {GET_UNIV_LIST} from "../actions/types";
 import {GET_FACULTY_LIST} from "../actions/types";
 import {GET_MY_SAVED_LOR} from "../actions/types";
+import {GET_MY_APPLIED_LORS} from "../actions/types";
 
 const initialState = {
   univ: null,
@@ -14,6 +15,8 @@ const initialState = {
   savedLor: null,
   lorLoading: true,
   selectLor: null,
+  appliedLor: null,
+  appliedLoading: true
 };
 
 export default function(state = initialState, action) {
@@ -27,7 +30,9 @@ export default function(state = initialState, action) {
         lorLoading: true,
         facList: null,
         univ: null,
-        savedLor: null
+        savedLor: null,
+        appliedLor: null,
+        appliedLoading: true
       };
 
     case GET_UNIV_LIST:
@@ -48,6 +53,12 @@ export default function(state = initialState, action) {
         savedLor: action.payload,
         lorLoading: false
       };
+    case GET_MY_APPLIED_LORS:
+      return {
+        ...state,
+        appliedLor: action.payload,
+        appliedLoading: false
+      }
     default:
       return state;
 

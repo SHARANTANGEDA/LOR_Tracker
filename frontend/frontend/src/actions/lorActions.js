@@ -3,7 +3,7 @@ import {tokenHeader} from "../utils/headers";
 import {
   CLEAR_ERRORS,
   GET_ERRORS,
-  GET_FACULTY_LIST,
+  GET_FACULTY_LIST, GET_MY_APPLIED_LORS,
   GET_MY_SAVED_LOR,
   GET_STUDENT_HOME,
   GET_UNIV_LIST,
@@ -49,6 +49,18 @@ export const getFacultyList= () =>dispatch => {
   )
 };
 
+export const getAppliedLors= () =>dispatch => {
+	dispatch(loadList());
+	axios.get(`api/student/getAppliedLor`, tokenHeader()).then(res => {
+    dispatch({
+        type: GET_MY_APPLIED_LORS,
+        payload: res.data
+      })
+  }).catch(err =>
+      console.log(err)
+  )
+};
+
 export const getSavedLor= () =>dispatch => {
 	dispatch(loadList());
 	axios.get(`api/student/getSavedLor`, tokenHeader()).then(res => {
@@ -63,7 +75,7 @@ export const getSavedLor= () =>dispatch => {
 export const submitLor = (data) => dispatch => {
   dispatch(clearErrors());
   axios.post(`/api/student/selectFaculty`, data, tokenHeader()).then(res => {
-    window.location.reload()
+    window.location.href='/viewAppliedLor'
   }).catch(err => {
       console.log(err);
     dispatch({
