@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('api.urls')),
     path('', include('student_lor.urls')),
+    path('', include('faculty_lor.urls')),
     path(r'^auth-jwt/', obtain_jwt_token),
     path(r'^auth-jwt-refresh/', refresh_jwt_token),
-    path(r'^auth-jwt-verify/', verify_jwt_token)
+    path(r'^auth-jwt-verify/', verify_jwt_token),
 ]

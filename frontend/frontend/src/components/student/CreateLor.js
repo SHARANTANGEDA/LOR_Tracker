@@ -36,7 +36,6 @@ class CreateLor extends Component {
 			confirmationModal: false,
 			category: null,
 			universityName: null,
-			portalAddress: '',
 			programName: '',
 			deadline: null,
 			dateHandle: null,
@@ -108,7 +107,6 @@ class CreateLor extends Component {
 			purpose: this.state.purpose.value,
 			others_details: this.state.otherDetails,
 			university_name: this.state.universityName.value,
-			portal_address: this.state.portalAddress,
 			program_name: this.state.programName,
 			deadline: this.state.deadline,
 		};
@@ -207,9 +205,19 @@ class CreateLor extends Component {
 							<div style={{minWidth: '100px', margin: '10px'}}>
 								<div className='row'>
 									<div className='col-md-6'>
-										<TextFieldGroup placeholder="Enter Portal Address to fill the Lor" error={errors.portal_address}
-																		type="text" onChange={this.changeHandler} value={this.state.portalAddress}
-																		name="portalAddress"
+										<DatePicker
+											selected={this.state.dateHandle}
+											onChange={this.dateTimeHandler}
+											minDate={new Date()}
+											showTimeSelect
+											timeFormat="HH:mm"
+											timeIntervals={15}
+											timeCaption="time"
+											disabledKeyboardNavigation
+											showMonthDropdown
+											dateFormat="MMMM d, yyyy h:mm aa"
+
+											customInput={<DateCustomInput/>}
 										/>
 									</div>
 									<div className='col-md-6'>
@@ -251,22 +259,7 @@ class CreateLor extends Component {
 								</div>
 								<div className='row'>
 									{othersContent}
-									<div className='col-md-6'>
-										<DatePicker
-											selected={this.state.dateHandle}
-											onChange={this.dateTimeHandler}
-											minDate={new Date()}
-											showTimeSelect
-											timeFormat="HH:mm"
-											timeIntervals={15}
-											timeCaption="time"
-											disabledKeyboardNavigation
-											showMonthDropdown
-											dateFormat="MMMM d, yyyy h:mm aa"
 
-											customInput={<DateCustomInput/>}
-										/>
-									</div>
 								</div>
 								<div className='row d-flex justify-content-center'>
 									<button className="btn btn-primary w-30 my-1 text-center" type='submit'

@@ -9,7 +9,7 @@ from .validations.validate_lor_submission import validate_lor_submission
 class StudentProfileSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = StudentDetails
-		fields = ['full_name', 'email', 'phone', 'cgpa', 'student_id',  'graduation_status', 'degree']
+		fields = ['student_id', 'full_name', 'email', 'phone', 'cgpa', 'graduation_status', 'degree']
 
 
 class GetFacultyListSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class CreateProfileSerializer(serializers.ModelSerializer):
 		fields = ['student_id', 'full_name', 'email', 'phone', 'cgpa', 'graduation_status', 'degree']
 
 	def create(self, validated_data):
-		entry = StudentDetails.objects.update_or_create(
+		entry = StudentDetails.objects.create(
 			student_id=validated_data['student_id'],
 			full_name=validated_data['full_name'],
 			email=validated_data['email'],
@@ -65,7 +65,6 @@ class CreateProfileSerializer(serializers.ModelSerializer):
 			degree=validated_data['degree'],
 			user=AppUser.objects.get(id=self.context['request'].user.id)
 		)
-		print(entry)
 		return entry
 
 	def update(self, instance, validated_data):

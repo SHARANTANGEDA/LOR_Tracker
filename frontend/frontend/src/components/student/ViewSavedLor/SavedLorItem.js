@@ -25,7 +25,6 @@ class SavedLorItem extends Component {
       <tr>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.purpose}</span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.university_name}</span></td>
-        <td><a href={lorItem.portal_address} target="_blank" style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.portal_address}</a></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.program_name}</span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px'  }}>{getLocalDate(lorItem.deadline)}</span></td>
       </tr>

@@ -10,6 +10,9 @@ import CreateLor from '../../student/CreateLor'
 import ViewSavedLor from '../../student/ViewSavedLor/ViewSavedLor'
 import SubmitLor from '../../student/SubmitLor/SubmitLor'
 import ViewLorRequestsStatus from '../../student/ViewLorRequestsStatus/ViewLorRequestsStatus'
+import AcceptLorRequests from '../../faculty/LorPages/AcceptLorRequests'
+import AcceptedLorRequests from '../../faculty/LorPages/AcceptedLorRequests/AcceptedLorRequests'
+import CompletedLorRequests from "../../faculty/LorPages/CompletedLorRequests/CompletedLorRequests";
 const Routes = () => {
   return (
 
@@ -23,9 +26,13 @@ const Routes = () => {
         <PrivateRoute exact path='/viewMyLor' component={ViewSavedLor}/>
         <PrivateRoute exact path='/submitLor' component={SubmitLor}/>
         <PrivateRoute exact path='/viewAppliedLor' component={ViewLorRequestsStatus}/>
+        <PrivateRoute exact path='/viewNewRequests' component={AcceptLorRequests}/>
+        <PrivateRoute exact path='/viewAcceptedLorRequests' component={AcceptedLorRequests}/>
+        <PrivateRoute exact path='/completedLorRequests' component={CompletedLorRequests}/>
+
         <Route path="*" component={NotFound} />
       </Switch>
     </div>
-)}
+)};
 
 export default Routes

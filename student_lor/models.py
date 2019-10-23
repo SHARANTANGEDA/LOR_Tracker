@@ -40,7 +40,14 @@ class FacultyListLor(models.Model):
 	thesis_done = JSONField()
 	status = models.BooleanField(editable=True, default=False)
 	application_status = models.CharField(max_length=15,
-										  choices=[('AP', 'Applied'), ('AC', 'Accepted'), ('RE', 'Rejected')],
+										  choices=[('AP', 'Applied'), ('AC', 'Accepted'), ('RE', 'Rejected'), ('CO', 'Completed')],
 										  default='AP')
 	others = models.CharField(max_length=500)
+	created_at = models.DateTimeField(auto_now_add=True, null=False)
+	updated_at = models.DateTimeField(auto_now=True, null=False)
+	days_15 = models.BooleanField(editable=True, default=False)
+	days_7 = models.BooleanField(editable=True, default=False)
+	days_3 = models.BooleanField(editable=True, default=False)
+	days_1 = models.BooleanField(editable=True, default=False)
+
 

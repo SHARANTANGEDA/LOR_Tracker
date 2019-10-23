@@ -1,5 +1,5 @@
 import {
-  GET_FACULTY_HOME,
+  GET_FACULTY_HOME, GET_HOD_HOME,
   GET_SA_HOME, GET_STUDENT_HOME,
   HOME_LOADING
 } from '../actions/types'
@@ -10,7 +10,9 @@ const initialState = {
   studentHome:null,
   invalid: false,
   facultyHome: null,
-  facLoading: true
+  facLoading: true,
+  hodLoading: true,
+  hodHome: null
 };
 
 export default function(state = initialState, action) {
@@ -23,7 +25,9 @@ export default function(state = initialState, action) {
         studentHome: null,
         invalid: false,
         facultyHome: null,
-        facLoading: true
+        facLoading: true,
+        hodLoading: true,
+        hodHome: null
       };
 
     case GET_SA_HOME:
@@ -43,6 +47,12 @@ export default function(state = initialState, action) {
         ...state,
         facultyHome: action.payload,
         facLoading: false
+      };
+    case GET_HOD_HOME:
+      return {
+        ...state,
+        hodHome: action.payload,
+        hodLoading: false
       };
     default:
       return state;

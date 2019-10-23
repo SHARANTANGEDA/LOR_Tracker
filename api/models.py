@@ -48,7 +48,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	email = models.EmailField(null=False, unique=True)
-	department_name = models.CharField(max_length=120)
+	department_name = models.CharField(max_length=120, default='Computer Science and Information Systems')
 	role = models.CharField(max_length=10, null=False)
 	created_at = models.DateTimeField(auto_now_add=True, null=False)
 	updated_at = models.DateTimeField(auto_now=True, null=False)
@@ -60,6 +60,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
 	USERNAME_FIELD = 'email'
 	objects = UserManager()
+
 	# password = models.CharField(max_length=250)
 
 	class Meta:
@@ -71,9 +72,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 		"""
 		full_name = '%s %s' % (self.first_name, self.last_name)
 		return full_name.strip()
-
-
-
 
 # class blog(models.Model):
 # 	title = models.CharField(max_length=100, unique=True)

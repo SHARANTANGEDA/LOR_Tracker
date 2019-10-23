@@ -1,5 +1,6 @@
 const validateLorSubmission = data => {
-	const errors={}
+	const errors={};
+	data =data[0];
 	if(data.status && data.others.length===0) {
 			errors.others="This field can't be blank"
 	}
@@ -8,6 +9,7 @@ const validateLorSubmission = data => {
 			data.thesis_done && data.thesis_done.length===0) {
 			errors.allEmpty="You have add at least one of the following for lor to be accepted, or choose others"
 		}
+		console.log({courses_done: data.courses_done, len: data})
 		if(data.courses_done.length!==0) {
 			data.courses_done.map(item => {
 				if(item.courseCode.length===0) {

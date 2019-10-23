@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {
-  CLEAR_ERRORS, GET_FACULTY_HOME, GET_NAME_RESULTS, GET_STUDENT_HOME, HOME_LOADING, SEARCH_LOADING,
+  CLEAR_ERRORS, GET_FACULTY_HOME, GET_HOD_HOME, GET_NAME_RESULTS, GET_STUDENT_HOME, HOME_LOADING, SEARCH_LOADING,
 } from './types'
 import { tokenHeader } from '../utils/headers';
 
@@ -26,35 +26,46 @@ export const facultyHome=() => dispatch => {
       console.log(err)
   )
 };
-export const favourite=(id) => dispatch => {
-  axios.get(`/api/upload/favourite/${id}`)
-    .then(res => {
 
+
+
+export const hodHome=() => dispatch => {
+  axios.get('api/hod/home', tokenHeader()).then(res => {
+    dispatch({
+        type: GET_HOD_HOME,
+        payload: res.data
+      })
+  }).catch(err =>
+      console.log(err)
+  )
+};
+
+export const acceptLorRequest=(lor, faculty) => dispatch => {
+  axios.get(`api/faculty/acceptLor/${lor}/${faculty}`, tokenHeader())
+    .then(res => {
+      window.location.reload()
     }).catch(err =>
     console.log(err)
   )
 };
 
-export const unFavourite=(id) => dispatch => {
-  axios.get(`/api/upload/unFavourite/${id}`)
+export const rejectLorRequest=(lor, faculty) => dispatch => {
+  axios.get(`api/faculty/rejectLor/${lor}/${faculty}`, tokenHeader())
     .then(res => {
-
+      window.location.reload()
     }).catch(err =>
     console.log(err)
   )
 };
 
 
-
-
-
-export const changeRating = (id, rating) => dispatch => {
-  axios.get(`/api/upload/changeRating/${id}/${rating}`)
+export const markAsComplete = (lor, faculty) => dispatch => {
+  axios.get(`api/faculty/markAsComplete/${lor}/${faculty}`, tokenHeader())
     .then(res => {
-
+      window.location.reload()
     }).catch(err =>
-    console.log(err)
-  )
+      console.log(err)
+    )
 };
 
 

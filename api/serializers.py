@@ -50,7 +50,7 @@ class RegisterStudentSerializer(serializers.ModelSerializer):
 			last_name=validated_data['last_name'],
 			email=validated_data['email'],
 			password=validated_data['password'],
-			department_name=validated_data['department_name'],
+			department_name='Computer Science and Information Systems',
 			# graduation_status=validated_data['graduation_status'],
 			# cgpa=validated_data['cgpa'],
 			role='student'
@@ -72,7 +72,7 @@ class RegisterFacultySerializers(serializers.ModelSerializer):
 			last_name=validated_data['last_name'],
 			email=validated_data['email'],
 			password=validated_data['password'],
-			department_name=validated_data['department_name'],
+			department_name='Computer Science and Information Systems',
 			role='faculty'
 		)
 		group, created = Group.objects.get_or_create(name='faculty')
@@ -92,7 +92,7 @@ class RegisterHodSerializers(serializers.ModelSerializer):
 			password=validated_data['password'],
 			first_name=validated_data['first_name'],
 			last_name=validated_data['last_name'],
-			department_name=validated_data['department_name'],
+			department_name='Computer Science and Information Systems',
 			role='hod'
 		)
 		group, created = Group.objects.get_or_create(name='hod')
@@ -112,28 +112,9 @@ class RegisterAdminSerializers(serializers.ModelSerializer):
 			password=validated_data['password'],
 			first_name=validated_data['first_name'],
 			last_name=validated_data['last_name'],
-			department_name=validated_data['department_name'],
+			department_name='Computer Science and Information Systems',
 			role='admin'
 		)
 		group, created = Group.objects.get_or_create(name='admin')
 		user.groups.add(group)
 		return user
-
-# class AddEntrySerializer(serializers.ModelSerializer):
-# 	class Meta:
-# 		model = Lor
-# 		fields = ['student_id', 'college', 'dead_line', 'country', 'email', 'phone', 'cgpa', 'portal_address']
-#
-# 	def create(self, validated_data):
-# 		entry = Lor.objects.create(
-# 			student_id=validated_data['student_id'],
-# 			college=validated_data['college'],
-# 			dead_line=validated_data['dead_line'],
-# 			country=validated_data['country'],
-# 			email=validated_data['email'],
-# 			phone=validated_data['phone'],
-# 			cgpa=validated_data['cgpa'],
-# 			portal_address=validated_data['portal_address'],
-# 			faculty_id=self.context['request'].user.id
-# 		)
-# 		return entry

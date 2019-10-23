@@ -6,8 +6,6 @@ import {getProfileInfo, updateInfo} from '../../actions/accountActions'
 import Spinner from '../common/Spinner'
 import TextFieldGroup from '../common/TextFieldGroup'
 import Select from 'react-select'
-import TextAreaFieldGroup from '../common/TextAreaGroupField'
-import countryList from 'react-select-country-list'
 import {Collapse} from 'react-collapse'
 // import './switch.css'
 import {MDBFormInline, MDBInput} from "mdbreact";
@@ -45,9 +43,11 @@ class EditProfile extends Component {
 					fullName: nextProps.account.details.full_name,
 					emailPersonal: nextProps.account.details.email,
 					phone: nextProps.account.details.phone,
-					cgpa: nextProps.account.details.cgpa,
 					graduationStatus: nextProps.account.details.graduation_status,
 				})
+				if(nextProps.account.details.cgpa) {
+					this.setState({cgpa: nextProps.account.details.cgpa})
+				}
 				if(nextProps.account.details.graduation_status) {
 					this.setState({degree: {value: nextProps.account.details.degree, label: nextProps.account.details.degree}})
 				}else {

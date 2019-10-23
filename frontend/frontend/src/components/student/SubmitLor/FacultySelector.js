@@ -10,6 +10,7 @@ import returnFilterList from '../../../utils/returnFilterList'
 import Modal from "react-modal";
 import CPTSelector from "./CPT/CPTSelector";
 import validateLorSubmission from "../../../validation/validateLorSubmission";
+import isEmpty from "../../../validation/is-empty"
 const customStyles = {
 	content: {
 		top: '5%',
@@ -82,7 +83,7 @@ class FacultySelector extends Component {
   }
 	closeModal () {
 		const errors=validateLorSubmission(this.props.checkbox.selected);
-		if(errors) {
+		if(!isEmpty(errors)) {
 			this.props.checkbox.errors=errors;
 		}else {
 			this.setState({ modalIsOpen: false });

@@ -107,7 +107,6 @@ class ViewSavedLor extends Component {
 							<tr>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Purpose</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth: '200px'}}>University Name</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Portal Address</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Program Name</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>deadline</th>
 							</tr>

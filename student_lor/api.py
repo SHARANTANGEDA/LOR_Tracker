@@ -11,6 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .validations.validate_lor_submission import validate_lor_submission
 import json
 from django.core.serializers import serialize
+from datetime import datetime, timezone
 
 
 # Edit my profile
@@ -27,7 +28,6 @@ class EditProfile(generics.GenericAPIView):
 	serializer_class = CreateProfileSerializer
 
 	def post(self, request, *args, **kwargs):
-		print("data:", request.data)
 		try:
 			existing = StudentDetails.objects.get(user=self.request.user.id)
 			serializer = self.get_serializer(existing, data=request.data)
@@ -36,7 +36,7 @@ class EditProfile(generics.GenericAPIView):
 			return Response({
 				"profile": StudentProfileSerializer(student_details, context=self.get_serializer_context()).data,
 			})
-		except ObjectDoesNotExist:
+		except ObjectDoesNotExist as notCreated:
 			serializer = self.get_serializer(data=request.data)
 			serializer.is_valid(raise_exception=True)
 			student_details = serializer.save()
@@ -132,7 +132,11 @@ class GetMySavedLor(APIView):
 
 	def get(self, request):
 		entries = Lor.objects.filter(user=self.request.user.id)
-		return Response(ViewSavedLor(entries, many=True).data)
+		for item in entries:
+			if item.deadline - datetime.now(timezone.utc) <= 0:
+				Lor.objects.get(id=item.id).delete()
+		new_entries = Lor.objects.filter(user=self.request.user.id)
+		return Response(ViewSavedLor(new_entries, many=True).data)
 
 
 class GetAppliedLor(APIView):
@@ -152,13 +156,16 @@ class GetAppliedLor(APIView):
 			str_data = serialize('json', FacultyListLor.objects.filter(lor=entry.id))
 			data = json.loads(str_data)
 			for item in data:
-				item["fields"]["lor"] = json.loads(serialize('json', Lor.objects.filter(id=item["fields"]["lor"])))[0]["fields"]
+				item["fields"]["lor"] = json.loads(serialize('json', Lor.objects.filter(id=item["fields"]["lor"])))[0][
+					"fields"]
 				# item["fields"]["faculty"] = json.loads(
 				# 	serialize('json',
 				# 			  AppUser.objects.values("id", "email", "first_name", "last_name", "department_name")
 				# 			  .filter(id=item["fields"]["faculty"])))[0]["fields"]
 				item["fields"]["faculty"] = AppUser.objects.values("id",
-							"email", "first_name", "last_name", "department_name").filter(id=item["fields"]["faculty"])[0]
+																   "email", "first_name", "last_name",
+																   "department_name").filter(
+					id=item["fields"]["faculty"])[0]
 				result.append(item["fields"])
 
 		print(result)
@@ -200,5 +207,3 @@ class GetFacultyList(APIView):
 		entries = AppUser.objects.filter(role='faculty')
 		print(entries)
 		return Response(GetFacultyListSerializer(entries, many=True).data)
-
-

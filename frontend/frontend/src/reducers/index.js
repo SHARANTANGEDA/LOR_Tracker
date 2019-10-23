@@ -7,6 +7,7 @@ import accountReducer from './accountReducer'
 import resetPasswordReducer from './resetPasswordReducer'
 import lorReducer from "./lorReducer";
 import checkboxReducer from "./checkboxReducer";
+import facultyReducer from "./facultyReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   account: accountReducer,
   reset: resetPasswordReducer,
   lor: lorReducer,
-  checkbox: checkboxReducer
+  checkbox: checkboxReducer,
+  faculty: facultyReducer
 })
