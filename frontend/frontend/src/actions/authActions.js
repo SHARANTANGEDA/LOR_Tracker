@@ -2,7 +2,7 @@ import {
   CLEAR_ERRORS,
   ENTER_OTP,
   ENTER_PASSWORD,
-  GET_ERRORS,
+  GET_ERRORS, GET_FACULTY_HOME,
   HOME_LOADING,
   SET_AUTH_LOADING,
   SET_CURRENT_USER
@@ -10,6 +10,7 @@ import {
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode'
+import {tokenHeader} from "../utils/headers";
 
 export const registerAdmin = (userData) => dispatch => {
   dispatch(clearErrors());
@@ -163,9 +164,19 @@ export const clearErrors = () => {
   };
 };
 //Log User Out
-export const logoutUser = () => dispatch => {
+export const autoLogoutUser = () => dispatch => {
   localStorage.removeItem('jwtToken');
-  setAuthToken(false);
-  dispatch(setCurrentUser({}));
+    setAuthToken(false);
+    dispatch(setCurrentUser({}));
+};
 
+export const logoutUser = () => dispatch => {
+  console.log('HERE', tokenHeader().headers.Authorization);
+  axios.get('api/auth/logout', tokenHeader()).then(res => {
+    localStorage.removeItem('jwtToken');
+    setAuthToken(false);
+    dispatch(setCurrentUser({}));
+  }).catch(err =>
+      console.log(err)
+  )
 };

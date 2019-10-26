@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework import permissions, generics
 from rest_framework.response import Response
 from .serializers import *
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from tracker_final.custom_jwt import jwt_response_payload_handler, jwt_payload_handler
@@ -98,11 +98,11 @@ class RegisterStudent(generics.GenericAPIView):
 
 
 class Logout(APIView):
+	permission_classes = (permissions.AllowAny,)
 
 	def get(self, request):
-		# simply delete the token to force a login
-		request.user.auth_token.delete()
-		return Response(status=status.HTTP_200_OK)
+		logout(request)
+		return Response({"Logged Out"})
 
 
 class UserAPI(generics.RetrieveAPIView):

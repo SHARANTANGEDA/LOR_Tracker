@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 	'api',
 	'student_lor',
 	'faculty_lor',
+	'hod_lor'
 ]
 DATABASES = {
 	'default': {
@@ -98,7 +99,7 @@ JWT_AUTH = {
 	'JWT_AUDIENCE': None,
 	'JWT_ISSUER': None,
 	'JWT_ALLOW_REFRESH': False,
-	'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+	'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=1),
 	'JWT_AUTH_COOKIE': None,
 	'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 	'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),

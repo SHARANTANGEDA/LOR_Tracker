@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
-import { logoutUser, setCurrentUser } from './actions/authActions'
+import { autoLogoutUser, setCurrentUser } from './actions/authActions'
 import { Provider } from 'react-redux'
 import store from './store'
 import NavBar from './components/layout/NavBar'
@@ -27,7 +27,7 @@ if(localStorage.jwtToken) {
   store.dispatch(setCurrentUser(decoded));
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
-    store.dispatch(logoutUser());
+    store.dispatch(autoLogoutUser());
     window.location.href = '/'
   }
 }
@@ -42,11 +42,8 @@ class App extends Component {
         <Switch>
         {/*<Route exact path="/home" component={Landing}/>*/}
           <Route exact path='/' component={Landing}/>
-          <Route exact path='/forgotPassword' component={ForgotPassword}/>
-          <Route exact path='/register' component={Register}/>
-          <Route exact path='/contactUs' component={ContactUs}/>
-          <Route exact path="/home/:id" component={FilterLanding}/>
-          <Route exact path="/search/:category/:search" component={SearchResults}/>
+          {/*<Route exact path='/forgotPassword' component={ForgotPassword}/>*/}
+          {/*<Route exact path='/register' component={Register}/>*/}
           <Route component={Routes}/>
         </Switch>
       </div>

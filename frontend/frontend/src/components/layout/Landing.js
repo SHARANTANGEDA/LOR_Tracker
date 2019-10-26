@@ -91,7 +91,7 @@ class Landing extends Component {
                     <div className="container">
                         <div className="row d-flex justify-content-center text-light">
                             <div className="col-md-12 text-center">
-                                <h1 className="display-3 mb-4" style={{color: 'white'}}>LOR Tracker</h1>
+                                <h1 className="display-3 mb-4" style={{color: 'white'}}>Department of CSIS</h1>
                                 <p className="lead" style={{color: 'white'}}>
                                     {' '}
                                     Sign in to access account
@@ -119,37 +119,13 @@ class Landing extends Component {
                                                   className='btn btn-info btn-block mt-4'>
                                                 Register</button>
                                         </div>
-
                                     </div>
                                     <hr/>
-
-                                    {/*<div className="col-md-12 d-flex justify-content-center text-center">*/}
-                                    {/*    <Link to="/registerFaculty" className="btn btn-lg btn-info mr-2"*/}
-                                    {/*          style={{marginRight:'10px'}}>*/}
-                                    {/*        <img src={require("../../img/landingIcons/professor.png")} alt=""/>*/}
-                                    {/*        <h6 style={{fontStyle: 'inherit'}}>Faculty</h6>*/}
-                                    {/*    </Link>*/}
-                                    {/*    <Link to="/registerHod" className="btn btn-lg btn-info mr-2"*/}
-                                    {/*         style={{marginRight:'10px', marginLeft:'10px'}}>*/}
-                                    {/*        <img src={require("../../img/landingIcons/hod.png")} alt=""/>*/}
-                                    {/*        <h6 style={{fontStyle: 'inherit'}}>HOD</h6>*/}
-                                    {/*    </Link>*/}
-                                    {/*    <Link to="/registerAdmin" className="btn btn-lg btn-info mr-2"*/}
-                                    {/*         style={{marginLeft:'10px'}}>*/}
-                                    {/*        <img src={require("../../img/landingIcons/admin.png")} alt=""/>*/}
-                                    {/*        <h6 style={{fontStyle: 'inherit'}}>Admin</h6>*/}
-                                    {/*    </Link>*/}
-                                    {/*</div>*/}
                                 </form>
                                 <hr/>
                             </div>
                         </div>
                     </div>
-                    {/*<footer className=" text-white mt-5 p-4 text-center " style={{ height:'60px',left:0,*/}
-                    {/*  bottom:0,background:'#008cff',position: 'relative',*/}
-                    {/*/!*  right:0}}>*!/style={{color:'white'}}*/}
-                    {/*  Copyright &copy; {new Date().getFullYear()} L V Prasad Eye Institute*/}
-                    {/*</footer>*/}
                 </div>
                 <Modal
                     isOpen={this.state.modalIsOpen}
