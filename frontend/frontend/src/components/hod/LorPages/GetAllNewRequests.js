@@ -2,17 +2,13 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Spinner from '../../common/Spinner'
-import Select from 'react-select'
-import Warning from '../../layout/Warning'
 import 'react-dates/initialize'
-import {DateRangePicker} from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css'
-import moment from 'moment'
-import {getLorAcceptData} from "../../../actions/lorActions";
+import {getAllNewRequestsHod, } from "../../../actions/lorActions";
 import SearchBar from "../../dashboard/SearchBar";
 import AcceptLorItem from "./AcceptLorItem";
 
-class AcceptLorRequests extends Component {
+class GetAllNewRequests extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -42,9 +38,9 @@ class AcceptLorRequests extends Component {
 	}
 
 	componentDidMount() {
-		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'faculty') {
+		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'hod') {
 			console.log('called');
-			this.props.getLorAcceptData(this.props.match.params.id)
+			this.props.getAllNewRequestsHod(this.props.match.params.id)
 		}
 	}
 
@@ -130,11 +126,13 @@ class AcceptLorRequests extends Component {
 							<thead>
 							<tr>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Id</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth: '200px'}}>Student Email</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Email</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Name</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Faculty Email</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Faculty Name</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Lor Purpose</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Lor Requested On</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Deadline for Application</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>View</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -151,13 +149,13 @@ class AcceptLorRequests extends Component {
 	}
 }
 
-AcceptLorRequests.propTypes = {
+GetAllNewRequests.propTypes = {
 	auth: PropTypes.object.isRequired,
 	faculty: PropTypes.object.isRequired,
-	getLorAcceptData: PropTypes.func.isRequired
+	getAllNewRequestsHod: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
 	faculty: state.faculty
 });
-export default connect(mapStateToProps, {getLorAcceptData})(AcceptLorRequests)
+export default connect(mapStateToProps, {getAllNewRequestsHod})(GetAllNewRequests)

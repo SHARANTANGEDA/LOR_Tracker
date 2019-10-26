@@ -1,14 +1,15 @@
-amqp==1.4.9
+amqp==2.5.1
 anyjson==0.3.3
 asn1crypto==0.24.0
-billiard==3.3.0.23
-celery==3.1.26.post2
+billiard==3.5.0.5
+celery==4.1.1
 certifi==2019.6.16
 cffi==1.12.3
 chardet==3.0.4
 cryptography==2.7
 defusedxml==0.6.0
 Django==2.2.4
+django-allauth==0.40.0
 django-appconf==1.0.3
 django-celery==3.3.1
 django-celery-email==2.0.2
@@ -18,7 +19,7 @@ djangorestframework-jwt==1.11.0
 djangorestframework-simplejwt==4.3.0
 idna==2.8
 importlib-metadata==0.23
-kombu==3.0.37
+kombu==4.6.3
 more-itertools==7.2.0
 mysqlclient==1.4.4
 oauthlib==3.1.0

@@ -1,7 +1,7 @@
 import axios from "axios";
 import {tokenHeader} from "../utils/headers";
 import {
-  CLEAR_ERRORS, GET_ACCEPTED_REQUESTS, GET_COMPLETED_REQUESTS,
+  CLEAR_ERRORS, GET_ACCEPTED_REQUESTS, GET_ALL_REQUESTS, GET_COMPLETED_REQUESTS,
   GET_ERRORS,
   GET_FACULTY_LIST, GET_MY_APPLIED_LORS,
   GET_MY_SAVED_LOR, GET_NEW_REQUESTS,
@@ -125,6 +125,59 @@ export const getAcceptedLorData = () => dispatch => {
   }
   )
 };
+
+
+
+export const getAllNewRequestsHod = () => dispatch => {
+  dispatch(loadList());
+  axios.get(`/api/hod/getAllNewRequests`, tokenHeader()).then(res => {
+   dispatch({
+        type: GET_NEW_REQUESTS,
+        payload: res.data
+      })
+  }).catch(err => {
+      console.log(err);
+  }
+  )
+};
+
+export const getAllCompletedRequests = () => dispatch => {
+  dispatch(loadList());
+  axios.get(`/api/hod/getAllCompletedRequests`, tokenHeader()).then(res => {
+   dispatch({
+        type: GET_COMPLETED_REQUESTS,
+        payload: res.data
+      })
+  }).catch(err => {
+      console.log(err);
+  }
+  )
+};export const getAllRequests = () => dispatch => {
+  dispatch(loadList());
+  axios.get(`/api/hod/getAllRequests`, tokenHeader()).then(res => {
+   dispatch({
+        type: GET_ALL_REQUESTS,
+        payload: res.data
+      })
+  }).catch(err => {
+      console.log(err);
+  }
+  )
+};
+
+export const getAllAcceptedRequests = () => dispatch => {
+  dispatch(loadList());
+  axios.get(`/api/hod/getAllAcceptedRequests`, tokenHeader()).then(res => {
+   dispatch({
+        type: GET_ACCEPTED_REQUESTS,
+        payload: res.data
+      })
+  }).catch(err => {
+      console.log(err);
+  }
+  )
+};
+
 export const loadList = () => {
   return {
     type: HOME_LOADING

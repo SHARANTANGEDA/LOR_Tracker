@@ -9,5 +9,8 @@ urlpatterns = [
 	path('api/hod/getAllCompletedRequests', GetAllCompletedRequestsHod.as_view()),
 	path('api/hod/getAllRequests', GetAllRequests.as_view()),
 	path('api/hod/home', GetHodHome.as_view()),
+	path('api/hod/getAllStudents', GetAllStudents.as_view()),
+	path('api/hod/getAllFaculty', GetAllFaculty.as_view()),
+	path('api/hod/activeUserControl', GetActiveUsers.as_view())
 	# path('api/hod/emailCheck', CheckEmail.as_view())
 ]

@@ -2,40 +2,12 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Spinner from '../../../common/Spinner'
-import Select from 'react-select'
-import Warning from '../../../layout/Warning'
 import 'react-dates/initialize'
-import {DateRangePicker} from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css'
-import moment from 'moment'
-import {getAcceptedLorData, getLorAcceptData, getSavedLor} from "../../../../actions/lorActions";
+import {getAcceptedLorData } from "../../../../actions/lorActions";
 import SearchBar from "../../../dashboard/SearchBar";
-import SavedLorItem from "../../../student/ViewSavedLor/SavedLorItem";
-import Modal from "react-modal";
-import CPTSelector from "../../../student/SubmitLor/CPT/CPTSelector";
-import AcceptLorModal from "../AcceptLorModal";
-import AcceptLorItem from "../AcceptLorItem";
-import AcceptedLorItem from "./AcceptedLorItem";
 
-const customStyles = {
-	content: {
-		top: '5%',
-		left: '5%',
-		right: '5%',
-		bottom: '5%',
-		marginRight: '0',
-		transform: 'translate(-0%, -0%)',
-		backgroundColor: 'rgba(255,167,38,0.8)'
-	},
-	// overlay: {
-	//     position: 'fixed',
-	//     top: '5px',
-	//     left: '1px',
-	//     right: '1px',
-	//     bottom: '1px',
-	//     backgroundColor: '#a0a79f'
-	//   },
-};
+import AcceptedLorItem from "./AcceptedLorItem";
 
 class AcceptedLorRequests extends Component {
 	constructor() {

@@ -113,7 +113,8 @@ class RegisterAdminSerializers(serializers.ModelSerializer):
 			first_name=validated_data['first_name'],
 			last_name=validated_data['last_name'],
 			department_name='Computer Science and Information Systems',
-			role='admin'
+			role='admin',
+			is_superuser=True
 		)
 		group, created = Group.objects.get_or_create(name='admin')
 		user.groups.add(group)

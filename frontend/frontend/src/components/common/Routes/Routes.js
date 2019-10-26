@@ -13,6 +13,10 @@ import ViewLorRequestsStatus from '../../student/ViewLorRequestsStatus/ViewLorRe
 import AcceptLorRequests from '../../faculty/LorPages/AcceptLorRequests'
 import AcceptedLorRequests from '../../faculty/LorPages/AcceptedLorRequests/AcceptedLorRequests'
 import CompletedLorRequests from "../../faculty/LorPages/CompletedLorRequests/CompletedLorRequests";
+import GetAllNewRequests from "../../hod/LorPages/GetAllNewRequests"
+import GetAllCompletedRequests from "../../hod/LorPages/CompletedLorRequests/GetAllCompletedRequests"
+import ViewAllAcceptedRequests from "../../hod/LorPages/AcceptedLorRequests/ViewAllAcceptedRequests"
+import ViewAllRequests from "../../hod/LorPages/ViewAllRequests/ViewAllRequests"
 const Routes = () => {
   return (
 
@@ -29,6 +33,10 @@ const Routes = () => {
         <PrivateRoute exact path='/viewNewRequests' component={AcceptLorRequests}/>
         <PrivateRoute exact path='/viewAcceptedLorRequests' component={AcceptedLorRequests}/>
         <PrivateRoute exact path='/completedLorRequests' component={CompletedLorRequests}/>
+        <PrivateRoute exact path='/viewAllCompletedRequests' component={GetAllCompletedRequests}/>
+        <PrivateRoute exact path='/viewAllNewRequests' component={GetAllNewRequests}/>
+        <PrivateRoute exact path='/viewAllAcceptedRequests' component={ViewAllAcceptedRequests}/>
+        <PrivateRoute exact path='/viewAllRequests' component={ViewAllRequests}/>
 
         <Route path="*" component={NotFound} />
       </Switch>

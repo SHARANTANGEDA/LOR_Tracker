@@ -14,7 +14,7 @@ class GetAllRequests(APIView):
 		HasGroupPermission
 	]
 	required_groups = {
-		'GET': ["hod", "admin"],
+		'GET': ["hod"],
 	}
 
 	# serializer_class = StudentProfileSerializer
@@ -36,6 +36,8 @@ class GetAllRequests(APIView):
 			details["student_details_profile"] = profile_details
 			details["application_details"] = json.loads(serialize('json', FacultyListLor.objects.filter
 			(faculty=item.faculty.id, lor=item.lor.id)))[0]["fields"]
+			details["faculty_details"] = AppUser.objects.values("id", "email", "first_name", "last_name", "department_name").get(
+				id=item.faculty.id, role='faculty')
 			result.append(details)
 		print(result)
 		return Response(result)
@@ -47,7 +49,7 @@ class GetAcceptedEntriesHod(APIView):
 		HasGroupPermission
 	]
 	required_groups = {
-		'GET': ["hod", "admin"],
+		'GET': ["hod"],
 	}
 
 	# serializer_class = StudentProfileSerializer
@@ -67,6 +69,8 @@ class GetAcceptedEntriesHod(APIView):
 			details["student_details_profile"] = profile_details
 			details["application_details"] = json.loads(serialize('json', FacultyListLor.objects.filter
 			(faculty=item.faculty.id, application_status='AC', lor=item.lor.id)))[0]["fields"]
+			details["faculty_details"] = AppUser.objects.values("id", "email", "first_name", "last_name",
+																"department_name").get(id=item.faculty.id, role='faculty')
 			result.append(details)
 		print(result)
 		return Response(result)
@@ -78,7 +82,7 @@ class GetAllNewRequestsHod(APIView):
 		HasGroupPermission
 	]
 	required_groups = {
-		'GET': ["hod", "admin"],
+		'GET': ["hod"],
 	}
 
 	# serializer_class = StudentProfileSerializer
@@ -97,6 +101,8 @@ class GetAllNewRequestsHod(APIView):
 			details["student_details_profile"] = profile_details
 			details["application_details"] = json.loads(serialize('json', FacultyListLor.objects.filter
 			(faculty=item.faculty.id, application_status='AP', lor=item.lor.id)))[0]["fields"]
+			details["faculty_details"] = AppUser.objects.values("id", "email", "first_name", "last_name",
+																"department_name").get(id=item.faculty.id, role='faculty')
 			result.append(details)
 		print(result)
 		return Response(result)
@@ -108,7 +114,7 @@ class GetAllCompletedRequestsHod(APIView):
 		HasGroupPermission
 	]
 	required_groups = {
-		'GET': ["hod", "admin"],
+		'GET': ["hod"],
 	}
 
 	# serializer_class = StudentProfileSerializer
@@ -127,6 +133,9 @@ class GetAllCompletedRequestsHod(APIView):
 			details["student_details_profile"] = profile_details
 			details["application_details"] = json.loads(serialize('json', FacultyListLor.objects.filter
 			(faculty=item.faculty.id, application_status='CO', lor=item.lor.id)))[0]["fields"]
+			details["faculty_details"] = AppUser.objects.values("id", "email", "first_name", "last_name",
+																"department_name").get(id=item.faculty.id,
+																					   role='faculty')
 			result.append(details)
 		return Response(result)
 
@@ -165,6 +174,78 @@ class GetHodHome(APIView):
 		result["completedRequests"] = len(completed_requests)
 		result["facultyCnt"] = len(faculty)
 		result["studentCnt"] = len(student)
+		result["activeUserCnt"] = len(current_users)
+		result["activeUserContent"] = current_users_json
+		return Response(result)
+
+
+class GetAllFaculty(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ["hod"],
+	}
+
+	# serializer_class = StudentProfileSerializer
+	def get(self, request):
+		result = []
+		new_requests = AppUser.objects.values("id", "email", "first_name", "last_name", "department_name")\
+			.filter(role='faculty')
+		if not len(new_requests) == 0:
+			result = new_requests
+		return Response(result)
+
+
+class GetAllStudents(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ["hod"],
+	}
+
+	# serializer_class = StudentProfileSerializer
+	def get(self, request):
+		result = []
+		new_requests = AppUser.objects.values("id", "email", "first_name", "last_name", "department_name")\
+			.filter(role='student')
+		if not len(new_requests) == 0:
+			for item in new_requests:
+				details = {}
+				student_details = StudentDetails.objects.get(user=item.id)
+				details["basic"] = item
+				details["profile"] = student_details
+				result.append(details)
+		return Response(result)
+
+
+class GetActiveUsers(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ["hod"],
+	}
+
+	# serializer_class = StudentProfileSerializer
+	def get(self, request):
+		result = {}
+		active_users = Session.objects.all()
+		uid_list = []
+		for session in active_users:
+			data = session.get_decoded()
+			print(data.get('_auth_user_id', None), str(self.request.user.id),
+				  data.get('_auth_user_id', None) == str(self.request.user.id))
+			if not data.get('_auth_user_id', None) == str(self.request.user.id):
+				uid_list.append(data.get('_auth_user_id', None))
+		current_users = AppUser.objects.values("id", "email", "first_name", "last_name", "role").filter(id__in=uid_list)
+		current_users_json = []
+		if not len(current_users) == 0:
+			current_users_json = current_users
 		result["activeUserCnt"] = len(current_users)
 		result["activeUserContent"] = current_users_json
 		return Response(result)

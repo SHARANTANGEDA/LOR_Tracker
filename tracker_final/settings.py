@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import datetime
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,13 +36,18 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.sites',
 	'rest_framework',
 	'rest_framework.authtoken',
 	'rest_framework_jwt',
 	'api',
 	'student_lor',
 	'faculty_lor',
-	'hod_lor'
+	'hod_lor',
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	'allauth.socialaccount.providers.google'
 ]
 DATABASES = {
 	'default': {
@@ -62,6 +66,17 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
+AUTH_USER_MODEL = 'api.AppUser'
+
+################################# GOOGLE OAUTH #######################################
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+SITE_ID = 1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+
 
 ################################## GMAIL SERVICE #####################################
 EMAIL_USE_TLS = True
@@ -75,7 +90,6 @@ EMAIL_PORT = 587
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-AUTH_USER_MODEL = 'api.AppUser'
 
 #         'rest_framework.authentication.TokenAuthentication',
 REST_FRAMEWORK = {

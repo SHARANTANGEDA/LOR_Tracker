@@ -1,5 +1,5 @@
 import {
-  GET_ACCEPTED_REQUESTS, GET_COMPLETED_REQUESTS,
+  GET_ACCEPTED_REQUESTS, GET_ALL_REQUESTS, GET_COMPLETED_REQUESTS,
   GET_NEW_REQUESTS,
   HOME_LOADING
 } from '../actions/types'
@@ -10,7 +10,9 @@ const initialState = {
   acceptedRequests: null,
   acceptedLoading: true,
   completedRequests: null,
-  completedLoading: true
+  completedLoading: true,
+  allRequests: null,
+  allRequestsLoading: true
 };
 
 export default function(state = initialState, action) {
@@ -23,7 +25,9 @@ export default function(state = initialState, action) {
         acceptedLoading: true,
         acceptedRequests: null,
         completedRequests: null,
-        completedLoading: true
+        completedLoading: true,
+        allRequests: null,
+        allRequestsLoading: true
       };
 
     case GET_NEW_REQUESTS:
@@ -31,6 +35,12 @@ export default function(state = initialState, action) {
         ...state,
         newRequests: action.payload,
         loading: false
+      };
+    case GET_ALL_REQUESTS:
+      return {
+        ...state,
+        allRequests: action.payload,
+        allRequestsLoading: false
       };
     case GET_ACCEPTED_REQUESTS:
       return {

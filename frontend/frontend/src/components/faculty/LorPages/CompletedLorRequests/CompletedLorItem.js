@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import getLocalDate from "../../../../utils/getLocalDate"
 import AcceptLorModal from "../AcceptLorModal";
 import Modal from "react-modal";
-import {markAsComplete} from "../../../../actions/homeActions";
 
 const customStyles = {
 	content: {

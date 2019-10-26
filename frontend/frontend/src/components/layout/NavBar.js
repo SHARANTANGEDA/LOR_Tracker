@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logoutUser} from '../../actions/authActions'
+import PrivateRoute from "../common/Routes/PrivateRoute";
+import GetAllCompletedRequests from "../hod/LorPages/CompletedLorRequests/GetAllCompletedRequests";
+import GetAllNewRequests from "../hod/LorPages/GetAllNewRequests";
 
 class Navbar extends Component {
 	constructor(props) {
@@ -363,18 +366,45 @@ class Navbar extends Component {
 							Lor Requests Control<i className="fas fa-caret-down"/>
 						</Link>
 						<ul className="dropdown-menu " style={{ background: '#ffe36b'}}>
-							<li  >
-						<Link className='nav-link' to="/viewNewRequests">
+						<li  >
+						<Link className='nav-link' to='/viewAllNewRequests'>
 							New Requests
 						</Link>
-					</li>
+						</li>
 							<li>
-						<Link className='nav-link' to="/viewAcceptedLorRequests" >
+						<Link className='nav-link' to='/viewAllAcceptedRequests' >
 							Accepted Requests
 						</Link></li>
 							<li>
-						<Link className='nav-link' to="/completedLorRequests" >
+						<Link className='nav-link' to='/viewAllCompletedRequests' >
 							Completed Requests
+						</Link></li>
+							<li>
+						<Link className='nav-link' to='/viewAllRequests' >
+							View All Requests
+						</Link></li>
+						</ul>
+					</li>
+					<li className="nav-item dropdown " style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px', minWidth:'200px'
+					}}>
+						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
+									style={{borderRadius: '5px'}}>
+							User Control<i className="fas fa-caret-down"/>
+						</Link>
+						<ul className="dropdown-menu " style={{ background: '#ffe36b', width:'100%'}}>
+						<li  >
+						<Link className='nav-link' to="/viewNewRequests">
+							View Faculty
+						</Link>
+						</li>
+							<li>
+						<Link className='nav-link' to="/viewAcceptedLorRequests" >
+							View Students
+						</Link></li>
+							<li>
+						<Link className='nav-link' to="/completedLorRequests" >
+							View Active Users
 						</Link></li>
 						</ul>
 					</li>

@@ -1,18 +1,14 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import Spinner from '../../common/Spinner'
-import Select from 'react-select'
-import Warning from '../../layout/Warning'
+import Spinner from '../../../common/Spinner'
 import 'react-dates/initialize'
-import {DateRangePicker} from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css'
-import moment from 'moment'
-import {getLorAcceptData} from "../../../actions/lorActions";
-import SearchBar from "../../dashboard/SearchBar";
-import AcceptLorItem from "./AcceptLorItem";
+import {completedLorData, getAllCompletedRequests, getAllRequests} from "../../../../actions/lorActions";
+import SearchBar from "../../../dashboard/SearchBar";
+import ViewAllRequestsItem from "./ViewAllRequestsItem";
 
-class AcceptLorRequests extends Component {
+class ViewAllRequests extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -42,9 +38,9 @@ class AcceptLorRequests extends Component {
 	}
 
 	componentDidMount() {
-		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'faculty') {
+		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'hod') {
 			console.log('called');
-			this.props.getLorAcceptData(this.props.match.params.id)
+			this.props.getAllRequests(this.props.match.params.id)
 		}
 	}
 
@@ -63,7 +59,7 @@ class AcceptLorRequests extends Component {
 			});
 		}
 
-		const {loading, newRequests} = this.props.faculty;
+		const {allRequests, allRequestsLoading} = this.props.faculty;
 		const {currentPage, todosPerPage} = this.state;
 		const indexOfLastTodo = currentPage * todosPerPage;
 		const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
@@ -72,23 +68,22 @@ class AcceptLorRequests extends Component {
 
 
 		let allFoldersContent, heading;
-		if (loading || newRequests === null) {
+		if (allRequestsLoading || allRequests === null) {
 			allFoldersContent = (<Spinner/>)
 		} else {
-			if (newRequests.length === 0) {
+			if (allRequests.length === 0) {
 				allFoldersContent = (
 					<h5>No Requests currently</h5>
 				);
 			} else {
-				console.log(newRequests)
+				console.log(allRequests)
 
-
-				const currentFolder = newRequests.slice(indexOfFirstTodo, indexOfLastTodo);
+				const currentFolder = allRequests.slice(indexOfFirstTodo, indexOfLastTodo);
 				const render = (currentFolder.map(lor => (
 					// <ProductCard folder={land} key={land._id}/>
-					<AcceptLorItem lorItem={lor} key={currentFolder.indexOf(lor)}/>
+					<ViewAllRequestsItem lorItem={lor} key={currentFolder.indexOf(lor)}/>
 				)));
-				for (let i = 1; i <= Math.ceil(newRequests.length / todosPerPage); i++) {
+				for (let i = 1; i <= Math.ceil(allRequests.length / todosPerPage); i++) {
 					pageNumbers.push(i);
 				}
 				const renderPageNumbers = (
@@ -130,11 +125,14 @@ class AcceptLorRequests extends Component {
 							<thead>
 							<tr>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Id</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth: '200px'}}>Student Email</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Email</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Name</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Faculty Email</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Faculty Name</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Lor Purpose</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Lor Requested On</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Deadline for Application</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>View</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Application Status</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -151,13 +149,13 @@ class AcceptLorRequests extends Component {
 	}
 }
 
-AcceptLorRequests.propTypes = {
+ViewAllRequests.propTypes = {
 	auth: PropTypes.object.isRequired,
 	faculty: PropTypes.object.isRequired,
-	getLorAcceptData: PropTypes.func.isRequired
+	getAllRequests: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
 	faculty: state.faculty
 });
-export default connect(mapStateToProps, {getLorAcceptData})(AcceptLorRequests)
+export default connect(mapStateToProps, {getAllRequests})(ViewAllRequests)
