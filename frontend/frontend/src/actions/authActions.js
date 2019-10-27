@@ -1,11 +1,11 @@
 import {
-  CLEAR_ERRORS,
-  ENTER_OTP,
-  ENTER_PASSWORD,
-  GET_ERRORS, GET_FACULTY_HOME,
-  HOME_LOADING,
-  SET_AUTH_LOADING,
-  SET_CURRENT_USER
+	CLEAR_ERRORS,
+	ENTER_OTP,
+	ENTER_PASSWORD,
+	GET_ERRORS,
+	HOME_LOADING,
+	SET_AUTH_LOADING,
+	SET_CURRENT_USER
 } from './types'
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'

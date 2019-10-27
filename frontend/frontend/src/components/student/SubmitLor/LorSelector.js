@@ -2,14 +2,9 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Spinner from '../../common/Spinner'
-import Select from 'react-select'
-import Warning from '../../layout/Warning'
 import 'react-dates/initialize'
-import {DateRangePicker} from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css'
-import moment from 'moment'
 import {getSavedLor} from "../../../actions/lorActions";
-import SearchBar from "../../dashboard/SearchBar";
 import getLocalDate from "../../../utils/getLocalDate";
 
 class LorSelector extends Component {

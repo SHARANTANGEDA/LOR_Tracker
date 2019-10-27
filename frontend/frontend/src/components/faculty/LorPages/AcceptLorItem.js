@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {PropTypes} from 'prop-types'
+import {connect} from 'react-redux'
 import getLocalDate from "../../../utils/getLocalDate"
 import AcceptLorModal from "./AcceptLorModal";
 import Modal from "react-modal";

@@ -1,4 +1,4 @@
-import { ENTER_OTP, ENTER_PASSWORD, RESET_PASSWORD_LOADING, SEND_OTP } from '../actions/types'
+import {ENTER_OTP, ENTER_PASSWORD, RESET_PASSWORD_LOADING, SEND_OTP} from '../actions/types'
 
 const initialState = {
   loading: true,

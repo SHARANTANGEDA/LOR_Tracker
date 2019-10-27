@@ -4,9 +4,7 @@ import {connect} from 'react-redux'
 import Spinner from '../../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
-import {
-	getAllAcceptedRequests,
-} from "../../../../actions/lorActions";
+import {getAllAcceptedRequests,} from "../../../../actions/lorActions";
 import SearchBar from "../../../dashboard/SearchBar";
 import AcceptedLorItem from "./AcceptedLorItem";
 

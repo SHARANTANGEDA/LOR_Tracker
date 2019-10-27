@@ -1,11 +1,4 @@
-import {
-
-} from '../actions/types'
-import {LOR_LOADING} from "../actions/types";
-import {GET_UNIV_LIST} from "../actions/types";
-import {GET_FACULTY_LIST} from "../actions/types";
-import {GET_MY_SAVED_LOR} from "../actions/types";
-import {GET_MY_APPLIED_LORS} from "../actions/types";
+import {GET_FACULTY_LIST, GET_MY_APPLIED_LORS, GET_MY_SAVED_LOR, GET_UNIV_LIST, LOR_LOADING} from '../actions/types'
 
 const initialState = {
   univ: null,

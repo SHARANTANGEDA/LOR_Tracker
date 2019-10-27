@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
-import {Link, Switch} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logoutUser} from '../../actions/authActions'
-import PrivateRoute from "../common/Routes/PrivateRoute";
-import GetAllCompletedRequests from "../hod/LorPages/CompletedLorRequests/GetAllCompletedRequests";
-import GetAllNewRequests from "../hod/LorPages/GetAllNewRequests";
 
 class Navbar extends Component {
 	constructor(props) {
@@ -394,16 +391,16 @@ class Navbar extends Component {
 						</Link>
 						<ul className="dropdown-menu " style={{ background: '#ffe36b', width:'100%'}}>
 						<li  >
-						<Link className='nav-link' to="/viewNewRequests">
+						<Link className='nav-link' to="/viewAllFaculty">
 							View Faculty
 						</Link>
 						</li>
 							<li>
-						<Link className='nav-link' to="/viewAcceptedLorRequests" >
+						<Link className='nav-link' to="/viewAllStudents" >
 							View Students
 						</Link></li>
 							<li>
-						<Link className='nav-link' to="/completedLorRequests" >
+						<Link className='nav-link' to="/viewCurrentActiveUsers" >
 							View Active Users
 						</Link></li>
 						</ul>

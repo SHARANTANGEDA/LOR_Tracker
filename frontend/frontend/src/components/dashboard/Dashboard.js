@@ -10,8 +10,6 @@ import 'react-dates/lib/css/_datepicker.css'
 import SearchBar from "./SearchBar";
 import {facultyHome, hodHome, studentHome} from "../../actions/homeActions";
 import FacultyDashboardItem from "./facultyDashboard/FacultyDashboardItem";
-import returnFilterList from "../../utils/returnFilterList";
-import SavedLorItem from "../student/ViewSavedLor/SavedLorItem";
 
 class Dashboard extends Component {
 	constructor() {

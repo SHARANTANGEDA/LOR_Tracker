@@ -1,8 +1,4 @@
-import {
-  GET_FACULTY_HOME, GET_HOD_HOME,
-  GET_SA_HOME, GET_STUDENT_HOME,
-  HOME_LOADING
-} from '../actions/types'
+import {GET_FACULTY_HOME, GET_HOD_HOME, GET_SA_HOME, GET_STUDENT_HOME, HOME_LOADING} from '../actions/types'
 
 const initialState = {
   home: null,

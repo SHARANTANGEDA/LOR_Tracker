@@ -1,4 +1,4 @@
-import { GET_NAME_RESULTS, GET_SEARCH_ERRORS, GET_SEARCH_RESULTS, SEARCH_LOADING, } from '../actions/types'
+import {GET_NAME_RESULTS, GET_SEARCH_ERRORS, GET_SEARCH_RESULTS, SEARCH_LOADING,} from '../actions/types'
 
 const initialState = {
   results: null,

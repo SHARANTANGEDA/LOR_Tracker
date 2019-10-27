@@ -1,4 +1,4 @@
-import { ACCOUNT_LOADING, GET_ACCOUNT_DETAILS, } from '../actions/types'
+import {ACCOUNT_LOADING, GET_ACCOUNT_DETAILS,} from '../actions/types'
 
 const initialState = {
   loading: true,

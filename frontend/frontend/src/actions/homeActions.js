@@ -1,8 +1,14 @@
 import axios from 'axios'
 import {
-  CLEAR_ERRORS, GET_FACULTY_HOME, GET_HOD_HOME, GET_NAME_RESULTS, GET_STUDENT_HOME, HOME_LOADING, SEARCH_LOADING,
+	CLEAR_ERRORS,
+	GET_FACULTY_HOME,
+	GET_HOD_HOME,
+	GET_NAME_RESULTS,
+	GET_STUDENT_HOME,
+	HOME_LOADING,
+	SEARCH_LOADING,
 } from './types'
-import { tokenHeader } from '../utils/headers';
+import {tokenHeader} from '../utils/headers';
 
 
 export const studentHome=() => dispatch => {

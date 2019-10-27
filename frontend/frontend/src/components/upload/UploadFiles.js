@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import axios from 'axios'
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import { PropTypes } from 'prop-types'
+import {PropTypes} from 'prop-types'
 
 class UploadFiles extends Component {
   constructor(props) {

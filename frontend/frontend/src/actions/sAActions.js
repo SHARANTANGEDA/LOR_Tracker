@@ -1,9 +1,6 @@
 import axios from 'axios'
 
-import {
-  CLEAR_ERRORS,
-  GET_ERRORS,
-} from './types'
+import {CLEAR_ERRORS, GET_ERRORS,} from './types'
 
 export const addDiagnostics = (userData) => dispatch => {
   dispatch(clearErrors());

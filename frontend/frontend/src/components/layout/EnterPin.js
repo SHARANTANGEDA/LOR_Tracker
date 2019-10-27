@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {PropTypes} from 'prop-types'
+import {connect} from 'react-redux'
 import TextFieldGroup from '../common/TextFieldGroup'
-import { confirmEmail } from '../../actions/authActions'
-import { green } from '@material-ui/core/colors'
+import {confirmEmail} from '../../actions/authActions'
+import {green} from '@material-ui/core/colors'
 import axios from 'axios'
 
 class EnterPin extends Component {

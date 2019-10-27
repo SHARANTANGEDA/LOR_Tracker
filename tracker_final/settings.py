@@ -81,8 +81,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 ################################## GMAIL SERVICE #####################################
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'xxxxx@gmail.com'
-EMAIL_HOST_PASSWORD = 'xxxxx'
+EMAIL_HOST_USER = 'ghotden@gmail.com'
+EMAIL_HOST_PASSWORD = '9440171221'
 EMAIL_PORT = 587
 # DATABASES = {
 #     'default': {

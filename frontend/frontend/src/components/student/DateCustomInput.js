@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, {forwardRef} from 'react';
 import DatePickerInputField from "../common/DatePickerInputField";
 
 const CustomDateInput = (props, _ref) => {

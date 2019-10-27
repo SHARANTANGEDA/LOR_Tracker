@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import Dashboard from '../../dashboard/Dashboard'
 import ChangePassword from '../../MyAccount/ChangePassword'
@@ -17,6 +17,10 @@ import GetAllNewRequests from "../../hod/LorPages/GetAllNewRequests"
 import GetAllCompletedRequests from "../../hod/LorPages/CompletedLorRequests/GetAllCompletedRequests"
 import ViewAllAcceptedRequests from "../../hod/LorPages/AcceptedLorRequests/ViewAllAcceptedRequests"
 import ViewAllRequests from "../../hod/LorPages/ViewAllRequests/ViewAllRequests"
+import ViewAllFaculty from "../../hod/UserControl/GetAllFaculty/ViewAllFaculty"
+import ViewAllStudents from "../../hod/UserControl/GetAllStudents/ViewAllStudents"
+import ActiveUsers from "../../hod/UserControl/ViewActiveUsers/ActiveUsers"
+
 const Routes = () => {
   return (
 
@@ -37,6 +41,9 @@ const Routes = () => {
         <PrivateRoute exact path='/viewAllNewRequests' component={GetAllNewRequests}/>
         <PrivateRoute exact path='/viewAllAcceptedRequests' component={ViewAllAcceptedRequests}/>
         <PrivateRoute exact path='/viewAllRequests' component={ViewAllRequests}/>
+        <PrivateRoute exact path='/viewAllFaculty' component={ViewAllFaculty}/>
+        <PrivateRoute exact path='/viewAllStudents' component={ViewAllStudents}/>
+        <PrivateRoute exact path='/viewCurrentActiveUsers' component={ActiveUsers}/>
 
         <Route path="*" component={NotFound} />
       </Switch>

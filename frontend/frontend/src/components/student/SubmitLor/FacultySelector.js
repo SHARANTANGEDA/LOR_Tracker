@@ -11,6 +11,7 @@ import Modal from "react-modal";
 import CPTSelector from "./CPT/CPTSelector";
 import validateLorSubmission from "../../../validation/validateLorSubmission";
 import isEmpty from "../../../validation/is-empty"
+
 const customStyles = {
 	content: {
 		top: '5%',

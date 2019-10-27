@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { PropTypes } from 'prop-types'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {PropTypes} from 'prop-types'
+import {connect} from 'react-redux'
 import TextFieldGroup from '../common/TextFieldGroup'
-import { getAllBooks, loginUser } from '../../actions/authActions'
+import {getAllBooks, loginUser} from '../../actions/authActions'
 
 class ModalLogin extends Component {
   constructor () {

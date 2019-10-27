@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { changePassword } from '../../actions/profileActions'
+import {changePassword} from '../../actions/profileActions'
 
 import classnames from 'classnames'
 

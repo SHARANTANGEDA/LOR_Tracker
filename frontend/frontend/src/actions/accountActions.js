@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { ACCOUNT_LOADING, CLEAR_ERRORS, GET_ACCOUNT_DETAILS, GET_ERRORS } from './types'
+import {ACCOUNT_LOADING, CLEAR_ERRORS, GET_ACCOUNT_DETAILS, GET_ERRORS} from './types'
 import {tokenHeader} from "../utils/headers";
 
 export const getProfileInfo = () => dispatch => {

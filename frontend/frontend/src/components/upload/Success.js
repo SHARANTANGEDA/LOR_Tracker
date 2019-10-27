@@ -1,5 +1,5 @@
 import UploadSuccess from '../common/UploadSuccess'
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 class Success extends Component {
   constructor(props) {

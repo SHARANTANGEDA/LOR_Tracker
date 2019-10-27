@@ -1,29 +1,46 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import Spinner from '../../common/Spinner'
+import Spinner from '../../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
-import {getSavedLor} from "../../../actions/lorActions";
-import SearchBar from "../../dashboard/SearchBar";
-import SavedLorItem from "./SavedLorItem";
+import SearchBar from "../../../dashboard/SearchBar";
+import StudentItem from "./StudentItem";
+import {getStudents} from "../../../../actions/hodActions";
 
-class ViewSavedLor extends Component {
+class ViewAllStudents extends Component {
 	constructor() {
 		super();
 		this.state = {
 			currentPage: 1,
 			todosPerPage: 25,
 			focusedInput: null,
-			filter: null
+			filter: null,
+			modalIsOpen: false,
+			currentData: null
 		};
-		this.handleClick = this.handleClick.bind(this)
+		this.handleClick = this.handleClick.bind(this);
+		this.openModal = this.openModal.bind(this);
+		this.afterOpenModal = this.afterOpenModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+	}
+
+	openModal(e) {
+		this.setState({modalIsOpen: true, currentData: e})
+	}
+
+	closeModal() {
+		this.setState({modalIsOpen: false})
+	}
+
+	afterOpenModal() {
+
 	}
 
 	componentDidMount() {
-		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'student') {
-			console.log('called')
-			this.props.getSavedLor(this.props.match.params.id)
+		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'hod') {
+			console.log('called');
+			this.props.getStudents(this.props.match.params.id)
 		}
 	}
 
@@ -42,27 +59,30 @@ class ViewSavedLor extends Component {
 			});
 		}
 
-		const {lorLoading, savedLor} = this.props.lor;
+		const {student, studentLoading} = this.props.hod;
 		const {currentPage, todosPerPage} = this.state;
 		const indexOfLastTodo = currentPage * todosPerPage;
 		const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
 		const pageNumbers = [];
-		let renderpn;
+		let renderpn, modalContent;
+
+
 		let allFoldersContent, heading;
-		if (lorLoading || savedLor === null) {
+		if (studentLoading || student === null) {
 			allFoldersContent = (<Spinner/>)
 		} else {
-			if (savedLor.length === 0) {
+			if (student.length === 0) {
 				allFoldersContent = (
-					<h5>You haven't created any LOR yet!!</h5>
+					<h5>No Requests currently</h5>
 				);
 			} else {
-				const currentFolder = savedLor.slice(indexOfFirstTodo, indexOfLastTodo);
+				console.log(student)
+				const currentFolder = student.slice(indexOfFirstTodo, indexOfLastTodo);
 				const render = (currentFolder.map(lor => (
 					// <ProductCard folder={land} key={land._id}/>
-					<SavedLorItem lorItem={lor} key={lor.id}/>
+					<StudentItem lorItem={lor} key={currentFolder.indexOf(lor)}/>
 				)));
-				for (let i = 1; i <= Math.ceil(savedLor.length / todosPerPage); i++) {
+				for (let i = 1; i <= Math.ceil(student.length / todosPerPage); i++) {
 					pageNumbers.push(i);
 				}
 				const renderPageNumbers = (
@@ -98,14 +118,16 @@ class ViewSavedLor extends Component {
 							width: '100%', height: '50px'
 						}}>
 							<SearchBar/>
+
 						</nav>
 						<table className="table table-bordered table-striped mb-0">
 							<thead>
 							<tr>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Purpose</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth: '200px'}}>University Name</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Program Name</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>deadline</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Id</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Email</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Contact No</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Student Name</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Graduation Status</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -122,13 +144,13 @@ class ViewSavedLor extends Component {
 	}
 }
 
-ViewSavedLor.propTypes = {
+ViewAllStudents.propTypes = {
 	auth: PropTypes.object.isRequired,
-	lor: PropTypes.object.isRequired,
-	getSavedLor: PropTypes.func.isRequired
+	hod: PropTypes.object.isRequired,
+	getStudents: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
-	lor: state.lor
+	hod: state.hod
 });
-export default connect(mapStateToProps, {getSavedLor})(ViewSavedLor)
+export default connect(mapStateToProps, {getStudents})(ViewAllStudents)

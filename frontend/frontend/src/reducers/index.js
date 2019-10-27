@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 import authReducer from './authReducer'
 import errorReducer from './errorReducer'
 import homeReducer from './homeReducer'
@@ -8,6 +8,7 @@ import resetPasswordReducer from './resetPasswordReducer'
 import lorReducer from "./lorReducer";
 import checkboxReducer from "./checkboxReducer";
 import facultyReducer from "./facultyReducer";
+import hodReducer from "./hodReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   reset: resetPasswordReducer,
   lor: lorReducer,
   checkbox: checkboxReducer,
-  faculty: facultyReducer
+  faculty: facultyReducer,
+  hod: hodReducer,
 })

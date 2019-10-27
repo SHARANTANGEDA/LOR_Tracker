@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
-import { connect } from 'react-redux'
-// import FolderRow from '../display/Folders/FolderRow'
-
+import React, {Component} from 'react'
+import {PropTypes} from 'prop-types'
+import {connect} from 'react-redux'
 import Select from 'react-select'
 import Spinner from '../common/Spinner'
 import SearchBar from './SearchBar'
+
+// import FolderRow from '../display/Folders/FolderRow'
 
 class SearchResults extends Component {
   constructor () {

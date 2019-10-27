@@ -1,11 +1,13 @@
-from rest_framework import permissions, generics
+import json
+
+from django.contrib.sessions.models import Session
+from django.core.serializers import serialize
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.core.serializers import serialize
+
 from student_lor.permissions import HasGroupPermission
-from student_lor.models import *
-import json
-from django.contrib.sessions.models import Session
+from student_lor.serializers import *
 
 
 class GetAllRequests(APIView):
@@ -208,6 +210,7 @@ class GetAllStudents(APIView):
 	}
 
 	# serializer_class = StudentProfileSerializer
+
 	def get(self, request):
 		result = []
 		new_requests = AppUser.objects.values("id", "email", "first_name", "last_name", "department_name")\
@@ -215,7 +218,9 @@ class GetAllStudents(APIView):
 		if not len(new_requests) == 0:
 			for item in new_requests:
 				details = {}
-				student_details = StudentDetails.objects.get(user=item.id)
+				print('here: ', StudentDetails.objects.values("phone", "graduation_status").get(user=item["id"]))
+				# json.loads(serialize('json', StudentDetails.objects.get(user=item["id"])))
+				student_details = StudentDetails.objects.values("phone", "graduation_status", "student_id", 'degree').get(user=item["id"])
 				details["basic"] = item
 				details["profile"] = student_details
 				result.append(details)

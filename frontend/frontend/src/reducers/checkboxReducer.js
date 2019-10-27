@@ -1,4 +1,4 @@
-import { FACULTY_CHECK_BOX, CHECK_BOX_LOADING } from '../actions/types'
+import {CHECK_BOX_LOADING, FACULTY_CHECK_BOX} from '../actions/types'
 
 const initialState = {
   selected: [],
