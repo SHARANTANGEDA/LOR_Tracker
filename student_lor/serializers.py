@@ -1,9 +1,6 @@
 from rest_framework import serializers
+
 from .models import *
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import Group
-from django.db import models
-from .validations.validate_lor_submission import validate_lor_submission
 
 
 class StudentProfileSerializer(serializers.ModelSerializer):
@@ -97,6 +94,15 @@ class CreateLorRequestSerializer(serializers.ModelSerializer):
 		)
 		print("Create: ", entry)
 		return entry
+
+	def update(self, instance, validated_data):
+		instance.purpose = validated_data.get('purpose', instance.purpose)
+		instance.others_details = validated_data.get('others_details', instance.others_details)
+		instance.university_name = validated_data.get('university_name', instance.university_name)
+		instance.deadline = validated_data.get('deadline', instance.deadline)
+		instance.program_name = validated_data.get('program_name', instance.program_name)
+		instance.save()
+		return instance
 
 
 class AddFacultyToLorSerializer(serializers.ModelSerializer):

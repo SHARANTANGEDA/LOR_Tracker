@@ -2,84 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7022dd86-529b-4f3e-99a4-b2159242c198" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/UserControl/GetAllFaculty/ViewAllFaculty.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/UserControl/GetAllStudents/StudentItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/UserControl/GetAllStudents/ViewAllStudents.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/UserControl/ViewActiveUsers/ActiveUserItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/UserControl/ViewActiveUsers/ActiveUsers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/hodReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/accountActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/accountActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/authActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/dAActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/hodActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/homeActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/homeActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/lorActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/lorActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/profileActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/profileActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/sAActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/sAActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/ChangePassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/ChangePassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/ContactUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/ContactUs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/DatePickerInputField.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/DatePickerInputField.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/PrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/PrivateRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/TextFieldGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/TextFieldGroup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/plugins/addLinkPlugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/plugins/addLinkPlugin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchResults.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/facultyDashboard/FacultyDashboardItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/facultyDashboard/FacultyDashboardItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/studentDashboard/StudentHomeFeedTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/studentDashboard/StudentHomeFeedTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/AcceptLorItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/AcceptLorItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/AcceptLorRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/AcceptLorRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/AcceptedLorRequests/AcceptedLorRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/AcceptedLorRequests/AcceptedLorRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/ModalTabContents.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/ModalTabContents.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/CoursesDisplayPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/CoursesDisplayPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/LorPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/LorPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/ProjectsDisplayPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/ProjectsDisplayPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/StudentProfilePanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/StudentProfilePanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/ThesisDisplayPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/tabPanels/ThesisDisplayPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/AcceptLorItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/AcceptLorItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/AcceptedLorRequests/ViewAllAcceptedRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/AcceptedLorRequests/ViewAllAcceptedRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/CompletedLorRequests/GetAllCompletedRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/CompletedLorRequests/GetAllCompletedRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/GetAllNewRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/GetAllNewRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests/ViewAllRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests/ViewAllRequests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/EnterPin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/EnterPin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/FilterLanding.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/FilterLanding.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/ForgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/ForgotPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/ModalLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/ModalLogin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NotFound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/SearchNotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/SearchNotFound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Warning.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Warning.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/DateCustomInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/DateCustomInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CPTSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CPTSelector.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CoursesDone.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CoursesDone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ProjectsDone.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ProjectsDone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ThesisDone.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ThesisDone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/FacultySelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/FacultySelector.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/LorSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/LorSelector.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/LorRequestsItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/LorRequestsItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/ViewLorRequestsStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/ViewLorRequestsStatus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/SavedLorItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/SavedLorItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/ViewSavedLor.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/ViewSavedLor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/upload/Success.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/upload/Success.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadFiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadFiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/accountReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/accountReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/checkboxReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/checkboxReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/errorReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/errorReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/facultyReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/facultyReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/homeReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/homeReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/lorReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/lorReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/resetPasswordReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/resetPasswordReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/searchReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/searchReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hod_lor/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/hod_lor/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tracker_final/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker_final/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/CreateLor.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/CreateLor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student_lor/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student_lor/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student_lor/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student_lor/validations/validate_lor_submission.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/validations/validate_lor_submission.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -181,7 +113,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Django server.Server">
     <configuration name="Server" type="Python.DjangoServer" factoryName="Django server">
       <module name="tracker_final" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -323,7 +255,8 @@
       <workItem from="1571965542932" duration="953000" />
       <workItem from="1571990050828" duration="2261000" />
       <workItem from="1572051609275" duration="19159000" />
-      <workItem from="1572139664538" duration="6508000" />
+      <workItem from="1572139664538" duration="6626000" />
+      <workItem from="1572239254864" duration="8027000" />
     </task>
     <task id="LOCAL-00001" summary="#Initial Commit&#10;#Completed Authentication&#10;#Created add_lor and User Models">
       <created>1565873737853</created>
@@ -388,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572140868403</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="# Completed Functionality for HOD&#10;# Fixed few bugs and typos in serializers and api calls&#10;#Commit Release Test - 1">
+      <created>1572149744730</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1572149744730</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,7 +357,8 @@
     <MESSAGE value="# Completed HOD Home page&#10;# Fixed few bugs" />
     <MESSAGE value="#Added Custom User Modal and Fixed a small Bug in Django Admin User&#10;#Added Requests master control for HOD Group&#10;#Minor Bug Fixes&#10;#Added All Auth package" />
     <MESSAGE value="# Commit to remote repository&#10;# Removed Password from code&#10;# Added auto email functionality&#10;# Added front-end and back-end functionality hod, faculty" />
-    <option name="LAST_COMMIT_MESSAGE" value="# Commit to remote repository&#10;# Removed Password from code&#10;# Added auto email functionality&#10;# Added front-end and back-end functionality hod, faculty" />
+    <MESSAGE value="# Completed Functionality for HOD&#10;# Fixed few bugs and typos in serializers and api calls&#10;#Commit Release Test - 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="# Completed Functionality for HOD&#10;# Fixed few bugs and typos in serializers and api calls&#10;#Commit Release Test - 1" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="masterDetails">

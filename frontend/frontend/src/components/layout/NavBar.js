@@ -322,9 +322,11 @@ class Navbar extends Component {
 									style={{borderRadius: '5px'}}>
 							{user.email}<i className="fas fa-caret-down"/>
 						</Link>
-						<ul className="dropdown-menu ">
+						<ul className="dropdown-menu " style={{width: '100%'}}>
 							<li><Link className='nav-link' to="/changePassword">
 								Change Password</Link></li>
+							<li><Link className='nav-link' to="/editProfile">
+								Edit Profile</Link></li>
 						</ul>
 					</li>
 					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>

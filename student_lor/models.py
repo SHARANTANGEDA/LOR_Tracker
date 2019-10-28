@@ -1,6 +1,9 @@
-from django.db import models
-from api.models import AppUser
 from django.contrib.postgres.fields import JSONField
+from django.db import models
+
+from api.models import AppUser
+
+
 # Create your models here.
 
 
@@ -40,7 +43,7 @@ class FacultyListLor(models.Model):
 	thesis_done = JSONField()
 	status = models.BooleanField(editable=True, default=False)
 	application_status = models.CharField(max_length=15,
-										  choices=[('AP', 'Applied'), ('AC', 'Accepted'), ('RE', 'Rejected'), ('CO', 'Completed')],
+										  choices=[('AP', 'Applied'), ('AC', 'Accepted'), ('RE', 'Rejected'), ('CO', 'Completed'), ('EX', 'Expired')],
 										  default='AP')
 	others = models.CharField(max_length=500)
 	created_at = models.DateTimeField(auto_now_add=True, null=False)

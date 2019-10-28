@@ -11,7 +11,7 @@ const DatePickerInputField = ({
   return (
     <div className="form-group">
       <input type={type} readOnly
-             className={classnames('form-control form-control-lg w-75')}
+             className={classnames('form-control form-control-lg w-100')}
              placeholder={placeholder}
              name={name}
              value={value} onClick={onClick}/>
