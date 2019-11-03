@@ -107,6 +107,7 @@ class ViewLorRequestsStatus extends Component {
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Lor created on</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Lor for University</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Deadline for Application</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Edit Application</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Application Status</th>
 							</tr>
 							</thead>

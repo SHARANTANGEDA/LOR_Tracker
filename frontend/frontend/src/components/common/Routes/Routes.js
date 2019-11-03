@@ -14,10 +14,9 @@ import AcceptLorRequests from '../../faculty/LorPages/AcceptLorRequests'
 import AcceptedLorRequests from '../../faculty/LorPages/AcceptedLorRequests/AcceptedLorRequests'
 import CompletedLorRequests from "../../faculty/LorPages/CompletedLorRequests/CompletedLorRequests";
 import GetAllNewRequests from "../../hod/LorPages/GetAllNewRequests"
-import GetAllCompletedRequests from "../../hod/LorPages/CompletedLorRequests/GetAllCompletedRequests"
-import ViewAllAcceptedRequests from "../../hod/LorPages/AcceptedLorRequests/ViewAllAcceptedRequests"
-import ViewAllRequests from "../../hod/LorPages/ViewAllRequests/ViewAllRequests"
-import ViewAllFaculty from "../../hod/UserControl/GetAllFaculty/ViewAllFaculty"
+import DisplayCompletedLorRequests from "../../hod/LorPages/DisplayCompletedLorRequests"
+import DisplayAcceptedLorRequests from "../../hod/LorPages/DisplayAcceptedLorRequests"
+import DisplayLorRequests from "../../hod/LorPages/DisplayLorRequests"
 import ViewAllStudents from "../../hod/UserControl/GetAllStudents/ViewAllStudents"
 import ActiveUsers from "../../hod/UserControl/ViewActiveUsers/ActiveUsers"
 
@@ -37,11 +36,10 @@ const Routes = () => {
         <PrivateRoute exact path='/viewNewRequests' component={AcceptLorRequests}/>
         <PrivateRoute exact path='/viewAcceptedLorRequests' component={AcceptedLorRequests}/>
         <PrivateRoute exact path='/completedLorRequests' component={CompletedLorRequests}/>
-        <PrivateRoute exact path='/viewAllCompletedRequests' component={GetAllCompletedRequests}/>
+        <PrivateRoute exact path='/viewAllCompletedRequests' component={DisplayCompletedLorRequests}/>
         <PrivateRoute exact path='/viewAllNewRequests' component={GetAllNewRequests}/>
-        <PrivateRoute exact path='/viewAllAcceptedRequests' component={ViewAllAcceptedRequests}/>
-        <PrivateRoute exact path='/viewAllRequests' component={ViewAllRequests}/>
-        <PrivateRoute exact path='/viewAllFaculty' component={ViewAllFaculty}/>
+        <PrivateRoute exact path='/viewAllAcceptedRequests' component={DisplayAcceptedLorRequests}/>
+        <PrivateRoute exact path='/viewAllRequests' component={DisplayLorRequests}/>
         <PrivateRoute exact path='/viewAllStudents' component={ViewAllStudents}/>
         <PrivateRoute exact path='/viewCurrentActiveUsers' component={ActiveUsers}/>
 

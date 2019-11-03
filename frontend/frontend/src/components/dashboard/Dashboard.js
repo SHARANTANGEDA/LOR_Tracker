@@ -260,7 +260,7 @@ class Dashboard extends Component {
 			const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
 			const pageNumbers = [];
 			let renderpn;
-			let allFoldersContent, heading;
+			let allFoldersContent=null, heading, noContent=null;
 
 			if (hodLoading || hodHome === null) {
 				return (<Spinner/>)
@@ -270,10 +270,11 @@ class Dashboard extends Component {
 				}
 				console.log({HOME: hodHome});
 				if (hodHome.activeUserContent.length === 0) {
-					allFoldersContent = (
+					noContent = (
 						<h5>No currently active users</h5>
 					);
 				} else {
+					noContent=null
 					const currentFolder = hodHome.activeUserContent.slice(indexOfFirstTodo, indexOfLastTodo);
 					const render = (currentFolder.map(user => (
 						<tr key={user.id}>
@@ -327,16 +328,13 @@ class Dashboard extends Component {
 							<div className='col-md-4'>
 								<Card style={{
 									backgroundColor: '#f40058', marginRight: '20px', padding: '5px', margin: '3px'
-									// '100px',
-									// maxWidth:
-									// '250px'
 								}}>
-									<div className='row d-flex justify-content-between'>
-										<div className=' col-md-8'>
+									<div className='row d-flex justify-content-between' style={{paddingLeft:'10px', paddingRight:'10px'}}>
+										<div className=' ' >
 											<p style={{color: 'white', fontWeight: 'bold'}}>New Lor Requests</p>
 											<img style={{width: 'auto'}} src={require('../../img/facultyIcons/new.png')} alt=''/>
 										</div>
-										<div className='d-flex justify-content-end col-md-4'>
+										<div className=' ' style={{ marginRight:'5px'}}>
 											<h1 style={{color: 'white', fontWeight: 'bold'}}>
 												{hodHome.newRequests}
 											</h1>
@@ -348,14 +346,14 @@ class Dashboard extends Component {
 								<Card style={{
 									backgroundColor: '#00bcc1', marginRight: '20px', padding: '5px', margin: '3px'
 								}}>
-									<div className='row d-flex justify-content-between'>
-										<div className=' col-md-8'>
+									<div className='row d-flex justify-content-between' style={{paddingLeft:'10px', paddingRight:'10px'}}>
+										<div className=''>
 											<p style={{color: 'white', fontWeight: 'bold'}}>Accepted Lor Requests</p>
 											<img style={{width: '65px', maxHeight: '90px'}}
 													 src={require('../../img/facultyIcons/pending.png')}
 													 alt=''/>
 										</div>
-										<div className='d-flex justify-content-end col-md-4'>
+										<div className=''>
 											<h1 style={{color: 'white', fontWeight: 'bold'}}>
 												{hodHome.acceptedRequests}
 											</h1>
@@ -367,12 +365,12 @@ class Dashboard extends Component {
 								<Card style={{
 									backgroundColor: '#24af2f', marginRight: '20px', padding: '5px', margin: '3px'
 								}}>
-									<div className='row d-flex justify-content-between'>
-										<div className=' col-md-8'>
+									<div className='row d-flex justify-content-between' style={{paddingLeft:'10px', paddingRight:'10px'}}>
+										<div className=''>
 											<p style={{color: 'white', fontWeight: 'bold'}}>Completed Lor</p>
 											<img style={{width: '60px'}} src={require('../../img/facultyIcons/email.png')} alt=''/>
 										</div>
-										<div className='d-flex justify-content-end col-md-4'>
+										<div className=''>
 											<h1 style={{color: 'white', fontWeight: 'bold'}}>
 												{hodHome.completedRequests}
 											</h1>
@@ -384,14 +382,14 @@ class Dashboard extends Component {
 								<Card style={{
 									backgroundColor: '#24af2f', marginRight: '20px', padding: '5px', margin: '3px'
 								}}>
-									<div className='row d-flex justify-content-between'>
-										<div className=' col-md-8'>
+									<div className='row d-flex justify-content-between' style={{paddingLeft:'10px', paddingRight:'10px'}}>
+										<div className=''>
 											<p style={{color: 'white', fontWeight: 'bold'}}>Total Students</p>
 											<img style={{width: '65px', maxHeight: '90px'}}
 													 src={require('../../img/landingIcons/student.png')}
 													 alt=''/>
 										</div>
-										<div className='d-flex justify-content-end col-md-4'>
+										<div className=' '>
 											<h1 style={{color: 'white', fontWeight: 'bold'}}>
 												{hodHome.studentCnt}
 											</h1>
@@ -403,14 +401,14 @@ class Dashboard extends Component {
 								<Card style={{
 									backgroundColor: '#f40058', marginRight: '20px', padding: '5px', margin: '3px'
 								}}>
-									<div className='row d-flex justify-content-between'>
-										<div className=' col-md-8'>
+									<div className='row d-flex justify-content-between' style={{paddingLeft:'10px', paddingRight:'10px'}}>
+										<div className=' '>
 											<p style={{color: 'white', fontWeight: 'bold'}}>Total Faculty</p>
 											<img style={{width: '65px', maxHeight: '90px'}}
 													 src={require('../../img/landingIcons/professor.png')}
 													 alt=''/>
 										</div>
-										<div className='d-flex justify-content-end col-md-4'>
+										<div className=' '>
 											<h1 style={{color: 'white', fontWeight: 'bold'}}>
 												{hodHome.facultyCnt}
 											</h1>
@@ -422,14 +420,14 @@ class Dashboard extends Component {
 								<Card style={{
 									backgroundColor: '#00bcc1', marginRight: '20px', padding: '5px', margin: '3px'
 								}}>
-									<div className='row d-flex justify-content-between'>
-										<div className=' col-md-8'>
+									<div className='row d-flex justify-content-between' style={{paddingLeft:'10px', paddingRight:'10px'}}>
+										<div className=''>
 											<p style={{color: 'white', fontWeight: 'bold'}}>Currently Active Users</p>
 											<img style={{width: '65px', maxHeight: '90px'}}
 													 src={require('../../img/landingIcons/activeUsers.png')}
 													 alt=''/>
 										</div>
-										<div className='d-flex justify-content-end col-md-4'>
+										<div className=' '>
 											<h1 style={{color: 'white', fontWeight: 'bold'}}>
 												{hodHome.activeUserCnt}
 											</h1>
@@ -441,8 +439,8 @@ class Dashboard extends Component {
 						<div className='row col-md-12 d-flex justify-content-center'>
 							<h3>Currently Active Users</h3>
 						</div>
-						<table className="table table-bordered table-striped mb-0">
-
+						<div style={{overflowX:'auto'}}>
+							<table className="table table-bordered table-striped mb-0">
 							<thead>
 							<tr>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>User Id</th>
@@ -456,6 +454,9 @@ class Dashboard extends Component {
 							{allFoldersContent}
 							</tbody>
 						</table>
+							{noContent}
+						</div>
+
 						<div className='d-flex justify-content-end'>
 							{renderpn}
 						</div>

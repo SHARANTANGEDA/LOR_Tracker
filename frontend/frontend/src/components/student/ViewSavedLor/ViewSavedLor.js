@@ -99,6 +99,8 @@ class ViewSavedLor extends Component {
 						}}>
 							<SearchBar/>
 						</nav>
+						<h5 style={{color:'red', fontStyle:'italic'}}>
+							**Editing your saved Lor will also change details in the submitted application, It is advised not to make edits repeatedly</h5>
 						<table className="table table-bordered table-striped mb-0">
 							<thead>
 							<tr>
@@ -106,6 +108,7 @@ class ViewSavedLor extends Component {
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth: '200px'}}>University Name</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Program Name</th>
 								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>deadline</th>
+								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Edit Lor</th>
 							</tr>
 							</thead>
 							<tbody>

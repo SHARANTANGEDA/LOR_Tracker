@@ -2,16 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7022dd86-529b-4f3e-99a4-b2159242c198" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/DisplayAcceptedLorRequests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/DisplayCompletedLorRequests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/DisplayLorRequests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests/FilterRequests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Sidebar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/EditLorModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/filterSortReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/157fb285-38fb-4343-9a6d-e8a0bfdef362.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/157fb285-38fb-4343-9a6d-e8a0bfdef362.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/48de350e-9bc1-4652-a812-6b55f0a64639.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/48de350e-9bc1-4652-a812-6b55f0a64639.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/DatePickerInputField.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/DatePickerInputField.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/hodActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/hodActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/lorActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/lorActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/SearchBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/AcceptLorItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/AcceptedLorRequests/AcceptedLorItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/AcceptedLorRequests/ViewAllAcceptedRequests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/CompletedLorRequests/CompletedLorItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/CompletedLorRequests/GetAllCompletedRequests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/GetAllNewRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/GetAllNewRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests/ViewAllRequests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests/ViewAllRequests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests/ViewAllRequestsItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests/ViewAllRequestsItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/hod/UserControl/GetAllFaculty/ViewAllFaculty.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/CreateLor.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/CreateLor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/validations/validate_lor_submission.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/validations/validate_lor_submission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/LorRequestsItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/LorRequestsItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/ViewLorRequestsStatus.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewLorRequestsStatus/ViewLorRequestsStatus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/SavedLorItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/SavedLorItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/ViewSavedLor.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor/ViewSavedLor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hod_lor/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/hod_lor/api.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +99,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="11.10.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/frontend/src/components/hod" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../fods/ass_1" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -86,19 +111,19 @@
     <property name="ts.external.directory.path" value="/usr/local/lib/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/hod" />
-      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages" />
-      <recent name="$PROJECT_DIR$/frontend/frontend/src/components" />
-      <recent name="$PROJECT_DIR$/hod_lor" />
-      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/CompletedLorRequests" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages" />
       <recent name="$PROJECT_DIR$/faculty_lor" />
       <recent name="$PROJECT_DIR$/frontend/frontend/src/components/faculty/LorPages/AcceptedLorRequests" />
       <recent name="$PROJECT_DIR$/frontend/frontend/src/components/faculty/AcceptLor" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages/ViewAllRequests" />
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/layout" />
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/hod/LorPages" />
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/student/ViewSavedLor" />
+      <recent name="$PROJECT_DIR$/frontend/frontend/src/components/hod" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -256,7 +281,15 @@
       <workItem from="1571990050828" duration="2261000" />
       <workItem from="1572051609275" duration="19159000" />
       <workItem from="1572139664538" duration="6626000" />
-      <workItem from="1572239254864" duration="8027000" />
+      <workItem from="1572239254864" duration="8200000" />
+      <workItem from="1572347946605" duration="92000" />
+      <workItem from="1572350660763" duration="1034000" />
+      <workItem from="1572371505031" duration="7000" />
+      <workItem from="1572401205614" duration="2162000" />
+      <workItem from="1572458254330" duration="652000" />
+      <workItem from="1572702252318" duration="160000" />
+      <workItem from="1572702631143" duration="7032000" />
+      <workItem from="1572749566350" duration="19425000" />
     </task>
     <task id="LOCAL-00001" summary="#Initial Commit&#10;#Completed Authentication&#10;#Created add_lor and User Models">
       <created>1565873737853</created>
@@ -328,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572149744730</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="# Fixed few bugs in Student Section&#10;# Added few Alert systems for on action notification">
+      <created>1572247623320</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1572247623320</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +398,8 @@
     <MESSAGE value="#Added Custom User Modal and Fixed a small Bug in Django Admin User&#10;#Added Requests master control for HOD Group&#10;#Minor Bug Fixes&#10;#Added All Auth package" />
     <MESSAGE value="# Commit to remote repository&#10;# Removed Password from code&#10;# Added auto email functionality&#10;# Added front-end and back-end functionality hod, faculty" />
     <MESSAGE value="# Completed Functionality for HOD&#10;# Fixed few bugs and typos in serializers and api calls&#10;#Commit Release Test - 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="# Completed Functionality for HOD&#10;# Fixed few bugs and typos in serializers and api calls&#10;#Commit Release Test - 1" />
+    <MESSAGE value="# Fixed few bugs in Student Section&#10;# Added few Alert systems for on action notification" />
+    <option name="LAST_COMMIT_MESSAGE" value="# Fixed few bugs in Student Section&#10;# Added few Alert systems for on action notification" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="masterDetails">

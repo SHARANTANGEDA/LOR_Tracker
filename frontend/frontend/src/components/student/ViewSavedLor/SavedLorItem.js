@@ -27,6 +27,10 @@ class SavedLorItem extends Component {
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.university_name}</span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.program_name}</span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px'  }}>{getLocalDate(lorItem.deadline)}</span></td>
+        <td>
+          <button  style={{color:'blue'}} className='btn btn-sm'>
+            <i className="fas fa-edit fa-2x"/></button>
+        </td>
       </tr>
 
     )

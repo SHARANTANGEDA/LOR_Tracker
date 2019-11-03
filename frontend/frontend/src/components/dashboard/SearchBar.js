@@ -54,9 +54,9 @@ class SearchBar extends Component {
       {value:'author',label:'Author/Publication'}
     ]
     return (
-        <div className="row container-fluid d-flex justify-content-between col-md-6">
-          <div className=" input-group md-form form-sm form-2 pl-0" style={{ width: '500px', maxWidth: '700px' }}>
-            <div style={{ minWidth: '100px' }}>
+        <div className="row container-fluid d-flex justify-content-between col-md-6" style={{paddingLeft:'5px'}}>
+          <div className=" input-group md-form form-sm form-2 pl-0" style={{ width: '500px', maxWidth: '700px', paddingLeft:'5px' }}>
+            <div style={{ minWidth: '100px', marginLeft:'5px' }}>
               <Select options={options}
                       className={classnames('isSearchable',
                         { 'is-invalid': errors.category })}

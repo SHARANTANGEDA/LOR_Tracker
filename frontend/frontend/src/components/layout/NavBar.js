@@ -10,7 +10,8 @@ class Navbar extends Component {
 		this.state = {
 			category: {value: 'mr.No', label: 'MR No'},
 			errors: {},
-			search: ''
+			search: '',
+			width: window.innerWidth
 		};
 		this.onCatChange = this.onCatChange.bind(this);
 		this.onChange = this.onChange.bind(this);
@@ -54,6 +55,20 @@ class Navbar extends Component {
 			this.setState({errors: nextProps.errors})
 		}
 	}
+
+	componentWillMount() {
+  window.addEventListener('resize', this.handleWindowSizeChange);
+}
+
+// make sure to remove the listener
+// when the component is not mounted anymore
+componentWillUnmount() {
+  window.removeEventListener('resize', this.handleWindowSizeChange);
+}
+
+handleWindowSizeChange = () => {
+  this.setState({ width: window.innerWidth });
+};
 
 	onCatChange(e) {
 		this.setState({category: e})
@@ -135,209 +150,7 @@ class Navbar extends Component {
 		);
 
 		let authLinksIII = null;
-		if (isAuthenticated && (user.role === 'admin')) {
-			authLinksIII = (
-				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px'}}>
-							Home
-						</Link>
-					</li>
-
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-					</li>
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-
-					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px', minWidth:'200px'
-					}}>
-						<Link className="nav-link nav-item d-flex justify-content-between" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							Lor Requests Control<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu " style={{ background: '#ffe36b'}}>
-							<li  >
-						<Link className='nav-link' to="/viewNewRequests">
-							New Requests
-						</Link>
-					</li>
-							<li>
-						<Link className='nav-link' to="/viewAcceptedLorRequests" >
-							Accepted Requests
-						</Link></li>
-							<li>
-						<Link className='nav-link' to="/completedLorRequests" >
-							Completed Requests
-						</Link></li>
-						</ul>
-					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							{user.email}<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu " style={{ background: '#ffe36b'}}>
-							<li><Link className='nav-link' to="/editProfile">
-								My Account</Link></li>
-							<li><Link className='nav-link' to="/changePassword">
-								Change Password</Link></li>
-						</ul>
-					</li>
-					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
-					</li>
-				</ul>
-
-			)
-		} else if (isAuthenticated && user.role === 'faculty') {
-			authLinksIII = (
-				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px'}}>
-							Home
-						</Link>
-					</li>
-
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-					</li>
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-
-					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px', minWidth:'200px'
-					}}>
-						<Link className="nav-link nav-item d-flex justify-content-between" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							Lor Requests Control<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu " style={{ background: '#ffe36b'}}>
-							<li  >
-						<Link className='nav-link' to="/viewNewRequests">
-							New Requests
-						</Link>
-					</li>
-							<li>
-						<Link className='nav-link' to="/viewAcceptedLorRequests" >
-							Accepted Requests
-						</Link></li>
-							<li>
-						<Link className='nav-link' to="/completedLorRequests" >
-							Completed Requests
-						</Link></li>
-						</ul>
-					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							{user.email}<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu " style={{ background: '#ffe36b'}}>
-							<li><Link className='nav-link' to="/editProfile">
-								My Account</Link></li>
-							<li><Link className='nav-link' to="/changePassword">
-								Change Password</Link></li>
-						</ul>
-					</li>
-					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
-					</li>
-				</ul>
-			)
-		} else if (isAuthenticated && user.role === 'student') {
-			authLinksIII = (
-				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px'}}>
-							Home
-						</Link>
-					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-					<Link className="nav-link nav-item d-flex justify-content-between" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							LOR{' '}<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu ">
-							<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className='nav-link' to="/viewAppliedLor" style={{borderRadius: '5px'}}>
-							View Application Status
-						</Link>
-					</li>
-							<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className='nav-link' to="/submitLor" style={{borderRadius: '5px'}}>
-							Submit Lor
-						</Link>
-					</li>
-							<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className='nav-link' to="/viewMyLor" style={{borderRadius: '5px'}}>
-							View My Lor
-						</Link>
-					</li>
-							<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className='nav-link' to="/fillLor" style={{borderRadius: '5px'}}>
-							Create Lor
-						</Link>
-					</li>
-						</ul>
-					</li>
-
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							{user.email}<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu " style={{width: '100%'}}>
-							<li><Link className='nav-link' to="/changePassword">
-								Change Password</Link></li>
-							<li><Link className='nav-link' to="/editProfile">
-								Edit Profile</Link></li>
-						</ul>
-					</li>
-					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
-					</li>
-				</ul>
-			)
-		}else if(isAuthenticated && user.role==='hod') {
+		if (isAuthenticated && (user.role === 'hod')) {
 			authLinksIII = (
 				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
 					<li className='nav-item' style={{
@@ -412,13 +225,136 @@ class Navbar extends Component {
 					}}>
 						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
 									style={{borderRadius: '5px'}}>
-							{user.email}<i className="fas fa-caret-down"/>
+							{user.email}
+						</Link>
+					</li>
+					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
+						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
+									style={{borderRadius: '5px'}}>
+							<i className="fa fa-power-off" aria-hidden="true"/>
+							{'  '}Logout</Link>
+					</li>
+				</ul>
+			)
+		} else if (isAuthenticated && user.role === 'faculty') {
+			authLinksIII = (
+				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
+					<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px'}}>
+							Home
+						</Link>
+					</li>
+
+					<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+					</li>
+					<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+
+					</li>
+					<li className="nav-item dropdown " style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px', minWidth:'200px'
+					}}>
+						<Link className="nav-link nav-item d-flex justify-content-between" to="" data-toggle="dropdown"
+									style={{borderRadius: '5px'}}>
+							Lor Requests Control<i className="fas fa-caret-down"/>
 						</Link>
 						<ul className="dropdown-menu " style={{ background: '#ffe36b'}}>
+							<li  >
+						<Link className='nav-link' to="/viewNewRequests">
+							New Requests
+						</Link>
+					</li>
+							<li>
+						<Link className='nav-link' to="/viewAcceptedLorRequests" >
+							Accepted Requests
+						</Link></li>
+							<li>
+						<Link className='nav-link' to="/completedLorRequests" >
+							Completed Requests
+						</Link></li>
+						</ul>
+					</li>
+					<li className="nav-item dropdown " style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
+									style={{borderRadius: '5px'}}>
+						</Link>
+					</li>
+					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
+						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
+									style={{borderRadius: '5px'}}>
+							<i className="fa fa-power-off" aria-hidden="true"/>
+							{'  '}Logout</Link>
+					</li>
+				</ul>
+			)
+		} else if (isAuthenticated && user.role === 'student') {
+			authLinksIII = (
+				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
+					<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px'}}>
+							Home
+						</Link>
+					</li>
+					<li className="nav-item dropdown " style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+					<Link className="nav-link nav-item d-flex justify-content-between" to="" data-toggle="dropdown"
+									style={{borderRadius: '5px'}}>
+							LOR{' '}<i className="fas fa-caret-down"/>
+						</Link>
+						<ul className="dropdown-menu ">
+							<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className='nav-link' to="/viewAppliedLor" style={{borderRadius: '5px'}}>
+							View Application Status
+						</Link>
+					</li>
+							<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className='nav-link' to="/submitLor" style={{borderRadius: '5px'}}>
+							Submit Lor
+						</Link>
+					</li>
+							<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className='nav-link' to="/viewMyLor" style={{borderRadius: '5px'}}>
+							View My Lor
+						</Link>
+					</li>
+							<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className='nav-link' to="/fillLor" style={{borderRadius: '5px'}}>
+							Create Lor
+						</Link>
+					</li>
+						</ul>
+					</li>
+
+					<li className="nav-item dropdown " style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					}}>
+						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
+									style={{borderRadius: '5px'}}>
+							{user.email}<i className="fas fa-caret-down"/>
+						</Link>
+						<ul className="dropdown-menu " style={{width: '100%'}}>
+							{/*<li><Link className='nav-link' to="/changePassword">*/}
+							{/*	Change Password</Link></li>*/}
 							<li><Link className='nav-link' to="/editProfile">
-								My Account</Link></li>
-							<li><Link className='nav-link' to="/changePassword">
-								Change Password</Link></li>
+								My Profile</Link></li>
 						</ul>
 					</li>
 					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
@@ -430,10 +366,22 @@ class Navbar extends Component {
 				</ul>
 			)
 		}
-		return (
-			<nav className="navbar navbar-expand-sm  col-md-12 " style={{background: '#ffe36b'}}>
-				<div className="row container d-flex justify-content-between col-md-12">
-					<div className='row  d-flex justify-content-between col-md-12'>
+		const { width } = this.state;
+  	const isMobile = width <= 575;
+  	if(isMobile) {
+  		return (
+					<nav className="navbar navbar-expand-sm  col-md-12 w-100" style={{background: '#ffe36b'}}>
+						<div style={{color:'white'}}><i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"/></div>
+				<div className="row container-fluid d-flex justify-content-between col-md-12 w-100">
+					{isAuthenticated ? authLinkO : guestLinkO}
+				</div>
+			</nav>
+  			)
+		} else {
+  		return (
+			<nav className="navbar navbar-expand-sm  col-md-12 w-100" style={{background: '#ffe36b'}}>
+				<div className="row container-fluid d-flex justify-content-between col-md-12 w-100">
+					<div className='row  d-flex justify-content-between col-md-12 w-100'>
 						{isAuthenticated ? authLinkO : guestLinkO}
 						<button
 							className="navbar-toggler"
@@ -441,15 +389,17 @@ class Navbar extends Component {
 							data-toggle="collapse"
 							data-target="#mobile-nav"
 						>
-							<span className="navbar-toggler-icon"/>
+							<span className="navbar-toggler-icon" style={{background:'white'}}/>
 						</button>
-						<div className="row collapse navbar-collapse justify-content-end" id="mobile-nav">
+						<div className="row collapse navbar-collapse justify-content-end w-100" id="mobile-nav">
 							{isAuthenticated ? authLinksIII : guestLink1}
 						</div>
 					</div>
 				</div>
 			</nav>
 		)
+		}
+
 	}
 }
 

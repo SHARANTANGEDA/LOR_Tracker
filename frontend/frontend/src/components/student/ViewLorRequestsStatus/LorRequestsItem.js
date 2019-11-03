@@ -29,6 +29,10 @@ class LorRequestsItem extends Component {
       app_status=(<td><span style={{ fontFamily: 'Arial', fontSize: '16px', color:'green'}}>Accepted</span></td>)
     }else if(application.application_status==='RE') {
       app_status=(<td><span style={{ fontFamily: 'Arial', fontSize: '16px', color:'red'}}>Rejected</span></td>)
+    }else if(application.application_status==='CO') {
+      app_status=(<td><span style={{ fontFamily: 'Arial', fontSize: '16px', color:'white', background:'green', padding: '2px',
+        borderRadius: '5px'}}>
+        Done</span></td>)
     }
     return (
       <tr>
@@ -37,10 +41,13 @@ class LorRequestsItem extends Component {
         </span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{application.faculty.email}</span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{application.lor.purpose}</span></td>
-                <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{application.lor.created_at}</span></td>
-                        <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{application.lor.university_name}</span></td>
-
+        <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{application.lor.created_at}</span></td>
+        <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{application.lor.university_name}</span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px'  }}>{getLocalDate(application.lor.deadline)}</span></td>
+        <td>
+          <button  style={{color:'blue'}} className='btn btn-sm'>
+            <i className="fas fa-edit fa-2x"/>Lor</button>
+        </td>
 				{app_status}
 
       </tr>

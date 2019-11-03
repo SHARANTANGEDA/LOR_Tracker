@@ -1,6 +1,6 @@
 import axios from "axios";
 import {tokenHeader} from "../utils/headers";
-import {GET_ACTIVE_USERS, GET_FACULTY, GET_STUDENTS, HOME_LOADING} from "./types";
+import {GET_ACTIVE_USERS, GET_STUDENTS, HOME_LOADING} from "./types";
 
 export const getStudents= () =>dispatch => {
 	dispatch(loadList());
@@ -14,18 +14,18 @@ export const getStudents= () =>dispatch => {
   )
 };
 
-export const getFaculty = () => dispatch => {
-  dispatch(loadList());
-  axios.get(`/api/hod/getAllFaculty`, tokenHeader()).then(res => {
-   dispatch({
-        type: GET_FACULTY,
-        payload: res.data
-      })
-  }).catch(err => {
-      console.log(err);
-  }
-  )
-};
+// export const getFaculty = () => dispatch => {
+//   dispatch(loadList());
+//   axios.get(`/api/hod/getAllFaculty`, tokenHeader()).then(res => {
+//    dispatch({
+//         type: GET_FACULTY,
+//         payload: res.data
+//       })
+//   }).catch(err => {
+//       console.log(err);
+//   }
+//   )
+// };
 
 export const getActiveUsers = () => dispatch => {
   dispatch(loadList());

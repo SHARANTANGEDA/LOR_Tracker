@@ -10,9 +10,7 @@ import Landing from './components/layout/Landing'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import Routes from './components/common/Routes/Routes'
-// import Login from './components/layout/Login'
-// import Footer from './components/layout/Footer'
-
+import Sidebar from "./components/layout/Sidebar";
 
 //Check for token
 if(localStorage.jwtToken) {
@@ -27,20 +25,43 @@ if(localStorage.jwtToken) {
 }
 
 class App extends Component {
+  constructor(props) {
+  super(props);
+  this.state = { width: 0, height: 0 };
+  this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+}
+
+componentDidMount() {
+  this.updateWindowDimensions();
+  window.addEventListener('resize', this.updateWindowDimensions);
+}
+
+componentWillUnmount() {
+  window.removeEventListener('resize', this.updateWindowDimensions);
+}
+
+updateWindowDimensions() {
+  this.setState({ width: window.innerWidth, height: window.innerHeight });
+}
   render() {
     return (
       <Provider store={store}>
-      <Router>
-      <div className="App w-100">
+      <Router >
+      <div className="App w-100 " style={{width:this.state.width, height: this.state.height, overflow: 'scroll'}}>
         <NavBar/>
         <Switch>
+
         {/*<Route exact path="/home" component={Landing}/>*/}
           <Route exact path='/' component={Landing}/>
           {/*<Route exact path='/forgotPassword' component={ForgotPassword}/>*/}
           {/*<Route exact path='/register' component={Register}/>*/}
+          <div className='wrapper' style={{width:this.state.width, height: this.state.height, overflow: 'scroll'}}>
+             <Sidebar/>
           <Route component={Routes}/>
+          </div>
+
         </Switch>
-      </div>
+        </div>
       </Router>
       </Provider>
     );

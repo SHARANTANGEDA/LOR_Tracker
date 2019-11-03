@@ -17,7 +17,7 @@ import {clearErrors} from "./accountActions";
 export const createLor = (data) => dispatch => {
   dispatch(clearErrors());
   axios.post(`/api/student/createLor`, data, tokenHeader()).then(res => {
-    window.location.reload()
+    window.location.href='/viewMyLor'
   }).catch(err => {
       console.log(err);
     dispatch({
