@@ -16,6 +16,17 @@ export const changePassword = (data) => dispatch => {
       })
     );
 };
+// export const viewProfilePicture = () => dispatch => {
+//   clearErrors();
+//   axios.get('api/student/getProfilePicture', tokenHeader()).then(res => {
+//
+//   }).catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// };
 export const resetPassword = (data) => dispatch => {
   clearErrors();
   axios

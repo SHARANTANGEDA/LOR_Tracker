@@ -73,10 +73,11 @@ class Dashboard extends Component {
 					</div>
 
 					<div className="App-content row d-flex justify-content-center">
-						<h1 className="grid--cell fl1 fs-headline1 text-center" style={{
+						<h1 className="grid--cell fl1 fs-headline1 text-center row" style={{
 							color: 'black'
 						}}>Welcome {this.props.auth.user.first_name} {this.props.auth.user.last_name}</h1>
 					</div>
+						<h5 className='row text-center fl1 fs-headline1'>Guidelines to apply for Letter of Recommendation:</h5>
 
 				</div>
 			)

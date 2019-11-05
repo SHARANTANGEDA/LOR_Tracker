@@ -1,17 +1,17 @@
 # Create your views here.
 import json
-from datetime import datetime, timezone
+import os
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.core.serializers import serialize
 from django.template import Template, Context
 from rest_framework import permissions, generics
-from rest_framework.exceptions import ValidationError
+from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import *
+from tracker_final.settings import BASE_DIR
 from .permissions import HasGroupPermission
 from .serializers import *
 from .validations.validate_lor_submission import validate_lor_submission
@@ -67,8 +67,9 @@ class EditProfile(generics.GenericAPIView):
 		HasGroupPermission
 	]
 	required_groups = {
-		'POST': ['student'],
+		'POST': ["student"],
 	}
+
 	serializer_class = CreateProfileSerializer
 
 	def post(self, request, *args, **kwargs):
@@ -87,6 +88,63 @@ class EditProfile(generics.GenericAPIView):
 			return Response({
 				"profile": StudentProfileSerializer(student_details, context=self.get_serializer_context()).data,
 			})
+
+
+class UploadProfilePicture(generics.GenericAPIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'POST': ["student"],
+	}
+	# permission_classes = (permissions.AllowAny,)
+	parser_class = (MultiPartParser, FormParser, FileUploadParser)
+
+	serializer_class = ProfilePictureSerializer
+
+	def post(self, request, *args, **kwargs):
+		print({'here': request.data})
+
+		try:
+			existing = StudentProfilePicture.objects.get(user=self.request.user.id)
+			print(os.path.join(BASE_DIR, 'media', existing.picture.name))
+			os.remove(os.path.join(BASE_DIR, 'media', existing.picture.name))
+			print({'here': request.data})
+			serializer = self.get_serializer(existing, data=request.data)
+			serializer.is_valid(raise_exception=True)
+			profile_picture = serializer.save()
+			return Response({
+				"profile": GetPictureSerializer(profile_picture, context=self.get_serializer_context()).data,
+			})
+		except ObjectDoesNotExist as notCreated:
+			print({'here': request.data})
+			serializer = self.get_serializer(data=request.data)
+			serializer.is_valid(raise_exception=True)
+			profile_picture = serializer.save()
+			return Response({
+				"profile": GetPictureSerializer(profile_picture, context=self.get_serializer_context()).data,
+			})
+
+
+class GetMyProfilePicture(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ["student"],
+	}
+
+	parser_class = (MultiPartParser, FormParser, FileUploadParser)
+	serializer_class = GetPictureSerializer
+
+	def get(self, request):
+		try:
+			entries = StudentProfilePicture.objects.get(user=self.request.user.id)
+			return Response(GetPictureSerializer(entries).data)
+		except ObjectDoesNotExist:
+			return Response({'status': False})
 
 
 # View profile
@@ -135,6 +193,46 @@ class CreateLor(generics.GenericAPIView):
 			raise ValidationError(errors)
 
 
+class EditLor(generics.GenericAPIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'POST': ['student'],
+	}
+	serializer_class = EditLorRequestSerializer
+
+	def post(self, request, lor_id):
+		try:
+			existing = StudentDetails.objects.get(user=self.request.user.id)
+			print("Data: ", request.data)
+			serializer = self.get_serializer(data=request.data)
+			serializer.is_valid(raise_exception=True)
+			lor_details = serializer.update(Lor.objects.get(id=lor_id), serializer.run_validation(data=request.data))
+			applications = FacultyListLor.objects.filter(lor=lor_details.id)
+			for item in applications:
+				template = Template(EDITLOR_TEMPLATE)
+				faculty_details = AppUser.objects.get(id=item.faculty)
+				details = StudentDetails.objects.get(user=self.request.user.id)
+				send_mail(
+					'Lor Updated: Student has changed the details of LOR ',
+					template.render(
+						context=Context(
+							{'faculty': faculty_details, 'student': details, 'deadline': lor_details.deadline})),
+					'ghotden@gmail.com',
+					[faculty_details.email],
+					fail_silently=False,
+				)
+			return Response({
+				"lor": ViewSavedLor(lor_details, context=self.get_serializer_context()).data,
+			})
+		except ObjectDoesNotExist as notCreated:
+			errors = {
+				"profile": 'You have not created your profile yet, please create your profile before creating LOR'}
+			raise ValidationError(errors)
+
+
 # Add Faculty Recipient for LOR
 class AddFacultyForLOR(generics.GenericAPIView):
 	permission_classes = [
@@ -151,30 +249,48 @@ class AddFacultyForLOR(generics.GenericAPIView):
 		print('received:', request.data)
 		validate_lor_submission(data=request.data)
 		entries = []
-		# TODO Check for Integrity Errors
+		flag = 0
+		creation_errors = {}
 		for validated_data in request.data:
-			entry = FacultyListLor.objects.create(
-				lor_id=validated_data['lor_id'],
-				faculty_id=validated_data['faculty_id'],
-				courses_done=validated_data['courses_done'],
-				projects_done=validated_data['projects_done'],
-				thesis_done=validated_data['thesis_done'],
-				status=validated_data['status'],
-				others=validated_data['others']
-			)
-			template = Template(APPLICATION_TEMPLATE)
-			faculty_details = AppUser.objects.get(id=validated_data['faculty_id'])
-			details = StudentDetails.objects.get(user=self.request.user.id)
-			lor = Lor.objects.get(id=validated_data['lor_id'])
-			dead_line = lor.deadline.replace(tzinfo=timezone.utc).astimezone(tz=None)
-			send_mail(
-				'New LOR Request: You got new Request with deadline on ' + dead_line,
-				template.render(context=Context({'faculty': faculty_details, 'student': details, 'deadline': dead_line})),
-				'ghotden@gmail.com',
-				[faculty_details.email],
-				fail_silently=False,
-			)
-			entries.append(entry)
+			selected_lor = Lor.objects.get(id=validated_data['lor_id'])
+			if selected_lor.deadline.replace(tzinfo=None) <= datetime.now().replace(tzinfo=None):
+				errors = {
+					"lor": 'Your LOR is expired, choose another one'}
+				raise ValidationError(errors)
+			else:
+				check_exists = FacultyListLor.objects.filter(faculty=validated_data['faculty_id'],
+															 lor=validated_data['lor_id']).count()
+				if check_exists > 0:
+					flag = 1
+					creation_errors = {
+						'application': 'Lor already requested'
+					}
+				else:
+					entry = FacultyListLor.objects.create(
+						lor_id=validated_data['lor_id'],
+						faculty_id=validated_data['faculty_id'],
+						courses_done=validated_data['courses_done'],
+						projects_done=validated_data['projects_done'],
+						thesis_done=validated_data['thesis_done'],
+						status=validated_data['status'],
+						others=validated_data['others']
+					)
+					template = Template(APPLICATION_TEMPLATE)
+					faculty_details = AppUser.objects.get(id=validated_data['faculty_id'])
+					details = StudentDetails.objects.get(user=self.request.user.id)
+					lor = Lor.objects.get(id=validated_data['lor_id'])
+					dead_line = lor.deadline.replace(tzinfo=timezone.utc).astimezone(tz=None)
+					send_mail(
+						'New LOR Request: You got new Request with deadline on ' + str(dead_line),
+						template.render(
+							context=Context({'faculty': faculty_details, 'student': details, 'deadline': dead_line})),
+						'ghotden@gmail.com',
+						[faculty_details.email],
+						fail_silently=False,
+					)
+					entries.append(entry)
+		if flag:
+			raise ValidationError(creation_errors)
 		return Response({"success": True})
 
 
@@ -190,8 +306,46 @@ class GetMySavedLor(APIView):
 	serializer_class = ViewSavedLor
 
 	def get(self, request):
-		entries = Lor.objects.filter(user=self.request.user.id, deadline__gt=datetime.now(timezone.utc))
+		update_entries = Lor.objects.filter(user=self.request.user.id, deadline__lte=datetime.now(timezone.utc)
+											, expired=False).update(expired=True)
+		entries = Lor.objects.filter(user=self.request.user.id, hidden=False)
 		return Response(ViewSavedLor(entries, many=True).data)
+
+
+class GetLorForApplication(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ['student'],
+	}
+	serializer_class = ViewSavedLor
+
+	def get(self, request):
+		entries = Lor.objects.filter(user=self.request.user.id, deadline__gt=datetime.now(timezone.utc), hidden=False)
+		return Response(ViewSavedLor(entries, many=True).data)
+
+
+class DeleteLor(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ['student'],
+	}
+	serializer_class = ViewSavedLor
+
+	def get(self, request, lor_id):
+		entries = FacultyListLor.objects.filter(lor=lor_id).count()
+		if entries > 0:
+			print('hide', lor_id)
+			hide = Lor.objects.filter(id=lor_id).update(hidden=True)
+		else:
+			print('delete', lor_id)
+			delete_lor = Lor.objects.get(id=lor_id).delete()
+		return Response({'Success': True})
 
 
 class GetAppliedLor(APIView):
@@ -214,7 +368,8 @@ class GetAppliedLor(APIView):
 				item["fields"]["lor"] = json.loads(serialize('json', Lor.objects.filter(id=item["fields"]["lor"])))[0][
 					"fields"]
 				item["fields"]["faculty"] = AppUser.objects.values("id", "email", "first_name", "last_name",
-														   "department_name").filter(id=item["fields"]["faculty"])[0]
+																   "department_name").filter(
+					id=item["fields"]["faculty"])[0]
 				result.append(item["fields"])
 
 		print(result)
@@ -247,38 +402,38 @@ class WithdrawApplications(APIView):
 
 
 class EditLorApplication(generics.GenericAPIView):
-		permission_classes = [
-			permissions.IsAuthenticated,
-			HasGroupPermission
-		]
-		required_groups = {
-			'POST': ['student'],
-		}
-		serializer_class = CreateLorRequestSerializer
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'POST': ['student'],
+	}
+	serializer_class = CreateLorRequestSerializer
 
-		def post(self, request, lor):
-			try:
-				existing = Lor.objects.get(id=lor, user=self.request.user.id)
-				serializer = self.get_serializer(existing, data=request.data)
-				serializer.is_valid(raise_exception=True)
-				lor = FacultyListLor.objects.filter(lor=lor)
-				student_details = serializer.save()
-				for item in lor:
-					faculty_details = AppUser.objects.get(id=item.faculty)
-					details = StudentDetails.objects.get(user=self.request.user.id)
-					dead_line = lor.deadline.replace(tzinfo=timezone.utc).astimezone(tz=None)
-					template = Template(EDITLOR_TEMPLATE)
-					send_mail(
-						'Lor Application Edited by the student',
-						template.render(
-							context=Context({'faculty': faculty_details, 'student': details, 'deadline': dead_line})),
-						'ghotden@gmail.com',
-						[faculty_details.email],
-						fail_silently=False,
-					)
-				return Response('Success')
-			except ObjectDoesNotExist as notCreated:
-				return Response('Error: Database Integrity Compromised, Contact Support if this persists')
+	def post(self, request, lor):
+		try:
+			existing = Lor.objects.get(id=lor, user=self.request.user.id)
+			serializer = self.get_serializer(existing, data=request.data)
+			serializer.is_valid(raise_exception=True)
+			lor = FacultyListLor.objects.filter(lor=lor)
+			student_details = serializer.save()
+			for item in lor:
+				faculty_details = AppUser.objects.get(id=item.faculty)
+				details = StudentDetails.objects.get(user=self.request.user.id)
+				dead_line = lor.deadline.replace(tzinfo=timezone.utc).astimezone(tz=None)
+				template = Template(EDITLOR_TEMPLATE)
+				send_mail(
+					'Lor Application Edited by the student',
+					template.render(
+						context=Context({'faculty': faculty_details, 'student': details, 'deadline': dead_line})),
+					'ghotden@gmail.com',
+					[faculty_details.email],
+					fail_silently=False,
+				)
+			return Response('Success')
+		except ObjectDoesNotExist as notCreated:
+			return Response('Error: Database Integrity Compromised, Contact Support if this persists')
 
 
 # List of Universities in database

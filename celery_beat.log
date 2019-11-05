@@ -1,0 +1,55 @@
+[2019-11-04 05:01:06,802: INFO/MainProcess] beat: Starting...
+[2019-11-04 05:02:00,256: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:02:00,264: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:03:00,000: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:03:00,001: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:04:00,000: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:04:00,001: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:05:00,018: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:05:00,019: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:06:00,063: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:06:00,064: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:07:00,036: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:07:00,037: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:08:00,041: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:08:00,042: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:09:00,046: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:09:00,047: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:10:00,094: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:10:00,095: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:11:00,022: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:11:00,024: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:12:00,015: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:12:00,017: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:13:00,000: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:13:00,001: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:14:00,067: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:14:00,068: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:15:00,011: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:15:00,012: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:16:00,016: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:16:00,017: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:17:00,034: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+[2019-11-04 05:17:00,035: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:18:00,061: INFO/MainProcess] Scheduler: Sending due task test (faculty_lor.tasks.get_celery_worker_status)
+[2019-11-04 05:18:00,062: INFO/MainProcess] Scheduler: Sending due task send-reminder-every-single-minute (faculty_lor.tasks.send_application_remainder)
+celery beat v4.1.1 (latentcall) is starting.
+__    -    ... __   -        _
+LocalTime -> 2019-11-04 05:01:06
+Configuration ->
+    . broker -> redis://localhost:6379//
+    . loader -> celery.loaders.app.AppLoader
+    . scheduler -> celery.beat.PersistentScheduler
+    . db -> celerybeat-schedule
+    . logfile -> [stderr]@%INFO
+    . maxinterval -> 5.00 minutes (300s)
+[2019-11-04 19:44:03,176: INFO/MainProcess] beat: Starting...
+[2019-11-04 19:44:03,276: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 2.0 seconds...
+[2019-11-04 19:44:05,279: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 4.0 seconds...
+[2019-11-04 19:44:09,284: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 6.0 seconds...
+[2019-11-04 19:44:15,291: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 8.0 seconds...
+[2019-11-04 19:44:23,301: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 10.0 seconds...
+[2019-11-04 19:44:33,314: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 12.0 seconds...
+[2019-11-04 19:44:45,328: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 14.0 seconds...
+[2019-11-04 19:44:59,345: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 16.0 seconds...
+[2019-11-04 19:45:15,365: ERROR/MainProcess] beat: Connection error: Error 111 connecting to localhost:6379. Connection refused.. Trying again in 18.0 seconds...

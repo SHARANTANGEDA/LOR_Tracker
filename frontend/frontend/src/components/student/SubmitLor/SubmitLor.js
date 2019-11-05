@@ -7,7 +7,7 @@ import {Collapse} from "react-collapse";
 import SearchBar from "../../dashboard/SearchBar";
 import LorSelector from "./LorSelector";
 import FacultySelector from "./FacultySelector";
-import {getFacultyList, getSavedLor, submitLor} from "../../../actions/lorActions";
+import {getFacultyList, getLorForApplication, submitLor} from "../../../actions/lorActions";
 
 
 const customStyles = {
@@ -43,7 +43,7 @@ class SubmitLor extends Component {
 
 	componentDidMount() {
 		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'student') {
-			this.props.getSavedLor(this.props.match.params.id);
+			this.props.getLorForApplication(this.props.match.params.id);
 			this.props.getFacultyList(this.props.match.params.id);
 		}
 	}
@@ -159,7 +159,7 @@ SubmitLor.propTypes = {
 	lor: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
 	checkbox: PropTypes.object.isRequired,
-	getSavedLor: PropTypes.func.isRequired,
+	getLorForApplication: PropTypes.func.isRequired,
 	getFacultyList: PropTypes.func.isRequired,
 	submitLor: PropTypes.func.isRequired
 };
@@ -171,4 +171,4 @@ const mapStateToProps = state => ({
 	lor: state.lor
 });
 
-export default connect(mapStateToProps, {getFacultyList, getSavedLor, submitLor})(SubmitLor)
+export default connect(mapStateToProps, {getFacultyList, getLorForApplication, submitLor})(SubmitLor)

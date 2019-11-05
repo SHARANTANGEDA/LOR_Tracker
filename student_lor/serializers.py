@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 from .models import *
 
@@ -7,6 +10,12 @@ class StudentProfileSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = StudentDetails
 		fields = ['student_id', 'full_name', 'email', 'phone', 'cgpa', 'graduation_status', 'degree']
+
+
+class GetPictureSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = StudentProfilePicture
+		fields = ['picture']
 
 
 class GetFacultyListSerializer(serializers.ModelSerializer):
@@ -25,7 +34,7 @@ class ViewAppliedFacultyListSerializer(serializers.ModelSerializer):
 class ViewSavedLor(serializers.ModelSerializer):
 	class Meta:
 		model = Lor
-		fields = ['id', 'purpose', 'others_details', 'university_name', 'deadline', 'program_name']
+		fields = ['id', 'purpose', 'others_details', 'university_name', 'deadline', 'program_name', 'expired']
 
 
 class GetAppliedLor(serializers.ModelSerializer):
@@ -58,7 +67,7 @@ class CreateProfileSerializer(serializers.ModelSerializer):
 			phone=validated_data['phone'],
 			cgpa=validated_data['cgpa'],
 			graduation_status=validated_data['graduation_status'],
-			# graduation_year=validated_data['graduation_year'],
+			picture=validated_data['picture'],
 			degree=validated_data['degree'],
 			user=AppUser.objects.get(id=self.context['request'].user.id)
 		)
@@ -71,8 +80,26 @@ class CreateProfileSerializer(serializers.ModelSerializer):
 		instance.phone = validated_data.get('phone', instance.phone)
 		instance.cgpa = validated_data.get('cgpa', instance.cgpa)
 		instance.graduation_status = bool(validated_data.get('graduation_status', instance.graduation_status))
-		# instance.graduation_year = validated_data.get('graduation_year', instance.graduation_year)
+		instance.picture = validated_data.get('picture', instance.picture)
 		instance.degree = validated_data.get('degree', instance.degree)
+		instance.save()
+		return instance
+
+
+class ProfilePictureSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = StudentProfilePicture
+		fields = ['picture']
+
+	def create(self, validated_data):
+		entry = StudentProfilePicture.objects.create(
+			picture=validated_data['picture'],
+			user=AppUser.objects.get(id=self.context['request'].user.id)
+		)
+		return entry
+
+	def update(self, instance, validated_data):
+		instance.picture = validated_data.get('picture', instance.picture)
 		instance.save()
 		return instance
 
@@ -83,26 +110,57 @@ class CreateLorRequestSerializer(serializers.ModelSerializer):
 		fields = ['purpose', 'others_details', 'university_name', 'deadline', 'program_name']
 
 	def create(self, validated_data):
-		entry = Lor.objects.create(
-			purpose=validated_data['purpose'],
-			others_details=validated_data['others_details'],
-			university_name=validated_data['university_name'],
-			# portal_address=validated_data['portal_address'],
-			deadline=validated_data['deadline'],
-			program_name=validated_data['program_name'],
-			user=AppUser.objects.get(id=self.context['request'].user.id)
-		)
-		print("Create: ", entry)
-		return entry
+		print(type(validated_data['deadline'].replace(tzinfo=None)), type(datetime.now().replace(tzinfo=None)))
+		if validated_data['deadline'].replace(tzinfo=None) <= datetime.now().replace(tzinfo=None):
+			errors = {
+				"deadline": 'Invalid deadline'}
+			raise ValidationError(errors)
+		else:
+			entry = Lor.objects.create(
+				purpose=validated_data['purpose'],
+				others_details=validated_data['others_details'],
+				university_name=validated_data['university_name'],
+				# portal_address=validated_data['portal_address'],
+				deadline=validated_data['deadline'],
+				program_name=validated_data['program_name'],
+				user=AppUser.objects.get(id=self.context['request'].user.id)
+			)
+			print("Create: ", entry)
+			return entry
 
 	def update(self, instance, validated_data):
-		instance.purpose = validated_data.get('purpose', instance.purpose)
-		instance.others_details = validated_data.get('others_details', instance.others_details)
-		instance.university_name = validated_data.get('university_name', instance.university_name)
-		instance.deadline = validated_data.get('deadline', instance.deadline)
-		instance.program_name = validated_data.get('program_name', instance.program_name)
-		instance.save()
-		return instance
+		if validated_data.get('deadline', instance.deadline) <= datetime.now().replace(tzinfo=None):
+			errors = {
+				"deadline": 'Invalid deadline'}
+			raise ValidationError(errors)
+		else:
+			instance.purpose = validated_data.get('purpose', instance.purpose)
+			instance.others_details = validated_data.get('others_details', instance.others_details)
+			instance.university_name = validated_data.get('university_name', instance.university_name)
+			instance.deadline = validated_data.get('deadline', instance.deadline)
+			instance.program_name = validated_data.get('program_name', instance.program_name)
+			instance.save()
+			return instance
+
+
+class EditLorRequestSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Lor
+		fields = ['purpose', 'others_details', 'university_name', 'deadline', 'program_name', 'expired']
+
+	def update(self, instance, validated_data):
+		if validated_data.get('deadline', instance.deadline).replace(tzinfo=None) <= datetime.now().replace(tzinfo=None):
+			errors = {
+				"deadline": 'Invalid deadline'}
+			raise ValidationError(errors)
+		else:
+			instance.purpose = validated_data.get('purpose', instance.purpose)
+			instance.others_details = validated_data.get('others_details', instance.others_details)
+			instance.university_name = validated_data.get('university_name', instance.university_name)
+			instance.deadline = validated_data.get('deadline', instance.deadline)
+			instance.program_name = validated_data.get('program_name', instance.program_name)
+			instance.save()
+			return instance
 
 
 class AddFacultyToLorSerializer(serializers.ModelSerializer):

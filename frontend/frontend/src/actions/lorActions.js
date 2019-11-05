@@ -8,6 +8,7 @@ import {
 	GET_FACULTY_LIST,
 	GET_MY_APPLIED_LORS,
 	GET_MY_SAVED_LOR,
+	GET_MY_SAVED_LOR_APPLICATION,
 	GET_NEW_REQUESTS,
 	GET_UNIV_LIST,
 	HOME_LOADING
@@ -17,6 +18,19 @@ import {clearErrors} from "./accountActions";
 export const createLor = (data) => dispatch => {
   dispatch(clearErrors());
   axios.post(`/api/student/createLor`, data, tokenHeader()).then(res => {
+    window.location.href='/viewMyLor'
+  }).catch(err => {
+      console.log(err);
+    dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+  }
+  )
+};
+export const updateLor = (data, id) => dispatch => {
+  dispatch(clearErrors());
+  axios.post(`/api/student/editLor/${id}`, data, tokenHeader()).then(res => {
     window.location.href='/viewMyLor'
   }).catch(err => {
       console.log(err);
@@ -52,6 +66,14 @@ export const getFacultyList= () =>dispatch => {
   )
 };
 
+export const deleteLor= (id) =>dispatch => {
+	dispatch(loadList());
+	axios.get(`api/student/deleteLor/${id}`, tokenHeader()).then(res => {
+	  window.location.reload();
+  }).catch(err =>
+      console.log(err)
+  )
+};
 export const getAppliedLors= () =>dispatch => {
 	dispatch(loadList());
 	axios.get(`api/student/getAppliedLor`, tokenHeader()).then(res => {
@@ -69,6 +91,17 @@ export const getSavedLor= () =>dispatch => {
 	axios.get(`api/student/getSavedLor`, tokenHeader()).then(res => {
     dispatch({
         type: GET_MY_SAVED_LOR,
+        payload: res.data
+      })
+  }).catch(err =>
+      console.log(err)
+  )
+};
+export const getLorForApplication= () =>dispatch => {
+	dispatch(loadList());
+	axios.get(`api/student/getSavedLorForApplication`, tokenHeader()).then(res => {
+    dispatch({
+        type: GET_MY_SAVED_LOR_APPLICATION,
         payload: res.data
       })
   }).catch(err =>

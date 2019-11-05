@@ -3,6 +3,7 @@ import {CHECK_BOX_LOADING, FACULTY_CHECK_BOX} from '../actions/types'
 const initialState = {
   selected: [],
   errors: {},
+  editData: {},
   loading: true,
 };
 
@@ -15,6 +16,7 @@ export default function(state = initialState, action) {
         loading: true,
         selected: [],
         errors: {},
+        editData: {}
       };
     case FACULTY_CHECK_BOX:
       return {

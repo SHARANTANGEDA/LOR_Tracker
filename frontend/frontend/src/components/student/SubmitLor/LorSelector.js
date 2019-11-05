@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import Spinner from '../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
-import {getSavedLor} from "../../../actions/lorActions";
 import getLocalDate from "../../../utils/getLocalDate";
 
 class LorSelector extends Component {
@@ -24,7 +23,7 @@ class LorSelector extends Component {
 
 	// componentDidMount() {
 	// 	if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'student') {
-	// 		this.props.getSavedLor(this.props.match.params.id)
+	// 		this.props.getLorForApplication(this.props.match.params.id)
 	// 	}
 	// }
 
@@ -55,7 +54,7 @@ class LorSelector extends Component {
 			});
 		}
 
-		const {lorLoading, savedLor} = this.props.lor;
+		const {savedLorForApplication, savedLorForApplicationLoading} = this.props.lor;
 		const {currentPage, todosPerPage} = this.state;
 		const indexOfLastTodo = currentPage * todosPerPage;
 		const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
@@ -72,15 +71,15 @@ class LorSelector extends Component {
     //     <i className="fas fa-check-square fa-2x"/></button></td>)
 		//
     // }
-		if (lorLoading || savedLor === null) {
+		if (savedLorForApplicationLoading || savedLorForApplication === null) {
 			allFoldersContent = (<Spinner/>)
 		} else {
-			if (savedLor.length === 0) {
+			if (savedLorForApplication.length === 0) {
 				allFoldersContent = (
 					<h5>You haven't created any LOR yet!!</h5>
 				);
 			} else {
-				const currentFolder = savedLor.slice(indexOfFirstTodo, indexOfLastTodo);
+				const currentFolder = savedLorForApplication.slice(indexOfFirstTodo, indexOfLastTodo);
 				const render = (currentFolder.map(lor => (
 					<tr key={lor.id}>
 						{/*<td>{checkbox}</td>*/}
@@ -95,7 +94,7 @@ class LorSelector extends Component {
 						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{getLocalDate(lor.deadline)}</span></td>
 					</tr>
 				)));
-				for (let i = 1; i <= Math.ceil(savedLor.length / todosPerPage); i++) {
+				for (let i = 1; i <= Math.ceil(savedLorForApplication.length / todosPerPage); i++) {
 					pageNumbers.push(i);
 				}
 				const renderPageNumbers = (
@@ -154,10 +153,9 @@ class LorSelector extends Component {
 LorSelector.propTypes = {
 	auth: PropTypes.object.isRequired,
 	lor: PropTypes.object.isRequired,
-	getSavedLor: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
 	lor: state.lor
 });
-export default connect(mapStateToProps, {getSavedLor})(LorSelector)
+export default connect(mapStateToProps)(LorSelector)

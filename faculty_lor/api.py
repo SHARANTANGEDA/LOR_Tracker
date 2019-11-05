@@ -1,19 +1,16 @@
-from django.shortcuts import render
-
 # Create your views here.
-from rest_framework import permissions, generics
-from rest_framework.response import Response
-from .serializers import *
-from rest_framework.views import APIView
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.serializers import serialize
-from student_lor.permissions import HasGroupPermission
-from student_lor.models import *
 import json
 from datetime import datetime, timezone
-from django.template import Template, Context
+
 from django.core.mail import send_mail
-from django.contrib.sessions.models import Session
+from django.core.serializers import serialize
+from django.template import Template, Context
+from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from student_lor.models import *
+from student_lor.permissions import HasGroupPermission
 
 # Edit my profile
 # class EditProfile(generics.GenericAPIView):
@@ -86,6 +83,8 @@ Departments of Computer Science and Information Systems
 
 For any query or inconvenience related to accessing the site please email to lor@hyderabad.bits-pilani.ac.in
 """
+
+
 # Get Home Data for faculty
 class GetHome(APIView):
 	permission_classes = [

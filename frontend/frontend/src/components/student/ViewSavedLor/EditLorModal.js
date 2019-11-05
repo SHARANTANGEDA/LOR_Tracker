@@ -2,19 +2,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import TextFieldGroup from '../common/TextFieldGroup'
-import Modal from 'react-modal'
+import TextFieldGroup from '../../common/TextFieldGroup'
 import Select from 'react-select'
-import {createLor, getUniversitiesList} from "../../actions/lorActions";
+import {getUniversitiesList, updateLor} from "../../../actions/lorActions";
 import CreatableSelect from 'react-select/lib/Creatable';
-import TextAreaFieldGroup from "../common/TextAreaGroupField";
-import convertToSelectArray from '../../utils/convertToSelectArray'
+import TextAreaFieldGroup from "../../common/TextAreaGroupField";
 import DatePicker from "react-datepicker";
-import './datePicker.css'
+import '../datePicker.css'
 import "react-datepicker/dist/react-datepicker.css";
-import SearchBar from "../dashboard/SearchBar";
-import DateCustomInput from "./DateCustomInput";
-import {Link} from "react-router-dom";
+import SearchBar from "../../dashboard/SearchBar";
+import DateCustomInput from "../DateCustomInput";
 
 const customStyles = {
 	content: {
@@ -28,7 +25,7 @@ const customStyles = {
 	}
 };
 
-class CreateLor extends Component {
+class EditLorModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -43,22 +40,37 @@ class CreateLor extends Component {
 			dateHandle: null,
 			errors: {}
 		};
-
 		this.changeHandler = this.changeHandler.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
-		this.openModal = this.openModal.bind(this);
-		this.closeModal = this.closeModal.bind(this);
-		this.afterOpenModal = this.afterOpenModal.bind(this);
 		this.onSelectType = this.onSelectType.bind(this);
 		this.onUnivChange = this.onUnivChange.bind(this);
-		this.openConfirmationModel = this.openConfirmationModel.bind(this);
-		this.closeConfirmationModal = this.closeConfirmationModal.bind(this)
 	}
+	componentWillMount() {
+		console.log(this.props.lorItem)
+		this.setState({
+					programName: this.props.lorItem.program_name,
+					deadline: this.props.lorItem.deadline,
+					universityName: {label: this.props.lorItem.university_name, value: this.props.lorItem.university_name},
+					otherDetails: this.props.lorItem.other_details,
+					purpose: {label: this.props.lorItem.purpose, value: this.props.lorItem.purpose},
+					// category: {label: this.props.lorItem.category, value: this.props.lorItem.category}
+		});
+		if(this.props.lorItem.otherDetails===null) {
+			this.setState({otherDetails: ''})
+		}
 
-	componentDidMount() {
-		this.props.getProfileInfo(this.props.match.params.id)
-		this.props.getUniversitiesList(this.props.match.params.id)
+					// category: {label: this.props.lorItem.category, value: this.props.lorItem.category}
+
 	}
+componentDidMount() {
+		console.log(this.state.programName,
+					this.state.deadline,
+					this.state.universityName,
+					this.state.otherDetails,
+					this.state.purpose)
+}
+
+
 	componentWillReceiveProps(nextProps, nextContext) {
 		if (nextProps.errors) {
 			if (nextProps.errors.profile !== null && nextProps.errors.profile !== undefined) {
@@ -67,24 +79,7 @@ class CreateLor extends Component {
 			}
 			this.setState({errors: nextProps.errors})
 		}
-		if (nextProps.account.loading === false && nextProps.account.details !== null) {
-			if (nextProps.auth.user.role === 'student') {
-				this.setState({
-					programName: nextProps.account.details.programName,
-					deadline: nextProps.account.details.deadline,
-					universityName: nextProps.account.details.universityName,
-					otherDetails: nextProps.account.details.otherDetails,
-				});
-				if(nextProps.account.details.purpose) {
-					this.setState({purpose: nextProps.account.details.purpose})
-				}
-			if(nextProps.account.details.category) {
-					this.setState({category: nextProps.account.details.category})
-				}
 
-			}
-
-		}
 	}
 
 	dateTimeHandler = date => {
@@ -96,18 +91,6 @@ class CreateLor extends Component {
 		this.setState({[e.target.name]: e.target.value})
 	}
 
-	openModal() {
-		this.setState({modalIsOpen: true})
-	}
-
-	openConfirmationModel() {
-		this.setState({confirmationModal: true})
-	}
-
-	closeConfirmationModal() {
-		this.setState({confirmationModal: false})
-	}
-
 	onSelectType(e) {
 		this.setState({purpose: e})
 	}
@@ -117,12 +100,6 @@ class CreateLor extends Component {
 		console.log({register: e})
 	}
 
-	afterOpenModal() {
-	}
-
-	closeModal() {
-		this.setState({modalIsOpen: false})
-	}
 
 
 	onSubmit(e) {
@@ -146,7 +123,7 @@ class CreateLor extends Component {
 				program_name: this.state.programName,
 				deadline: this.state.deadline,
 			};
-			this.props.createLor(userData)
+			this.props.updateLor(userData, this.props.lorItem.id)
 		}
 	}
 
@@ -154,14 +131,6 @@ class CreateLor extends Component {
 		const {errors} = this.state;
 		if (this.props.auth.user.role !== 'student') {
 			window.location.href = '/404';
-		}
-		const {loading, univ} = this.props.lor;
-		let univArray = [{value: null, label: 'Loading...'}];
-		if (loading || univ === null || univ === []) {
-
-		} else {
-			// console.log({select:convertToSelectArray(univ)})
-			univArray = convertToSelectArray(univ)
 		}
 		const customSelectStyles = {
 			control: (base, state) => ({
@@ -193,41 +162,6 @@ class CreateLor extends Component {
 		// const DateCustomInput = ({value, onClick}) => (
 		//
 		// );
-		let confirmationContent = (
-			<div className='d-flex justify-content-center'>
-				<div>
-					<h3>Confirm the details</h3>
-					<p>Make sure you have entered the correct details before submitting</p>
-					<div className='d-flex justify-content-end'>
-						<button onClick={this.onSubmit} className='btn btn-sm' style={{color: 'white', background: 'green'}}>
-							Continue
-						</button>
-						<button onClick={this.closeConfirmationModal} className='btn btn-sm'
-										style={{color: 'white', background: 'red'}}>
-							Check Again
-						</button>
-					</div>
-				</div>
-			</div>
-		);
-		let profileErrorContent = (
-			<div className='col-md-12'>
-				<div className='row col-md-12 d-flex justify-content-end'>
-					<button onClick={this.closeModal} className='btn btn-sm'
-									style={{color: 'white', background: 'red'}}>
-						<i className="fas fa-times"/></button>
-				</div>
-				<div className='row col-md-12 '>
-					<h3>Profile not found</h3>
-					<p>Please create your profile before creating LOR Application</p>
-					<div className='d-flex justify-content-end'>
-						<Link to='/editProfile' className='btn btn-primary' style={{color: 'white', background: 'green'}}>
-							Create Profile
-						</Link>
-					</div>
-				</div>
-			</div>
-		);
 		if (this.state.purpose !== null && this.state.purpose.value === 'Others') {
 			othersContent = (
 				<div className='col-md-6'>
@@ -293,11 +227,7 @@ class CreateLor extends Component {
 											)}
 										</div>
 										<div className='col-md-6'>
-											{/*<Select allowCreate={true} options={univArray} className={classnames("isSearchable w-75",*/}
-											{/*	{'is-invalid': errors.university_name})} name="universityName" styles={customSelectStyles}*/}
-											{/*				placeholder="Select the university you want to apply for"*/}
-											{/*				onChange={this.onUnivChange} value={this.state.universityName}/>*/}
-											<CreatableSelect isClearable options={univArray} className={classnames("isSearchable w-100")}
+											<CreatableSelect isClearable options={this.props.univ} className={classnames("isSearchable w-100")}
 																			 styles={customSelectStyles}
 																			 placeholder="Select the university you want to apply for"
 																			 name="universityName" value={this.state.universityName}
@@ -327,39 +257,22 @@ class CreateLor extends Component {
 
 								</div>
 							</form>
-
 						</div>
 					</div>
-
 				</div>
-				<Modal
-					isOpen={this.state.confirmationModal}
-					onAfterOpen={this.afterOpenModal}
-					onRequestClose={this.closeConfirmationModal}
-					style={customStyles}
-					contentLabel="Data Confirmation"
-					ariaHideApp={false}
-				>{confirmationContent}</Modal>
-				<Modal
-					isOpen={this.state.modalIsOpen}
-					onAfterOpen={this.afterOpenModal}
-					onRequestClose={this.closeModal}
-					style={customStyles}
-					contentLabel="Profile Error"
-					ariaHideApp={false}
-				>{profileErrorContent}</Modal>
-
 			</div>
 		)
 	}
 }
 
-CreateLor.propTypes = {
+EditLorModal.propTypes = {
 	auth: PropTypes.object.isRequired,
 	lor: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
-	createLor: PropTypes.func.isRequired,
-	getUniversitiesList: PropTypes.func.isRequired
+	updateLor: PropTypes.func.isRequired,
+	getUniversitiesList: PropTypes.func.isRequired,
+	lorItem: PropTypes.object.isRequired,
+	univ: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -368,4 +281,4 @@ const mapStateToProps = state => ({
 	lor: state.lor
 });
 
-export default connect(mapStateToProps, {createLor, getUniversitiesList})(CreateLor)
+export default connect(mapStateToProps, {updateLor, getUniversitiesList})(EditLorModal)

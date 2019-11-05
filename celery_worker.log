@@ -1,0 +1,182 @@
+[2019-11-04 05:01:07,382: INFO/MainProcess] Connected to redis://localhost:6379//
+[2019-11-04 05:01:07,388: INFO/MainProcess] mingle: searching for neighbors
+[2019-11-04 05:01:08,399: INFO/MainProcess] mingle: all alone
+[2019-11-04 05:01:08,470: WARNING/MainProcess] /home/sharan/ProjectsAndLearning/LOR_tracker/tracker_final/env/lib/python3.6/site-packages/celery/fixups/django.py:200: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warnings.warn('Using settings.DEBUG leads to a memory leak, never '
+[2019-11-04 05:01:08,470: INFO/MainProcess] celery@sharan-inspiron-5577 ready.
+[2019-11-04 05:01:08,526: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[d9dec0e4-3a45-49df-a750-066447ba1137]  
+[2019-11-04 05:01:08,528: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[6d84042a-cf00-496d-90a6-3423af0f6bbb]  
+[2019-11-04 05:01:08,528: WARNING/ForkPoolWorker-1] HERE
+[2019-11-04 05:01:08,595: WARNING/ForkPoolWorker-8] Here 15
+[2019-11-04 05:01:12,561: INFO/ForkPoolWorker-1] Task faculty_lor.tasks.get_celery_worker_status[6d84042a-cf00-496d-90a6-3423af0f6bbb] succeeded in 4.0331390700002885s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '2', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}, {...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:01:20,921: WARNING/ForkPoolWorker-8] Here 15
+[2019-11-04 05:01:26,668: INFO/ForkPoolWorker-8] Task faculty_lor.tasks.send_application_remainder[d9dec0e4-3a45-49df-a750-066447ba1137] succeeded in 18.13973868500034s: None
+[2019-11-04 05:02:00,264: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[6322b65f-7131-49d4-9a20-5d390136f945]  
+[2019-11-04 05:02:00,265: WARNING/ForkPoolWorker-3] HERE
+[2019-11-04 05:02:00,265: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[010a2dda-eaf0-4667-91a0-d3ac656af216]  
+[2019-11-04 05:02:00,278: WARNING/ForkPoolWorker-5] Here 15
+[2019-11-04 05:02:00,280: WARNING/ForkPoolWorker-5] Here 15
+[2019-11-04 05:02:00,281: INFO/ForkPoolWorker-5] Task faculty_lor.tasks.send_application_remainder[010a2dda-eaf0-4667-91a0-d3ac656af216] succeeded in 0.01478720599970984s: None
+[2019-11-04 05:02:04,299: INFO/ForkPoolWorker-3] Task faculty_lor.tasks.get_celery_worker_status[6322b65f-7131-49d4-9a20-5d390136f945] succeeded in 4.034648455000024s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '58', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:03:00,002: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[9e02ba78-7f74-4a40-bee7-3b677642ac5b]  
+[2019-11-04 05:03:00,003: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[2631f5cc-7d54-4db1-8e30-d4ae46e21d35]  
+[2019-11-04 05:03:00,003: WARNING/ForkPoolWorker-1] HERE
+[2019-11-04 05:03:00,014: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:03:00,015: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:03:00,017: INFO/ForkPoolWorker-7] Task faculty_lor.tasks.send_application_remainder[9e02ba78-7f74-4a40-bee7-3b677642ac5b] succeeded in 0.01427454900021985s: None
+[2019-11-04 05:03:04,022: INFO/ForkPoolWorker-1] Task faculty_lor.tasks.get_celery_worker_status[2631f5cc-7d54-4db1-8e30-d4ae46e21d35] succeeded in 4.018371730000581s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '122', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:04:00,002: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[dfd33bba-67a0-436b-94c7-ac0c1c4e9c84]  
+[2019-11-04 05:04:00,004: WARNING/ForkPoolWorker-3] HERE
+[2019-11-04 05:04:00,005: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[8aa018de-1337-402b-bdef-a95ce0b1c9c5]  
+[2019-11-04 05:04:00,013: WARNING/ForkPoolWorker-5] Here 15
+[2019-11-04 05:04:00,014: WARNING/ForkPoolWorker-5] Here 15
+[2019-11-04 05:04:00,014: INFO/ForkPoolWorker-5] Task faculty_lor.tasks.send_application_remainder[8aa018de-1337-402b-bdef-a95ce0b1c9c5] succeeded in 0.00874401399960334s: None
+[2019-11-04 05:04:04,024: INFO/ForkPoolWorker-3] Task faculty_lor.tasks.get_celery_worker_status[dfd33bba-67a0-436b-94c7-ac0c1c4e9c84] succeeded in 4.021014176999415s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '186', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:05:00,020: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[ef3c7e4b-7e2a-4e42-a4b1-42cbcfd3650e]  
+[2019-11-04 05:05:00,021: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[1c87cbba-8f88-4f09-ba26-291509582d1e]  
+[2019-11-04 05:05:00,022: WARNING/ForkPoolWorker-1] HERE
+[2019-11-04 05:05:00,028: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:05:00,029: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:05:00,030: INFO/ForkPoolWorker-7] Task faculty_lor.tasks.send_application_remainder[ef3c7e4b-7e2a-4e42-a4b1-42cbcfd3650e] succeeded in 0.009507310000117286s: None
+[2019-11-04 05:05:04,041: INFO/ForkPoolWorker-1] Task faculty_lor.tasks.get_celery_worker_status[1c87cbba-8f88-4f09-ba26-291509582d1e] succeeded in 4.019397330999709s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '250', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:06:00,064: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[0762c6b5-9107-45c7-9d01-9acff7e29b14]  
+[2019-11-04 05:06:00,065: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[3a0496db-989b-44d5-8623-8dbb33c2dc31]  
+[2019-11-04 05:06:00,066: WARNING/ForkPoolWorker-3] HERE
+[2019-11-04 05:06:00,081: WARNING/ForkPoolWorker-4] Here 15
+[2019-11-04 05:06:00,082: WARNING/ForkPoolWorker-4] Here 15
+[2019-11-04 05:06:00,084: INFO/ForkPoolWorker-4] Task faculty_lor.tasks.send_application_remainder[3a0496db-989b-44d5-8623-8dbb33c2dc31] succeeded in 0.018365259999882255s: None
+[2019-11-04 05:06:04,086: INFO/ForkPoolWorker-3] Task faculty_lor.tasks.get_celery_worker_status[0762c6b5-9107-45c7-9d01-9acff7e29b14] succeeded in 4.0198383930001s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '314', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:07:00,038: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[67343404-fdb5-47a1-84e4-70ad526073f4]  
+[2019-11-04 05:07:00,039: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[11e6f9ca-3bce-4aa8-b282-586b1eb09236]  
+[2019-11-04 05:07:00,039: WARNING/ForkPoolWorker-8] HERE
+[2019-11-04 05:07:00,051: WARNING/ForkPoolWorker-6] Here 15
+[2019-11-04 05:07:00,053: WARNING/ForkPoolWorker-6] Here 15
+[2019-11-04 05:07:00,054: INFO/ForkPoolWorker-6] Task faculty_lor.tasks.send_application_remainder[67343404-fdb5-47a1-84e4-70ad526073f4] succeeded in 0.015258839999660267s: None
+[2019-11-04 05:07:04,073: INFO/ForkPoolWorker-8] Task faculty_lor.tasks.get_celery_worker_status[11e6f9ca-3bce-4aa8-b282-586b1eb09236] succeeded in 4.03394556999956s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '378', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:08:00,044: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[e6907c51-208d-4ade-8df0-2597fe5fc4b9]  
+[2019-11-04 05:08:00,046: WARNING/ForkPoolWorker-2] HERE
+[2019-11-04 05:08:00,046: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[87045f85-8a2f-475a-99af-1d3aed8adf51]  
+[2019-11-04 05:08:00,054: WARNING/ForkPoolWorker-4] Here 15
+[2019-11-04 05:08:00,055: WARNING/ForkPoolWorker-4] Here 15
+[2019-11-04 05:08:00,056: INFO/ForkPoolWorker-4] Task faculty_lor.tasks.send_application_remainder[87045f85-8a2f-475a-99af-1d3aed8adf51] succeeded in 0.008661791999656998s: None
+[2019-11-04 05:08:04,080: INFO/ForkPoolWorker-2] Task faculty_lor.tasks.get_celery_worker_status[e6907c51-208d-4ade-8df0-2597fe5fc4b9] succeeded in 4.034640728999875s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '442', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:09:00,047: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[f9bce1af-2681-435e-97eb-54c9f8f6f457]  
+[2019-11-04 05:09:00,048: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[6d976a59-0fc8-4261-af15-c7bd9132ea7a]  
+[2019-11-04 05:09:00,049: WARNING/ForkPoolWorker-7] HERE
+[2019-11-04 05:09:00,055: WARNING/ForkPoolWorker-6] Here 15
+[2019-11-04 05:09:00,056: WARNING/ForkPoolWorker-6] Here 15
+[2019-11-04 05:09:00,057: INFO/ForkPoolWorker-6] Task faculty_lor.tasks.send_application_remainder[f9bce1af-2681-435e-97eb-54c9f8f6f457] succeeded in 0.00817262300006405s: None
+[2019-11-04 05:09:04,081: INFO/ForkPoolWorker-7] Task faculty_lor.tasks.get_celery_worker_status[6d976a59-0fc8-4261-af15-c7bd9132ea7a] succeeded in 4.032626177000566s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '506', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:10:00,096: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[b8a5b3f9-55f7-4fc2-a7c2-0a12230ceea8]  
+[2019-11-04 05:10:00,097: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[bc5af349-bb7f-48c0-a7c7-05f9217047e4]  
+[2019-11-04 05:10:00,097: WARNING/ForkPoolWorker-1] HERE
+[2019-11-04 05:10:00,108: WARNING/ForkPoolWorker-2] Here 15
+[2019-11-04 05:10:00,110: WARNING/ForkPoolWorker-2] Here 15
+[2019-11-04 05:10:00,110: INFO/ForkPoolWorker-2] Task faculty_lor.tasks.send_application_remainder[bc5af349-bb7f-48c0-a7c7-05f9217047e4] succeeded in 0.012964642000042659s: None
+[2019-11-04 05:10:04,115: INFO/ForkPoolWorker-1] Task faculty_lor.tasks.get_celery_worker_status[b8a5b3f9-55f7-4fc2-a7c2-0a12230ceea8] succeeded in 4.018193490000158s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '570', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:11:00,024: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[09bd0929-515f-4654-a7b4-7548c5c19ccc]  
+[2019-11-04 05:11:00,025: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[8b77425d-a571-4dfa-a8ea-34dd29f7d469]  
+[2019-11-04 05:11:00,025: WARNING/ForkPoolWorker-5] HERE
+[2019-11-04 05:11:00,032: WARNING/ForkPoolWorker-4] Here 15
+[2019-11-04 05:11:00,034: WARNING/ForkPoolWorker-4] Here 15
+[2019-11-04 05:11:00,034: INFO/ForkPoolWorker-4] Task faculty_lor.tasks.send_application_remainder[09bd0929-515f-4654-a7b4-7548c5c19ccc] succeeded in 0.008713047000128427s: None
+[2019-11-04 05:11:04,058: INFO/ForkPoolWorker-5] Task faculty_lor.tasks.get_celery_worker_status[8b77425d-a571-4dfa-a8ea-34dd29f7d469] succeeded in 4.0324851310006125s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '634', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:12:00,017: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[ec1b385b-3bf7-4ec1-a69b-ca65bca5ff1d]  
+[2019-11-04 05:12:00,018: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[408bb910-5d23-4058-8f21-ec4da724398f]  
+[2019-11-04 05:12:00,019: WARNING/ForkPoolWorker-7] HERE
+[2019-11-04 05:12:00,026: WARNING/ForkPoolWorker-8] Here 15
+[2019-11-04 05:12:00,027: WARNING/ForkPoolWorker-8] Here 15
+[2019-11-04 05:12:00,028: INFO/ForkPoolWorker-8] Task faculty_lor.tasks.send_application_remainder[408bb910-5d23-4058-8f21-ec4da724398f] succeeded in 0.009234266999555985s: None
+[2019-11-04 05:12:04,036: INFO/ForkPoolWorker-7] Task faculty_lor.tasks.get_celery_worker_status[ec1b385b-3bf7-4ec1-a69b-ca65bca5ff1d] succeeded in 4.017719688000398s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '698', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:13:00,002: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[1ce37ca4-c4d5-43ca-b69a-f884906373e4]  
+[2019-11-04 05:13:00,003: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[28cdc58a-f60f-4427-b6e9-f130131788a0]  
+[2019-11-04 05:13:00,004: WARNING/ForkPoolWorker-4] HERE
+[2019-11-04 05:13:00,011: WARNING/ForkPoolWorker-2] Here 15
+[2019-11-04 05:13:00,012: WARNING/ForkPoolWorker-2] Here 15
+[2019-11-04 05:13:00,012: INFO/ForkPoolWorker-2] Task faculty_lor.tasks.send_application_remainder[1ce37ca4-c4d5-43ca-b69a-f884906373e4] succeeded in 0.01011655099955533s: None
+[2019-11-04 05:13:04,039: INFO/ForkPoolWorker-4] Task faculty_lor.tasks.get_celery_worker_status[28cdc58a-f60f-4427-b6e9-f130131788a0] succeeded in 4.034838538000258s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '762', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:14:00,069: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[db50fb4f-71ab-439a-a488-5432de6d5271]  
+[2019-11-04 05:14:00,070: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[7826883f-5222-4325-8e45-cd99e9f51ae9]  
+[2019-11-04 05:14:00,070: WARNING/ForkPoolWorker-6] HERE
+[2019-11-04 05:14:00,077: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:14:00,078: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:14:00,078: INFO/ForkPoolWorker-7] Task faculty_lor.tasks.send_application_remainder[7826883f-5222-4325-8e45-cd99e9f51ae9] succeeded in 0.008288367999739421s: None
+[2019-11-04 05:14:04,102: INFO/ForkPoolWorker-6] Task faculty_lor.tasks.get_celery_worker_status[db50fb4f-71ab-439a-a488-5432de6d5271] succeeded in 4.032054371999948s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '826', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:15:00,012: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[37c28d8c-e4c7-489b-81c9-9da1b68da490]  
+[2019-11-04 05:15:00,013: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[844813fe-375a-4c61-9e12-9129a2576a4c]  
+[2019-11-04 05:15:00,014: WARNING/ForkPoolWorker-2] HERE
+[2019-11-04 05:15:00,025: WARNING/ForkPoolWorker-1] Here 15
+[2019-11-04 05:15:00,027: WARNING/ForkPoolWorker-1] Here 15
+[2019-11-04 05:15:00,027: INFO/ForkPoolWorker-1] Task faculty_lor.tasks.send_application_remainder[37c28d8c-e4c7-489b-81c9-9da1b68da490] succeeded in 0.01350023000031797s: None
+[2019-11-04 05:15:04,033: INFO/ForkPoolWorker-2] Task faculty_lor.tasks.get_celery_worker_status[844813fe-375a-4c61-9e12-9129a2576a4c] succeeded in 4.019254726999861s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '888', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:16:00,017: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[f5fbf269-d909-46cc-8b1a-2bc57a0dbdf4]  
+[2019-11-04 05:16:00,018: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[150ece41-5d83-4af9-b8f2-64a763da0eef]  
+[2019-11-04 05:16:00,019: WARNING/ForkPoolWorker-4] HERE
+[2019-11-04 05:16:00,026: WARNING/ForkPoolWorker-5] Here 15
+[2019-11-04 05:16:00,027: WARNING/ForkPoolWorker-5] Here 15
+[2019-11-04 05:16:00,028: INFO/ForkPoolWorker-5] Task faculty_lor.tasks.send_application_remainder[150ece41-5d83-4af9-b8f2-64a763da0eef] succeeded in 0.009199114000693953s: None
+[2019-11-04 05:16:04,035: INFO/ForkPoolWorker-4] Task faculty_lor.tasks.get_celery_worker_status[f5fbf269-d909-46cc-8b1a-2bc57a0dbdf4] succeeded in 4.017040538999936s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '952', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:17:00,036: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[89873470-5d99-4893-ba1f-bcc03649c820]  
+[2019-11-04 05:17:00,037: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[078a5027-49d7-47e5-a838-3c5d84b5d496]  
+[2019-11-04 05:17:00,037: WARNING/ForkPoolWorker-8] HERE
+[2019-11-04 05:17:00,045: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:17:00,046: WARNING/ForkPoolWorker-7] Here 15
+[2019-11-04 05:17:00,046: INFO/ForkPoolWorker-7] Task faculty_lor.tasks.send_application_remainder[89873470-5d99-4893-ba1f-bcc03649c820] succeeded in 0.009239670000170008s: None
+[2019-11-04 05:17:04,056: INFO/ForkPoolWorker-8] Task faculty_lor.tasks.get_celery_worker_status[078a5027-49d7-47e5-a838-3c5d84b5d496] succeeded in 4.019307360000312s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '1016', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+[2019-11-04 05:18:00,062: INFO/MainProcess] Received task: faculty_lor.tasks.get_celery_worker_status[f9d374a2-efa0-4d73-b2d1-a8745075b2e2]  
+[2019-11-04 05:18:00,063: INFO/MainProcess] Received task: faculty_lor.tasks.send_application_remainder[10309217-be84-414b-a217-8f39db11d201]  
+[2019-11-04 05:18:00,063: WARNING/ForkPoolWorker-2] HERE
+[2019-11-04 05:18:00,074: WARNING/ForkPoolWorker-3] Here 15
+[2019-11-04 05:18:00,076: WARNING/ForkPoolWorker-3] Here 15
+[2019-11-04 05:18:00,076: INFO/ForkPoolWorker-3] Task faculty_lor.tasks.send_application_remainder[10309217-be84-414b-a217-8f39db11d201] succeeded in 0.012957455999639933s: None
+[2019-11-04 05:18:04,081: INFO/ForkPoolWorker-2] Task faculty_lor.tasks.get_celery_worker_status[f9d374a2-efa0-4d73-b2d1-a8745075b2e2] succeeded in 4.017869418999908s: {'stats': {'celery@sharan-inspiron-5577': {'total': {...}, 'pid': 1445, 'clock': '1080', 'pool': {...}, 'broker': {...}, 'prefetch_count': 32, 'rusage': {...}}}, 'registered_tasks': {'celery@sharan-inspiron-5577': ['faculty_lor.tasks.get_celery_worker_status', 'faculty_lor.tasks.send_application_remainder', 'tracker_final.celery.debug_task']}, 'active_tasks': {'celery@sharan-inspiron-5577': [{...}]}, 'scheduled_tasks': {'celery@sharan-inspiron-5577': []}}
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@sharan-inspiron-5577 v4.1.1 (latentcall)
+---- **** ----- 
+--- * ***  * -- Linux-4.15.0-66-generic-x86_64-with-Ubuntu-18.04-bionic 2019-11-04 05:01:07
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         tracker_final:0x7f2f303e02b0
+- ** ---------- .> transport:   redis://localhost:6379//
+- ** ---------- .> results:     redis://localhost:6379/
+- *** --- * --- .> concurrency: 8 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . faculty_lor.tasks.get_celery_worker_status
+  . faculty_lor.tasks.send_application_remainder
+  . tracker_final.celery.debug_task
+
+[2019-11-04 19:44:03,366: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 2.00 seconds...
+
+[2019-11-04 19:44:05,369: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 4.00 seconds...
+
+[2019-11-04 19:44:09,374: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 6.00 seconds...
+
+[2019-11-04 19:44:15,382: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 8.00 seconds...
+
+[2019-11-04 19:44:23,392: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 10.00 seconds...
+
+[2019-11-04 19:44:33,404: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 12.00 seconds...
+
+[2019-11-04 19:44:45,419: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 14.00 seconds...
+
+[2019-11-04 19:44:59,436: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 16.00 seconds...
+
+[2019-11-04 19:45:15,456: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379//: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 18.00 seconds...
+

@@ -9,6 +9,7 @@ import Select from 'react-select'
 import {Collapse} from 'react-collapse'
 // import './switch.css'
 import {MDBFormInline, MDBInput} from "mdbreact";
+import UploadFiles from "../upload/UploadFiles";
 
 class EditProfile extends Component {
 	constructor(props) {
@@ -194,7 +195,7 @@ class EditProfile extends Component {
 				}
 				console.log({errors: errors});
 				profileContent = (
-					<div className='d-flex justify-content-center'>
+					<div className='App-content row d-flex justify-content-center'>
 						<div className="row col-md-12">
 							<div className='col-md-12 ' style={{
 								borderRadius: '5px', borderColor: 'black', borderStyle: 'solid',
@@ -306,6 +307,7 @@ class EditProfile extends Component {
 		}
 		return (
 			<div className=" bootstrap snippet editProfile" style={{maxWidth: '100%'}}>
+				<UploadFiles email={this.props.auth.user.email} user={this.props.auth.user.id}/>
 				{profileContent}
 			</div>
 		)

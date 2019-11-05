@@ -1,7 +1,8 @@
 from __future__ import absolute_import, unicode_literals
+
 import os
+
 from celery import Celery
-from django.conf import settings
 from celery.schedules import crontab
 
 # set the default Django settings module for the 'celery' program.
@@ -21,7 +22,7 @@ def debug_task(self):
 
 app.conf.timezone = 'UTC'
 app.conf.beat_schedule = {
-    'send-reminder-every-single-minute': {
-        'task': 'faculty_lor.tasks.send_application_remainder', 'schedule': crontab()},
+    'send-email-notification': {
+        'task': 'faculty_lor.tasks.send_application_remainder', 'schedule': crontab(minute=0, hour=9)},
     'test': {
         'task': 'faculty_lor.tasks.get_celery_worker_status', 'schedule': crontab()}}

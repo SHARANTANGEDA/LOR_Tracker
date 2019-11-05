@@ -20,6 +20,11 @@ class StudentDetails(models.Model):
 	updated_at = models.DateTimeField(auto_now=True, null=False)
 
 
+class StudentProfilePicture(models.Model):
+	picture = models.ImageField(upload_to='student_profile_pics')
+	user = models.OneToOneField(AppUser, on_delete=models.CASCADE, primary_key=True)
+
+
 class Lor(models.Model):
 	id = models.AutoField(primary_key=True)
 	user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
@@ -28,6 +33,8 @@ class Lor(models.Model):
 	university_name = models.CharField(max_length=250)
 	program_name = models.CharField(max_length=250)
 	deadline = models.DateTimeField()
+	expired = models.BooleanField(editable=True, default=False)
+	hidden = models.BooleanField(editable=True, default=False)
 	created_at = models.DateTimeField(auto_now_add=True, null=False)
 	updated_at = models.DateTimeField(auto_now=True, null=False)
 
