@@ -10,6 +10,9 @@ import 'react-dates/lib/css/_datepicker.css'
 import SearchBar from "./SearchBar";
 import {facultyHome, hodHome, studentHome} from "../../actions/homeActions";
 import FacultyDashboardItem from "./facultyDashboard/FacultyDashboardItem";
+import ReactTable from "react-table";
+import matchSorter from "match-sorter";
+import formatFacultyDashboardData from "./formatFacultyDashboardData";
 
 class Dashboard extends Component {
 	constructor() {
@@ -66,16 +69,10 @@ class Dashboard extends Component {
 			}
 			return (
 				<div className="display ">
-					<div className='App-content row d-flex justify-content-center'>
-						<nav className='navbar navbar-expand-sm  col-md-12' style={{background: '#ffa726', width: '100%'}}>
-							<SearchBar/>
-						</nav>
-					</div>
-
 					<div className="App-content row d-flex justify-content-center">
-						<h1 className="grid--cell fl1 fs-headline1 text-center row" style={{
+						<h3 className="grid--cell fl1 fs-headline1 text-center row" style={{
 							color: 'black'
-						}}>Welcome {this.props.auth.user.first_name} {this.props.auth.user.last_name}</h1>
+						}}>Welcome {this.props.auth.user.first_name} {this.props.auth.user.last_name}</h3>
 					</div>
 						<h5 className='row text-center fl1 fs-headline1'>Guidelines to apply for Letter of Recommendation:</h5>
 
@@ -84,6 +81,12 @@ class Dashboard extends Component {
 		} else if (userRole === 'faculty') {
 			const {facLoading, facultyHome} = this.props.home;
 			let homeContent;
+			const deleteButton = row => {
+			console.log({row: row.value});
+			return <button  onClick={() => this.openModal(row.value)} className='btn btn-sm'
+				style={{background: 'red', color: 'white', borderRadius: '5px', fontSize:'18px'}}>
+							Delete <i className="fas fa-trash-alt"/></button>
+		};
 			if (facLoading || facultyHome === null) {
 				return (<Spinner/>)
 			} else {
@@ -92,8 +95,9 @@ class Dashboard extends Component {
 				const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
 				const pageNumbers = [];
 				let renderpn;
-				let allFoldersContent, heading;
+				let allFoldersContent, heading=null, tableData=null, tableContent=null;
 				if (facultyHome.upcomingDeadlines.length === 0) {
+					heading = (<h6>No upcoming deadlines</h6>)
 					allFoldersContent = (
 						<tr>
 							<td><h6>No upcoming deadlines</h6></td>
@@ -101,6 +105,86 @@ class Dashboard extends Component {
 						</tr>
 					);
 				} else {
+					tableData = formatFacultyDashboardData(facultyHome.upcomingDeadline);
+				tableContent = (
+					<ReactTable
+						data={tableData}
+						filterable
+						defaultFilterMethod={(filter, row) =>
+							String(row[filter.id]) === filter.value}
+						style={{overflow:'wrap', minWidth: '100%'}}
+
+						minRows={1}
+						columns={[
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Purpose",
+										accessor: "purpose",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["purpose"]}),
+										filterAll: true,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "University Name",
+										accessor: "university",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["university"]}),
+										filterAll: true,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Program Name",
+										accessor: "programName",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["programName"]}),
+										filterAll: true,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Deadline to apply",
+										accessor: "deadline",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["deadline"]}),
+										filterAll: true,
+										expander: false,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								columns: [
+									{
+										Header: "View Requests",
+										accessor: "viewButton",
+										filterable: false,
+										Cell: row => (deleteButton(row))
+									}
+								]
+							}
+						]}
+						defaultPageSize={10}
+						className="-striped -highlight"
+					/>
+				);
 					const currentFolder = facultyHome.upcomingDeadlines.slice(indexOfFirstTodo, indexOfLastTodo);
 					const render = (currentFolder.map(lor => (
 						// <ProductCard folder={land} key={land._id}/>

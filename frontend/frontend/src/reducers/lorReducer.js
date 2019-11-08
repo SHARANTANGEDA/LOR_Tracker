@@ -37,7 +37,8 @@ export default function(state = initialState, action) {
         appliedLor: null,
         appliedLoading: true,
         savedLorForApplication: null,
-        savedLorForApplicationLoading: true
+        savedLorForApplicationLoading: true,
+        selectLor: null,
       };
 
     case GET_UNIV_LIST:

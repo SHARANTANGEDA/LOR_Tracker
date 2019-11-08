@@ -140,75 +140,48 @@ class Sidebar extends Component {
 			)
 		} else if (isAuthenticated && user.role === 'student') {
 			authLinksIII = (
-				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
+				<ul id="menu-content" className="menu-content collapse out" style={{height:'100%', marginRight:'5px', padding:'2px'}}>
 					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
+						color: 'white', background: '#ffe36b', borderRadius: '5px', padding:'0px'
 					}}>
-						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px'}}>
-							Home
+						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px', padding:'0px'}}>
+              <i className="fas fa-tachometer-alt fa-lg"/>{'  '}Dashboard
 						</Link>
 					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-						<Link className="nav-link nav-item d-flex justify-content-between" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							LOR{' '}<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu ">
-							<li className='nav-item' style={{
-								color: 'white', background: '#ffe36b', borderRadius: '5px'
-							}}>
-								<Link className='nav-link' to="/viewAppliedLor" style={{borderRadius: '5px'}}>
-									View Application Status
-								</Link>
-							</li>
-							<li className='nav-item' style={{
-								color: 'white', background: '#ffe36b', borderRadius: '5px'
-							}}>
-								<Link className='nav-link' to="/submitLor" style={{borderRadius: '5px'}}>
-									Submit Lor
-								</Link>
-							</li>
-							<li className='nav-item' style={{
-								color: 'white', background: '#ffe36b', borderRadius: '5px'
-							}}>
-								<Link className='nav-link' to="/viewMyLor" style={{borderRadius: '5px'}}>
-									View My Lor
-								</Link>
-							</li>
-							<li className='nav-item' style={{
-								color: 'white', background: '#ffe36b', borderRadius: '5px'
-							}}>
-								<Link className='nav-link' to="/fillLor" style={{borderRadius: '5px'}}>
-									Create Lor
-								</Link>
-							</li>
+					<li data-toggle="collapse" data-target="#lor" className="collapsed active" >
+						<a  href="#"
+									style={{borderRadius: '5px', color:'#000d69'}}>
+              LOR Actions<i className="fas fa-caret-down"/>
+						</a>
+          </li>
+						<ul className="sub-menu collapse" id="lor" style={{background: '#ffe36b'}}>
+							<li ><Link className='nav-link-Link' to='/viewAppliedLor'>Application Status</Link></li>
+							<li><Link className='nav-link-Link' to='/submitLor'>Submit Lor</Link></li>
+							<li><Link className='nav-link-Link'  to='/viewMyLor'>View My Lor</Link></li>
+							<li><Link className='nav-link-Link' to='/fillLor'>Create Lor</Link></li>
 						</ul>
-					</li>
-
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					<li data-toggle="collapse" data-target="#users" className="collapsed active"  style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px', minWidth: '200px'
 					}}>
-						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							{user.email}<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu " style={{width: '100%'}}>
-							{/*<li><Link className='nav-link' to="/changePassword">*/}
-							{/*	Change Password</Link></li>*/}
-							<li><Link className='nav-link' to="/editProfile">
-								My Profile</Link></li>
-						</ul>
-					</li>
-					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
+						<a href="#"
+									style={{borderRadius: '5px', color:'#000d69'}}>
+              {user.email}<i className="fas fa-caret-down"/>
+						</a>
+          </li>
+					<ul className="sub-menu collapse" id="users" style={{background: '#ffe36b', width: '100%'}}>
+						<li ><Link className='nav-link-Link' to="/editProfile">My Profile</Link>
+						</li>
+					</ul>
+					<li className="nav-item " style={{borderRadius: '5px', padding:'0px'}}>
 						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
+									style={{borderRadius: '5px',padding:'0px'}}>
+							<i className="fa fa-power-off fa-lg" />{'  '}
+							Logout</Link>
 					</li>
 				</ul>
 			)
+
+
 		}
 		const {width} = this.state;
 		const isMobile = width <= 575;

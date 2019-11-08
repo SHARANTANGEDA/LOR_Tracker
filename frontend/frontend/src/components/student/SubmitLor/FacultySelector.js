@@ -5,12 +5,14 @@ import Spinner from '../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import {getFacultyList} from "../../../actions/lorActions";
-import classnames from "classnames";
-import returnFilterList from '../../../utils/returnFilterList'
 import Modal from "react-modal";
 import CPTSelector from "./CPT/CPTSelector";
 import validateLorSubmission from "../../../validation/validateLorSubmission";
 import isEmpty from "../../../validation/is-empty"
+import ReactTable from "react-table";
+import matchSorter from "match-sorter";
+import formatFacultySelector from "./formatFacultySelector";
+import "react-table/react-table.css";
 
 const customStyles = {
 	content: {
@@ -22,44 +24,23 @@ const customStyles = {
 		transform: 'translate(-0%, -0%)',
 		backgroundColor: 'rgba(255,167,38,0.8)'
 	},
-	// overlay: {
-  //     position: 'fixed',
-  //     top: '5px',
-  //     left: '1px',
-  //     right: '1px',
-  //     bottom: '1px',
-  //     backgroundColor: '#a0a79f'
-  //   },
 };
 
 class FacultySelector extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentPage: 1,
-			todosPerPage: 25,
-			focusedInput: null,
-			filterFaculty:'',
-			filter: null,
-			state: null,
 			selected: false,
 			modalIsOpen: false,
 			currentFid: '',
 			currentIndex:''
 		};
-		this.handleClick = this.handleClick.bind(this);
 		this.onSelect = this.onSelect.bind(this);
     this.onUnSelect = this.onUnSelect.bind(this);
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
-	}
-
-	handleClick(event) {
-		this.setState({
-			currentPage: Number(event.target.id)
-		});
 	}
 
 	openModal (e) {
@@ -85,6 +66,7 @@ class FacultySelector extends Component {
 	closeModal () {
 		const errors=validateLorSubmission(this.props.checkbox.selected);
 		if(!isEmpty(errors)) {
+			console.log(errors)
 			this.props.checkbox.errors=errors;
 		}else {
 			this.setState({ modalIsOpen: false });
@@ -106,20 +88,9 @@ class FacultySelector extends Component {
     console.log(this.props.checkbox.selected)
   }
 	render() {
-		function sort_by_key(array, key) {
-			return array.sort(function (a, b) {
-				let x = a[key].toUpperCase();
-				let y = b[key].toUpperCase();
-				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-			});
-		}
-
 		const {facLoading, facList} = this.props.lor;
-		const {currentPage, todosPerPage} = this.state;
-		const indexOfLastTodo = currentPage * todosPerPage;
-		const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-		const pageNumbers = [];
-		let renderpn, allFoldersContent;
+
+		let heading=null, tableData=null, tableContent=null;
 		let modalContent = (
 				<div className='row container-fluid'>
 					<div className="col-md-12 d-flex justify-content-end">
@@ -133,70 +104,98 @@ class FacultySelector extends Component {
 						<CPTSelector facultyId={this.state.currentFid} selectionIndex={this.state.currentIndex}/>
 					</div>
 				</div>
-			)
-		if (facLoading || facList === null) {
-			allFoldersContent = (<Spinner/>)
-		} else {
-			let filterList=facList;
-
-			if(this.state.filterFaculty.length!==0) {
-				filterList=returnFilterList(facList,this.state.filterFaculty)
+			);
+		const selectFacultyContent = faculty => {
+			if (this.props.checkbox.selected.filter( item => item.faculty_id===faculty.id).length===0) {
+				return (
+					<button onClick={() => this.openModal(faculty.id)} style={{background:'white', color:'blue', borderStyle:'none'}}>
+          <i className="far fa-check-square fa-2x"/></button>
+				)
+			} else {
+				return (
+					<button  onClick={() => this.onUnSelect(faculty.id)} style={{background:'white', color:'blue', borderStyle:'none'}}>
+        <i className="fas fa-check-square fa-2x"/></button>
+				)
 			}
-			if (filterList.length === 0) {
-				allFoldersContent = (
-					<h5>You haven't created any LOR yet!!</h5>
+		};
+		if (facLoading || facList === null) {
+			heading = (<Spinner/>)
+
+		} else {
+			if (facList.length === 0) {
+				heading = (
+					<h5>Amazing!!, No Faculty available:)</h5>
 				);
 			} else {
-				const currentFolder = filterList.slice(indexOfFirstTodo, indexOfLastTodo);
-				const render = (currentFolder.map(faculty => (
-					<tr key={faculty.id}>
-						{this.props.checkbox.selected.filter( item => item.faculty_id===faculty.id).length===0 ?
-							<td><button onClick={() => this.openModal(faculty.id)} style={{background:'white', color:'blue', borderStyle:'none'}}>
-          <i className="far fa-check-square fa-2x"/></button></td> :
-						<td onClick={() => this.onUnSelect(faculty.id)}><button style={{background:'white', color:'blue', borderStyle:'none'}}>
-        <i className="fas fa-check-square fa-2x"/></button></td>}
-						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{faculty.first_name + ' '+faculty.last_name}</span></td>
-						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{faculty.email}</span></td>
-						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{faculty.department_name}</span></td>
-					{/*	<td><button type="submit" onClick={() => this.openModal(faculty.id)} className="btn-sm  text-center"*/}
-					{/*		style={{border: 'none',background: 'green', color: 'white'}}>*/}
-					{/*<i className="fas fa-plus"/>Add*/}
-					{/*</button></td>*/}
-					{/*	<td><button type="submit" onClick={() => this.openModal(faculty.id)} className="btn-sm  text-center"*/}
-					{/*style={{border: 'none',background: 'green', color: 'white'}}>*/}
-					{/*<i className="fas fa-plus"/>Add*/}
-					{/*	</button></td>*/}
-					{/*	<td><button type="submit" onClick={() => this.openModal(faculty.id)} className="btn-sm  text-center"*/}
-					{/*				style={{border: 'none',background: 'green', color: 'white'}}>*/}
-					{/*	<i className="fas fa-plus"/>Add*/}
-					{/*</button></td>*/}
-					</tr>
-				)));
-				for (let i = 1; i <= Math.ceil(filterList.length / todosPerPage); i++) {
-					pageNumbers.push(i);
-				}
-				const renderPageNumbers = (
-					pageNumbers.map(number => {
-						return (
-							<button className='page-item page-link'
-											key={number}
-											id={number}
-											onClick={this.handleClick}
-							>
-								{number}
-							</button>
-						);
-					}));
-				allFoldersContent = render;
-				renderpn = (
-					<nav aria-label="...">
-						<ul className="pagination pagination-sm">
-							{renderPageNumbers}
-						</ul>
-					</nav>
-
-				)
-
+				heading=null;
+				tableData = formatFacultySelector(facList);
+				tableContent = (
+					<ReactTable
+						data={tableData}
+						filterable
+						defaultFilterMethod={(filter, row) =>
+							String(row[filter.id]) === filter.value}
+						style={{overflowX:'auto'}}
+						minRows={1}
+						columns={[
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Select Faculty",
+										accessor: "selectFaculty",
+										Cell: ({value}) => (
+											selectFacultyContent(value)
+										),
+										filterable: false
+									}
+								]
+							},
+							{
+								columns: [
+									{
+										Header: "Faculty Name",
+										accessor: "facultyName",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["facultyName"]}),
+										filterAll: true,
+										minWidth: 300,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								columns: [
+									{
+										Header: "Email Address",
+										accessor: "facultyEmail",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["facultyEmail"]}),
+										filterAll: true,
+										minWidth: 225,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Department",
+										accessor: "departmentName",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["departmentName"]}),
+										filterAll: true,
+										minWidth: 225,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							}
+						]}
+						defaultPageSize={10}
+						className="-striped -highlight"
+					/>
+				);
 			}
 		}
 		return (
@@ -207,43 +206,10 @@ class FacultySelector extends Component {
 								projects or thesis done with the faculty for the Lor request to be accepted
 							</p>
 						</div>
-				<nav className='navbar navbar-expand-sm   ' style={{background: '#ffa726', width: '100%'}}>
-						<div className="row container-fluid d-flex justify-content-between col-md-6">
-          <div className=" input-group md-form form-sm form-2 pl-0" style={{ width: '500px', maxWidth: '700px' }}>
-            <input type="text"
-                   className={classnames('form-control my-0 py-1 lime-border')}
-                   placeholder="Search"
-                   name="search"
-                   value={this.state.filterFaculty} onChange={this.onChange}/>
-            <div className="input-group-append">
-              <button type="submit" onClick={this.onUnSelect} className="input-group-text cyan lighten-2">
-                <i className="fas fa-search text-grey" aria-hidden="true"/>filter
-              </button>
-            </div>
-          </div>
-        	</div>
-				</nav>
+				{heading}
 				<div className="displayFolder col-md-12">
-					<div className="App-content row d-flex justify-content-between">
-						<table className="table table-bordered table-striped mb-0 col-md-12">
-							<thead>
-							<tr>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Select Faculty</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth:'180px'}}>Name of Faculty</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth:'200px'}}>Email Address</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Department</th>
-								{/*<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Courses Done</th>*/}
-								{/*<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Projects Done</th>*/}
-								{/*<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Thesis Done</th>*/}
-							</tr>
-							</thead>
-							<tbody>
-							{allFoldersContent}
-							</tbody>
-						</table>
-					</div>
-					<div className='d-flex justify-content-end'>
-						{renderpn}
+					<div className="App-content row d-flex justify-content-center" style={{minWidth:'100%'}}>
+						{tableContent}
 					</div>
 				</div>
 				<Modal

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 import convertToBackendFormat from '../../../utils/convertToBackendFormat'
 import {Collapse} from "react-collapse";
-import SearchBar from "../../dashboard/SearchBar";
 import LorSelector from "./LorSelector";
 import FacultySelector from "./FacultySelector";
 import {getFacultyList, getLorForApplication, submitLor} from "../../../actions/lorActions";
@@ -61,20 +60,27 @@ class SubmitLor extends Component {
 	}
 
 	onSelectLor(e) {
-		this.setState({
+		if(this.props.lor.selectLor===null) {
+			alert('Please Select an Lor to Proceed')
+		}else {
+			this.setState({
 			isLorSelectorOpen: false, lorId: this.props.lor.selectLor, lorWarning: null,
 			isFacultySelectorOpen: true, makeLorSelectorInvisible: true
 		})
+		}
+
 	}
 
 
 	onSubmit(e) {
-		this.setState({isFacultySelectorOpen: false})
+		// this.setState({isFacultySelectorOpen: false})
 		if (this.props.checkbox.selected.length === 0) {
+			console.log({facultyWarning: 'Please select at least one faculty'})
 			this.setState({facultyWarning: 'Please select at least one faculty'})
 		}
 		if (this.state.lorId === null) {
-			this.setState({lorWarning: 'Please an Lor'})
+			console.log({lorWarning: 'Please select an Lor'})
+			this.setState({lorWarning: 'Please select an Lor'})
 		}
 		e.preventDefault();
 		let dataArray = convertToBackendFormat(this.state.lorId, this.props.checkbox.selected);
@@ -90,23 +96,20 @@ class SubmitLor extends Component {
 		let selectLorCode = null, selectFacultyCode = null;
 		if (!this.state.makeLorSelectorInvisible) {
 			selectLorCode = (
-				<div className='row col-md-8 d-flex justify-content-center'>
+
+				<div className='row col-md-12 d-flex justify-content-center'>
 					<button onClick={this.toggleLorSelector}
-									className="rounded border
-                                                d-flex justify-content-between align-items-center
-                                                flex-grow-1 pl-1 w-100 my-3"
+									className="rounded border d-flex justify-content-between align-items-center flex-grow-1 pl-1 w-100 my-3"
 									style={{
 										boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
 											'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 										fontSize: '25px', background: '#000d69', color: 'white'
 									}}>
 						Step-1: Select the LOR You want to use<i className="fas fa-angle-down"/></button>
-					<Collapse isOpened={this.state.isLorSelectorOpen} style={{listStyleType: 'none'}}>
-						<div className='row'>
-							<LorSelector/>
-						</div>
+					<Collapse isOpened={this.state.isLorSelectorOpen} style={{listStyleType: 'none', minWidth:'100%'}}>
+						<LorSelector/>
 						<div className='row d-flex justify-content-end' style={{margin: '5px'}}>
-							<button onClick={this.onSelectLor} className='btn btn-primary d-flex justify-content-end'>Confirm Lor
+							<button onClick={this.onSelectLor} className='btn btn-primary d-flex justify-content-center'>Confirm Lor
 							</button>
 						</div>
 					</Collapse>
@@ -114,11 +117,9 @@ class SubmitLor extends Component {
 			)
 		} else {
 			selectFacultyCode = (
-				<div className='row col-md-8 d-flex justify-content-center'>
+				<div className='row col-md-12 d-flex justify-content-center'>
 					<button onClick={this.toggleFacultySelector}
-									className="rounded border
-                                                d-flex justify-content-between align-items-center
-                                                flex-grow-1 pl-1 w-100 my-3"
+									className="rounded border d-flex justify-content-between align-items-center flex-grow-1 pl-1 w-100 my-3"
 									style={{
 										boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
 											'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -126,7 +127,6 @@ class SubmitLor extends Component {
 									}}>
 						Step-2: Select the faculty(You can choose multiple)<i className="fas fa-angle-down"/></button>
 					<Collapse isOpened={this.state.isFacultySelectorOpen} style={{listStyleType: 'none'}}>
-
 						<FacultySelector/>
 						<div className='row d-flex justify-content-end' style={{margin: '5px'}}>
 							<button onClick={this.onSubmit} className='btn btn-primary d-flex justify-content-end'>Confirm Faculty
@@ -139,12 +139,15 @@ class SubmitLor extends Component {
 
 		return (
 			<div className="display uploadForm">
-				<div className='App-content row ' style={{minWidth: '100%'}}>
-					<nav className='navbar navbar-expand-sm  col-md-12' style={{background: '#ffa726', width: '100%'}}>
-						<SearchBar/>
-					</nav>
+				<div className='App-content row d-flex justify-content-center' style={{minWidth: '100%'}}>
+					{/*<nav className='navbar navbar-expand-sm  col-md-12' style={{background: '#ffa726', width: '100%'}}>*/}
+					{/*	<SearchBar/>*/}
+					{/*</nav>*/}
+					<h3 className='d-flex justify-content-center'>Apply For Letter of Recommendation</h3>
 					<div className='row d-flex justify-content-center'>
 						{selectLorCode}
+					</div>
+					<div className='row d-flex justify-content-center'>
 						{selectFacultyCode}
 					</div>
 

@@ -4,10 +4,24 @@ import {connect} from 'react-redux'
 import Spinner from '../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
-import {getSavedLor, getUniversitiesList} from "../../../actions/lorActions";
-import SearchBar from "../../dashboard/SearchBar";
-import SavedLorItem from "./SavedLorItem";
+import {deleteLor, getSavedLor, getUniversitiesList} from "../../../actions/lorActions";
 import convertToSelectArray from "../../../utils/convertToSelectArray";
+import ReactTable from "react-table";
+import matchSorter from "match-sorter";
+import formatSavedLorData from "./formatSavedLorData";
+import EditLorModal from "./EditLorModal";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '0',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 class ViewSavedLor extends Component {
 	constructor() {
@@ -16,9 +30,18 @@ class ViewSavedLor extends Component {
 			currentPage: 1,
 			todosPerPage: 25,
 			focusedInput: null,
-			filter: null
+			filter: null,
+			modalIsOpen: false,
+			editModal: false,
+			currentLor: null,
+			toDeleteLorId: null
 		};
-		this.handleClick = this.handleClick.bind(this)
+		this.handleClick = this.handleClick.bind(this);
+			this.openModal = this.openModal.bind(this)
+		this.editModal = this.editModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.afterOpenModal = this.afterOpenModal.bind(this)
+		this.onDelete = this.onDelete.bind(this)
 	}
 
 	componentDidMount() {
@@ -34,28 +57,48 @@ class ViewSavedLor extends Component {
 			currentPage: Number(event.target.id)
 		});
 	}
-
+	openModal(id) {
+    this.setState({modalIsOpen: true, editModal: false,toDeleteLorId: id})
+  }
+  editModal(data) {
+  	this.setState({editModal: true, modalIsOpen: true, currentLor: data})
+	}
+  closeModal() {
+    this.setState({modalIsOpen: false, editModal: false, currentLor: null, toDeleteLorId: null})
+  }
+  afterOpenModal() {}
+	onDelete(id) {
+    this.props.deleteLor(id)
+  }
 	render() {
-		function sort_by_key(array, key) {
-			return array.sort(function (a, b) {
-				let x = a[key].toUpperCase();
-				let y = b[key].toUpperCase();
-				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-			});
+		const editButton = row => {
+			console.log({row: row.value});
+			return <button style={{color: 'white', background: 'blue', borderRadius: '5px', fontSize:'18px'}}
+										 onClick={() => this.editModal(row.value)} className='btn btn-sm'>
+				Edit <i className="fas fa-edit"/></button>
+		};
+		const deleteButton = row => {
+			console.log({row: row.value});
+			return <button  onClick={() => this.openModal(row.value)} className='btn btn-sm'
+				style={{background: 'red', color: 'white', borderRadius: '5px', fontSize:'18px'}}>
+							Delete <i className="fas fa-trash-alt"/></button>
+		};
+const lorStatus = value => {
+			console.log({row: value});
+    if(value==='expired') {
+      return <span style={{ fontFamily: 'Arial', fontSize: '16px', color: 'red'}}>Expired</span>;
+    }else {
+			return <span style={{fontFamily: 'Arial', fontSize: '16px', color: 'green'}}>Active</span>
 		}
-
+		};
 		const {lorLoading, savedLor, univ, loading} = this.props.lor;
-		const {currentPage, todosPerPage} = this.state;
-		const indexOfLastTodo = currentPage * todosPerPage;
-		const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-		const pageNumbers = [];
-		let renderpn;
-		let allFoldersContent, heading;
+		let heading=null, tableData=null, tableContent=null;
+		let modalContent = null;
 		if (lorLoading || loading || univ===null|| savedLor === null) {
-			allFoldersContent = (<Spinner/>)
+			heading = (<Spinner/>)
 		} else {
 			if (savedLor.length === 0) {
-				allFoldersContent = (
+				heading = (
 					<h5>You haven't created any LOR yet!!</h5>
 				);
 			} else {
@@ -65,71 +108,178 @@ class ViewSavedLor extends Component {
 				}else {
 					univList = convertToSelectArray(univ)
 				}
-				const currentFolder = savedLor.slice(indexOfFirstTodo, indexOfLastTodo);
-				const render = (currentFolder.map(lor => (
-					// <ProductCard folder={land} key={land._id}/>
-					<SavedLorItem lorItem={lor} key={lor.id} univ={univList}/>
-				)));
-				for (let i = 1; i <= Math.ceil(savedLor.length / todosPerPage); i++) {
-					pageNumbers.push(i);
+				if(this.state.editModal) {
+					modalContent = (<EditLorModal lorItem={this.state.currentLor} univ={univList}/>)
+				}else {
+					modalContent = (
+						<div className='row container-fluid'>
+							<h5>Do you wish to delete the Lor?</h5>
+							<div className="col-md-12 d-flex justify-content-end">
+								<button type="submit" onClick={() =>this.onDelete(this.state.toDeleteLorId)} className="btn-sm  text-center"
+												style={{background: 'red', color: 'white', borderRadius: '5px', fontSize:'18px'}}>
+									Delete <i className="fas fa-trash-alt"/>
+								</button>
+								<button type="submit" onClick={this.closeModal} className="btn-sm  text-center"
+												style={{background: 'green', color: 'white', borderRadius: '5px', fontSize:'18px'}}>
+									Cancel
+								</button>
+							</div>
+						</div>
+					)
 				}
-				const renderPageNumbers = (
-					pageNumbers.map(number => {
-						return (
-							<button className='page-item page-link'
-											key={number}
-											id={number}
-											onClick={this.handleClick}
-							>
-								{number}
-							</button>
-						);
-					}));
-				allFoldersContent = render;
-				renderpn = (
-					<nav aria-label="...">
-						<ul className="pagination pagination-sm">
-							{renderPageNumbers}
-						</ul>
-					</nav>
+				tableData = formatSavedLorData(savedLor);
+				tableContent = (
+					<ReactTable
+						data={tableData}
+						filterable
+						defaultFilterMethod={(filter, row) =>
+							String(row[filter.id]) === filter.value}
+						style={{overflow:'wrap', minWidth: '100%'}}
+						minRows={1}
+						columns={[
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Purpose",
+										accessor: "purpose",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["purpose"]}),
+										filterAll: true,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "University Name",
+										accessor: "university",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["university"]}),
+										filterAll: true,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Program Name",
+										accessor: "programName",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["programName"]}),
+										filterAll: true,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
 
-				)
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Deadline to apply",
+										accessor: "deadline",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["deadline"]}),
+										filterAll: true,
+										expander: false,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Info",
+								columns: [
+									{
+										Header: "Status",
+										accessor: "status",
+										id: "status",
+										// Cell: ({ value }) => (value >= 21 ? "Yes" : "No"),
+										Cell: ({value}) => (
+											lorStatus(value)
+										),
+										filterMethod: (filter, row) => {
+											console.log(filter.value, row.status);
+											if (filter.value === 'expired') {
+												return row.status === 'expired'
+											} else if (filter.value === 'active') {
+												return row.status === 'active'
+											} else {
+												return true
+											}
+                  },
+                  Filter: ({ filter, onChange }) =>
+                    <select
+                      onChange={event => onChange(event.target.value)}
+                      style={{ width: "100%" }}
+                      value={filter ? filter.value : "all"}
+                    >
+                      <option value="all">Show All</option>
+                      <option value="active">Active</option>
+                      <option value="expired">Expired</option>
+                    </select>
+									}
+								]
+							},
+							{
+								columns: [
+									{
+										Header: 'Edit Lor',
+										accessor: 'editLor',
+										filterable: false,
+										Cell: row => (editButton(row))
+									}
+								]
+							},
+							{
+								columns: [
+									{
+										Header: "Delete Lor",
+										accessor: "deleteLor",
+										filterable: false,
+										Cell: row => (deleteButton(row))
+									}
+								]
+							}
+						]}
+						defaultPageSize={10}
+						className="-striped -highlight"
+					/>
+				);
 
 			}
 		}
 		return (
 			<div className='container-fluid' style={{minWidth: '100%', padding: '0px'}}>
 				<div className="displayFolder ">
-					<div className="App-content row d-flex justify-content-between">
-						<nav className='navbar navbar-expand-sm justify-content-between col-md-12' style={{
-							background: '#ffa726',
-							width: '100%', height: '50px'
-						}}>
-							<SearchBar/>
-						</nav>
+					<div className="App-content row d-flex justify-content-center">
+							<button
+								className="rounded border d-flex justify-content-between align-items-center flex-grow-1 pl-1 w-100 my-3"
+								style={{
+									boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
+										'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+									fontSize: '25px', background: '#000d69', color: 'white'
+								}}>Saved Letter of Recommendations
+							</button>
+						{/*<h3 className='text-center'>Saved Letter of Recommendations</h3>*/}
+						{heading}
+					</div>
 						<h5 style={{color:'red', fontStyle:'italic'}}>
 							**Editing your saved Lor will also change details in the submitted application, It is advised not to make edits repeatedly</h5>
-						<table className="table table-bordered table-striped mb-0">
-							<thead>
-							<tr>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Purpose</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth: '200px'}}>University Name</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Program Name</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>deadline</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Status</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Edit Lor</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Delete Lor</th>
-							</tr>
-							</thead>
-							<tbody>
-							{allFoldersContent}
-							</tbody>
-						</table>
-					</div>
-					<div className='d-flex justify-content-end'>
-						{renderpn}
-					</div>
+						{tableContent}
 				</div>
+				 <Modal
+					isOpen={this.state.modalIsOpen}
+					onAfterOpen={this.afterOpenModal}
+					onRequestClose={this.closeModal}
+					style={customStyles}
+					contentLabel="Saved Lor"
+					ariaHideApp={false}
+				>{modalContent}</Modal>
 			</div>
 		);
 	}
@@ -139,10 +289,11 @@ ViewSavedLor.propTypes = {
 	auth: PropTypes.object.isRequired,
 	lor: PropTypes.object.isRequired,
 	getSavedLor: PropTypes.func.isRequired,
-	getUniversitiesList: PropTypes.func.isRequired
+	getUniversitiesList: PropTypes.func.isRequired,
+	deleteLor: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
 	lor: state.lor
 });
-export default connect(mapStateToProps, {getSavedLor, getUniversitiesList})(ViewSavedLor)
+export default connect(mapStateToProps, {getSavedLor, getUniversitiesList, deleteLor})(ViewSavedLor)

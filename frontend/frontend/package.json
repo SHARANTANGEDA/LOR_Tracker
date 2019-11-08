@@ -13,6 +13,7 @@
     "http-proxy-middleware": "^0.19.1",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
+    "match-sorter": "^4.0.2",
     "mdbreact": "^4.19.2",
     "moment": "^2.24.0",
     "perfect-scrollbar": "^1.4.0",
@@ -37,6 +38,7 @@
     "react-share": "^3.0.0",
     "react-star-rating-component": "^1.4.1",
     "react-swipeable-views": "^0.13.1",
+    "react-table": "^6.10.3",
     "reactjs-popup": "^1.4.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"

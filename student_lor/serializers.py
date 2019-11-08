@@ -34,7 +34,7 @@ class ViewAppliedFacultyListSerializer(serializers.ModelSerializer):
 class ViewSavedLor(serializers.ModelSerializer):
 	class Meta:
 		model = Lor
-		fields = ['id', 'purpose', 'others_details', 'university_name', 'deadline', 'program_name', 'expired']
+		fields = ['id', 'purpose', 'others_details', 'university_name', 'deadline', 'program_name', 'expired', 'created_at']
 
 
 class GetAppliedLor(serializers.ModelSerializer):
@@ -128,20 +128,6 @@ class CreateLorRequestSerializer(serializers.ModelSerializer):
 			print("Create: ", entry)
 			return entry
 
-	def update(self, instance, validated_data):
-		if validated_data.get('deadline', instance.deadline) <= datetime.now().replace(tzinfo=None):
-			errors = {
-				"deadline": 'Invalid deadline'}
-			raise ValidationError(errors)
-		else:
-			instance.purpose = validated_data.get('purpose', instance.purpose)
-			instance.others_details = validated_data.get('others_details', instance.others_details)
-			instance.university_name = validated_data.get('university_name', instance.university_name)
-			instance.deadline = validated_data.get('deadline', instance.deadline)
-			instance.program_name = validated_data.get('program_name', instance.program_name)
-			instance.save()
-			return instance
-
 
 class EditLorRequestSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -176,9 +162,26 @@ class AddFacultyToLorSerializer(serializers.ModelSerializer):
 			faculty_id=validated_data['faculty_id'],
 			projects_done=validated_data['projects_done'],
 			thesis_done=validated_data['thesis_done'],
+			courses_done=validated_data['courses_done'],
 			status=validated_data['status'],
 			others=validated_data['others']
 		)
 		print("HERE", entry)
 		return entry
 
+
+class EditSubmittedLorDetailsSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = FacultyListLor
+		fields = ['courses_done', 'projects_done', 'thesis_done', 'status', 'others']
+
+	def update(self, instance, validated_data):
+		print('DATA:', validated_data)
+		# validate_lor_submission(data=validated_data)
+		instance.projects_done = validated_data.get('projects_done', instance.projects_done)
+		instance.thesis_done = validated_data.get('thesis_done', instance.thesis_done)
+		instance.courses_done = validated_data.get('courses_done', instance.courses_done)
+		instance.status = validated_data.get('status', instance.status)
+		instance.others = validated_data.get('others', instance.others)
+		instance.save()
+		return instance

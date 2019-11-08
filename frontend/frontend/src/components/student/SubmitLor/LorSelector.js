@@ -4,37 +4,24 @@ import {connect} from 'react-redux'
 import Spinner from '../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
-import getLocalDate from "../../../utils/getLocalDate";
+import ReactTable from "react-table";
+import matchSorter from "match-sorter";
+import formatLorSelector from "./formatLorSelector";
+import "react-table/react-table.css";
 
 class LorSelector extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentPage: 1,
-			todosPerPage: 25,
-			focusedInput: null,
-			filter: null,
 			state: null
 		};
-		this.handleClick = this.handleClick.bind(this);
 		this.onSelect = this.onSelect.bind(this);
     this.onUnSelect = this.onUnSelect.bind(this);
 	}
 
-	// componentDidMount() {
-	// 	if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'student') {
-	// 		this.props.getLorForApplication(this.props.match.params.id)
-	// 	}
-	// }
-
-	handleClick(event) {
-		this.setState({
-			currentPage: Number(event.target.id)
-		});
-	}
 
 	onSelect (e) {
-		console.log(e)
+		console.log(e);
 		this.props.lor.selectLor=e;
 		this.setState({selected:e});
 
@@ -46,103 +33,130 @@ class LorSelector extends Component {
 	}
 
 	render() {
-		function sort_by_key(array, key) {
-			return array.sort(function (a, b) {
-				let x = a[key].toUpperCase();
-				let y = b[key].toUpperCase();
-				return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-			});
-		}
-
+		const selectLorContent = lor => {
+			if (this.state.selected !== lor.id) {
+				return (
+					<button onClick={() => this.onSelect(lor.id)}
+									style={{background: 'white', color: 'blue', borderStyle: 'none'}}>
+						<i className="far fa-check-square fa-2x"/></button>
+				)
+			} else {
+				return (
+					<button onClick={this.onUnSelect} style={{background: 'white', color: 'blue', borderStyle: 'none'}}>
+						<i className="fas fa-check-square fa-2x"/></button>
+				)
+			}
+		};
 		const {savedLorForApplication, savedLorForApplicationLoading} = this.props.lor;
-		const {currentPage, todosPerPage} = this.state;
-		const indexOfLastTodo = currentPage * todosPerPage;
-		const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-		const pageNumbers = [];
-		let renderpn, checkbox;
-		let allFoldersContent, heading;
-		// if(this.props.lor.selectLor!==this.props.lorItem.id) {
-    //   checkbox=(<td>
-    //     <button onClick={this.onSelect} style={{background:'white', color:'blue', borderStyle:'none'}}>
-    //       <i className="far fa-check-square fa-2x"/></button></td>)
-    // }else {
-    //   checkbox=(<td onClick={this.onUnSelect}
-    //   ><button style={{background:'white', color:'blue', borderStyle:'none'}}>
-    //     <i className="fas fa-check-square fa-2x"/></button></td>)
-		//
-    // }
+
+		let  heading=null, tableData=null, tableContent=null;
 		if (savedLorForApplicationLoading || savedLorForApplication === null) {
-			allFoldersContent = (<Spinner/>)
+			heading = (<Spinner/>)
 		} else {
 			if (savedLorForApplication.length === 0) {
-				allFoldersContent = (
+				heading = (
 					<h5>You haven't created any LOR yet!!</h5>
 				);
 			} else {
-				const currentFolder = savedLorForApplication.slice(indexOfFirstTodo, indexOfLastTodo);
-				const render = (currentFolder.map(lor => (
-					<tr key={lor.id}>
-						{/*<td>{checkbox}</td>*/}
-						{this.state.selected !== lor.id ?
-							<td><button onClick={() => this.onSelect(lor.id)} style={{background:'white', color:'blue', borderStyle:'none'}}>
-          <i className="far fa-check-square fa-2x"/></button></td> :
-						<td onClick={this.onUnSelect}><button style={{background:'white', color:'blue', borderStyle:'none'}}>
-        <i className="fas fa-check-square fa-2x"/></button></td>}
-						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{lor.purpose}</span></td>
-						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{lor.university_name}</span></td>
-						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{lor.program_name}</span></td>
-						<td><span style={{fontFamily: 'Arial', fontSize: '16px'}}>{getLocalDate(lor.deadline)}</span></td>
-					</tr>
-				)));
-				for (let i = 1; i <= Math.ceil(savedLorForApplication.length / todosPerPage); i++) {
-					pageNumbers.push(i);
-				}
-				const renderPageNumbers = (
-					pageNumbers.map(number => {
-						return (
-							<button className='page-item page-link'
-											key={number}
-											id={number}
-											onClick={this.handleClick}
-							>
-								{number}
-							</button>
-						);
-					}));
-				allFoldersContent = render;
-				renderpn = (
-					<nav aria-label="...">
-						<ul className="pagination pagination-sm">
-							{renderPageNumbers}
-						</ul>
-					</nav>
-
-				)
-
+				heading=null;
+				tableData = formatLorSelector(savedLorForApplication);
+				tableContent = (
+					<ReactTable
+						data={tableData}
+						filterable
+						defaultFilterMethod={(filter, row) =>
+							String(row[filter.id]) === filter.value}
+							style={{overflowX:'auto'}}
+						minRows={1}
+						columns={[
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Select",
+										accessor: "selectLor",
+										Cell: ({value}) => (
+											selectLorContent(value)
+										),
+										filterable: false
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Purpose",
+										accessor: "purpose",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["purpose"]}),
+										filterAll: true,
+										minWidth: 300,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "University Name",
+										accessor: "university",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["university"]}),
+										filterAll: true,
+										minWidth: 200,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Program Name",
+										accessor: "programName",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["programName"]}),
+										filterAll: true,
+										// minWidth: 225,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+							{
+								// Header: "Name",
+								columns: [
+									{
+										Header: "Deadline",
+										accessor: "deadline",
+										filterMethod: (filter, rows) =>
+											matchSorter(rows, filter.value, {keys: ["deadline"]}),
+										filterAll: true,
+										 // minWidth: 200,
+										style: { 'whiteSpace': 'unset' }
+									}
+								]
+							},
+						]}
+						defaultPageSize={10}
+						className="-striped -highlight"
+					/>
+				);
 			}
 		}
 		return (
-			<div className='container' style={{margin:'10px'}}>
-				<div className="displayFolder ">
-					<div className="App-content row d-flex justify-content-between">
-						<table className="table table-bordered table-striped mb-0 col-md-12">
-							<thead>
-							<tr>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Select a Lor</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Purpose</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1', minWidth: '200px'}}>University Name
-								</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>Program Name</th>
-								<th scope="col" style={{fontSize: '10pt', background: '#c1c1c1'}}>deadline</th>
-							</tr>
-							</thead>
-							<tbody>
-							{allFoldersContent}
-							</tbody>
-						</table>
-					</div>
-					<div className='d-flex justify-content-end'>
-						{renderpn}
+			<div className='container-fluid' style={{minWidth:'100%', padding:'0px', margin:'0px'}}>
+				<div className='row col-md-12'>
+					<p style={{color:'red', fontStyle:'italic', fontSize:'14px'}}>
+								*It is recommended that you add at least one of the courses,
+								projects or thesis done with the faculty for the Lor request to be accepted
+							</p>
+				</div>
+					{heading}
+				<div className="displayFolder col-md-12">
+					<div className="App-content row d-flex justify-content-center" style={{minWidth:'100%'}}>
+						{tableContent}
 					</div>
 				</div>
 			</div>

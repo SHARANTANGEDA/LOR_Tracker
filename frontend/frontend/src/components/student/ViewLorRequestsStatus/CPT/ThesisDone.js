@@ -188,7 +188,7 @@ ThesisDone.propTypes = {
 	errors: PropTypes.object.isRequired,
 	facultyId: PropTypes.number.isRequired,
 	checkbox: PropTypes.object.isRequired,
-	data: PropTypes.object.isRequired
+	data: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

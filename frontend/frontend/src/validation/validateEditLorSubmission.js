@@ -1,7 +1,5 @@
-const validateLorSubmission = data => {
+const validateEditLorSubmission = data => {
 	const errors={};
-	data =data[0];
-	console.log(data.status, data.others)
 	if(data.status && data.others.length===0) {
 			errors.others="This field can't be blank"
 	}
@@ -49,4 +47,4 @@ const validateLorSubmission = data => {
 };
 
 
-export default validateLorSubmission;
+export default validateEditLorSubmission;

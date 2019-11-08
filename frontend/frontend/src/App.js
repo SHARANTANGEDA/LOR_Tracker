@@ -50,7 +50,6 @@ updateWindowDimensions() {
       <div className="App w-100 " style={{width:this.state.width, height: this.state.height, overflow: 'scroll'}}>
         <NavBar/>
         <Switch>
-
         {/*<Route exact path="/home" component={Landing}/>*/}
           <Route exact path='/' component={Landing}/>
           {/*<Route exact path='/forgotPassword' component={ForgotPassword}/>*/}
@@ -59,7 +58,6 @@ updateWindowDimensions() {
              <Sidebar/>
           <Route component={Routes}/>
           </div>
-
         </Switch>
         </div>
       </Router>

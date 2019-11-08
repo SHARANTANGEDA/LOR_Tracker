@@ -108,44 +108,36 @@ handleWindowSizeChange = () => {
 			</div>
 
 		);
+		const authLinkMobileO = (
+			<div className='d-flex justify-content-between align-content-end col-md-12'>
+				<div className="row col-md-6 d-flex justify-content-start align-items-center"
+						 style={{color: 'white', verticalAlign: 'bottom'}}>
+					<Link to='/dashboard'><img style={{maxWidth: '450px', maxHeight: '100px'}}
+																			src={require('../../img/bitslogoFull.png')} alt=""/></Link>
+				</div>
+
+				<div className="row col-md-4 d-flex justify-content-end align-items-center" style={{color: 'white'}}>
+					<div style={{color:'white'}}><i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"/></div>
+				</div>
+			</div>
+
+		);
 		const guestLinkO = (
 			<div className='d-flex justify-content-between align-content-end col-md-12'>
 				<div className="row col-md-8 d-flex justify-content-start align-items-center"
 						 style={{color: 'white', verticalAlign: 'bottom'}}>
 					<Link to='/'> <img style={{maxWidth: '450px', maxHeight: '100px'}}
 														 src={require('../../img/bitslogoFull.png')} alt=""/></Link>
-					{/*<h5>{' '}Birla Institute of Technology & Science, Pilani</h5>*/}
 				</div>
 				<div className="row col-md-4 d-flex justify-content-end align-items-center" style={{color: 'white'}}>
-					{/*<img style={{maxWidth: '100px', maxHeight: '100px'}}*/}
-					{/*		 src={require('../../img/insert-picture-icon.png')} alt=""*/}
-					{/*/>*/}
-					{/*<h3 style={{color:'#06ff00'}}>L</h3><h3 style={{color:'#00c8ff'}}>O</h3><h3 style={{color:'#06ff00'}}>R</h3>*/}
-					{/*<h3>{' '}T</h3><h3 style={{color:'#00f500'}}>r</h3><h3 style={{color:'#00c8ff'}}>a</h3>*/}
-					{/*<h3 style={{color:'#06ff00'}}>c</h3><h3 style={{color:'#00c8ff'}}>k</h3><h3 style={{color:'#06ff00'}}>e</h3>*/}
-					{/*  <h3 style={{color:'#00c8ff'}}>r</h3>*/}
+
 					<h2 style={{color: '#000d69'}}>Lor Tracker</h2>
 				</div>
 			</div>
 		);
 		const guestLink1 = (
 			<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
-				{/*<li className='nav-item' style={{color: 'white',background:'#00c8ff' , borderRadius: '5px'*/}
-				{/*}}>*/}
-				{/*  <Link className="nav-link" to="/browse"*/}
-				{/*        style={{color: 'white', borderRadius: '5px' }}>*/}
-				{/*    {' '}PublicCatalogue</Link>*/}
-				{/*</li>*/}
-				{/*<li className='nav-item' style={{color: 'white',background:'#00c8ff' , borderRadius: '5px'*/}
-				{/*   }}>*/}
-				{/*  <Link className="nav-link" to="/"*/}
-				{/*        style={{color: 'white', borderRadius: '5px' }}>*/}
-				{/*    {' '}Login</Link>*/}
-				{/*</li>*/}
 
-				{/*<li className="nav-item pull-right" style={{color: 'white',background:'#00c8ff' , borderRadius: '5px'*/}
-				{/*   }}>*/}
-				{/*</li>*/}
 			</ul>
 		);
 
@@ -371,9 +363,9 @@ handleWindowSizeChange = () => {
   	if(isMobile) {
   		return (
 					<nav className="navbar navbar-expand-sm  col-md-12 w-100" style={{background: '#ffe36b'}}>
-						<div style={{color:'white'}}><i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"/></div>
+						{/*<div style={{color:'white'}}><i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"/></div>*/}
 				<div className="row container-fluid d-flex justify-content-between col-md-12 w-100">
-					{isAuthenticated ? authLinkO : guestLinkO}
+					{isAuthenticated ? authLinkMobileO : guestLinkO}
 				</div>
 			</nav>
   			)

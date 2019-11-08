@@ -12,6 +12,7 @@ urlpatterns = [
 	path('api/student/createLor', CreateLor.as_view()),
 	path('api/student/editLor/<int:lor_id>', EditLor.as_view()),
 	path('api/student/selectFaculty', AddFacultyForLOR.as_view()),
+	path('api/student/editSubmittedLor/<int:faculty>/<int:lor>', EditSubmittedLorCourseDetails.as_view()),
 	path('api/student/getSavedLor', GetMySavedLor.as_view()),
 	path('api/student/getSavedLorForApplication', GetLorForApplication.as_view()),
 	path('api/student/getFacultyList', GetFacultyList.as_view()),
@@ -19,6 +20,7 @@ urlpatterns = [
 	path('api/student/getUnivList', GetUnivList.as_view()),
 	path('api/student/getAppliedLor', GetAppliedLor.as_view()),
 	path('api/student/deleteLor/<int:lor_id>', DeleteLor.as_view()),
+	path('api/student/withdrawApplication/<int:faculty>/<int:lor>', WithdrawApplications.as_view()),
 
 ]
 

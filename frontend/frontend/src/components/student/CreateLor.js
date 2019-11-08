@@ -12,7 +12,6 @@ import convertToSelectArray from '../../utils/convertToSelectArray'
 import DatePicker from "react-datepicker";
 import './datePicker.css'
 import "react-datepicker/dist/react-datepicker.css";
-import SearchBar from "../dashboard/SearchBar";
 import DateCustomInput from "./DateCustomInput";
 import {Link} from "react-router-dom";
 
@@ -224,9 +223,9 @@ class CreateLor extends Component {
 		return (
 			<div className="display uploadForm">
 				<div className='App-content row ' style={{minWidth: '100%'}}>
-					<nav className='navbar navbar-expand-sm  col-md-12' style={{background: '#ffa726', width: '100%'}}>
-						<SearchBar/>
-					</nav>
+					{/*<nav className='navbar navbar-expand-sm  col-md-12' style={{background: '#ffa726', width: '100%'}}>*/}
+					{/*	<SearchBar/>*/}
+					{/*</nav>*/}
 					<div className='col-md-12 d-flex justify-content-center'>
 						<div className="row col-md-8 " style={{width: '100%'}}>
 							<button
@@ -301,11 +300,7 @@ class CreateLor extends Component {
 										>Save Details and Continue
 										</button>
 									</div>
-									{/*<InputMoment*/}
-									{/*	moment={this.state.dateHandle}*/}
-									{/*	onChange={this.dateTimeHandler}*/}
-									{/*	minStep={5}*/}
-									{/*/>*/}
+
 
 								</div>
 							</form>

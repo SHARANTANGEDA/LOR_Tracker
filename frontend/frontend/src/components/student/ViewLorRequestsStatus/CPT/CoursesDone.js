@@ -68,17 +68,16 @@ class CoursesDone extends Component {
 		this.setState({
 			courses: coursesHandler
 		});
-		let getSelected = this.props.checkbox.selected;
-		console.log(getSelected, this.props.selectionIndex);
-		getSelected[this.props.selectionIndex].courses_done=coursesHandler;
-		this.props.checkbox.selected = getSelected;
-		console.log({
-			STATE_LOG: {
-				courses: this.state.courses, handler: coursesHandler, yearsControl: this.state.yearsControl,
-				semControl: this.state.semControl
-			}
-		})
-	}
+		let getSelected = this.props.checkbox.editData;
+		getSelected.courses_done=coursesHandler;
+		this.props.checkbox.editData = getSelected;
+		// console.log({
+		// 	STATE_LOG: {
+		// 		courses: this.state.courses, handler: coursesHandler, yearsControl: this.state.yearsControl,
+		// 		semControl: this.state.semControl
+		// 	}
+		// })
+	};
 
 
 
@@ -239,7 +238,7 @@ CoursesDone.propTypes = {
 	errors: PropTypes.object.isRequired,
 	facultyId: PropTypes.number.isRequired,
 	checkbox: PropTypes.object.isRequired,
-	data: PropTypes.object.isRequired
+	data: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -19,7 +19,7 @@ class CPTSelector extends Component {
 			showOthers: false
 		};
 		this.changeHandler = this.changeHandler.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
+		// this.onSubmit = this.onSubmit.bind(this);
 		this.codeSelect = this.codeSelect.bind(this);
 		this.onClickOthers=this.onClickOthers.bind(this);
 		this.onBack=this.onBack.bind(this)
@@ -27,6 +27,9 @@ class CPTSelector extends Component {
 
 	changeHandler(e) {
 		this.setState({[e.target.name]: e.target.value});
+		if(this.props.checkbox.selected[this.props.selectionIndex].status===true) {
+			this.props.checkbox.selected[this.props.selectionIndex].others=this.state.others
+		}
 	}
 
 	componentWillReceiveProps(nextProps, nextContext) {
@@ -41,16 +44,15 @@ class CPTSelector extends Component {
 		this.props.checkbox.selected[this.props.selectionIndex].thesis_done=[];
 		this.props.checkbox.selected[this.props.selectionIndex].status=true;
 	}
-	onSubmit(e) {
-		this.setState({selected: true});
-		let getSelected = this.props.checkbox.selected;
-		const userData = {
-			emailId: this.state.emailId,
-			password: this.state.password
-		};
-		getSelected.push(e);
-		this.props.checkbox.selected = getSelected
-	}
+	// onSubmit(e) {
+	// 	this.setState({selected: true});
+	// 	let getSelected = this.props.checkbox.selected;
+	// 	if(this.props.checkbox.selected[this.props.selectionIndex].status===true) {
+	// 		this.props.checkbox.selected[this.props.selectionIndex].others=this.state.others
+	// 	}
+	// 	getSelected.push(e);
+	// 	this.props.checkbox.selected = getSelected
+	// }
 
 	onBack() {
 		this.setState({showOthers: false});
@@ -161,22 +163,6 @@ class CPTSelector extends Component {
 				<div className="row d-flex justify-content-center">
 					<h3 style={{background:'#000d69', color:'white', borderRadius:'10px', padding:'5px'}}>Add Courses, projects or thesis done with faculty</h3>
 					{this.state.showOthers ? othersHeaders : normalHeaders}
-					{/*<hr className='col-md-12 horizontalLine'/>*/}
-					{/*<div className='row d-flex justify-content-between'>*/}
-					{/*	<button type="submit" onClick={this.onAddThesis} className="btn-sm  text-center"*/}
-					{/*					style={{border: 'none',background: 'green', color: 'white', borderRadius: '100%'}}>*/}
-					{/*		Add Courses*/}
-					{/*	</button>*/}
-
-					{/*	<button type="submit" onClick={this.onAddThesis} className="btn-sm  text-center"*/}
-					{/*					style={{border: 'none',background: 'green', color: 'white', borderRadius: '100%', minHeight:'100px'}}>*/}
-					{/*		Add Projects*/}
-					{/*	</button>*/}
-					{/*	<button type="submit" onClick={this.onAddThesis} className="btn-sm  text-center"*/}
-					{/*					style={{border: 'none',background: 'green', color: 'white', borderRadius: '100%'}}>*/}
-					{/*		Add Thesis*/}
-					{/*	</button>*/}
-					{/*</div>*/}
 					{this.state.showOthers ? othersContent : normalContent}
 				</div>
 			</div>

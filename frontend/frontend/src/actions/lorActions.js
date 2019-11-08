@@ -1,17 +1,17 @@
 import axios from "axios";
 import {tokenHeader} from "../utils/headers";
 import {
-	GET_ACCEPTED_REQUESTS,
-	GET_ALL_REQUESTS,
-	GET_COMPLETED_REQUESTS,
-	GET_ERRORS,
-	GET_FACULTY_LIST,
-	GET_MY_APPLIED_LORS,
-	GET_MY_SAVED_LOR,
-	GET_MY_SAVED_LOR_APPLICATION,
-	GET_NEW_REQUESTS,
-	GET_UNIV_LIST,
-	HOME_LOADING
+  GET_ACCEPTED_REQUESTS,
+  GET_ALL_REQUESTS,
+  GET_COMPLETED_REQUESTS,
+  GET_ERRORS,
+  GET_FACULTY_LIST,
+  GET_MY_APPLIED_LORS,
+  GET_MY_SAVED_LOR,
+  GET_MY_SAVED_LOR_APPLICATION,
+  GET_NEW_REQUESTS,
+  GET_UNIV_LIST,
+  HOME_LOADING
 } from "./types";
 import {clearErrors} from "./accountActions";
 
@@ -74,6 +74,15 @@ export const deleteLor= (id) =>dispatch => {
       console.log(err)
   )
 };
+export const withdrawApplication= (faculty, id) =>dispatch => {
+	dispatch(loadList());
+	axios.get(`api/student/withdrawApplication/${faculty}/${id}`, tokenHeader()).then(res => {
+	  window.location.reload();
+  }).catch(err =>
+      console.log(err)
+  )
+};
+
 export const getAppliedLors= () =>dispatch => {
 	dispatch(loadList());
 	axios.get(`api/student/getAppliedLor`, tokenHeader()).then(res => {
@@ -114,6 +123,20 @@ export const submitLor = (data) => dispatch => {
     window.location.href='/viewAppliedLor'
   }).catch(err => {
       console.log(err);
+    dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+  }
+  )
+};
+export const editApplication = (data, faculty, lor) => dispatch => {
+  dispatch(clearErrors());
+  axios.post(`/api/student/editSubmittedLor/${faculty}/${lor}`, data, tokenHeader()).then(res => {
+    alert('Application Edited Successfully, Concerned faculty with be notified about this!!')
+    window.location.reload()
+  }).catch(err => {
+      console.log(err, err.response.data);
     dispatch({
           type: GET_ERRORS,
           payload: err.response.data
