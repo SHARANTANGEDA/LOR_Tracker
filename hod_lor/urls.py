@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .api import *
 
 # url('^api-auth/', include('rest_framework.urls'))
@@ -10,7 +11,8 @@ urlpatterns = [
 	path('api/hod/getAllRequests', GetAllRequests.as_view()),
 	path('api/hod/home', GetHodHome.as_view()),
 	path('api/hod/getAllStudents', GetAllStudents.as_view()),
-	path('api/hod/getAllFaculty', GetAllFaculty.as_view()),
-	path('api/hod/activeUserControl', GetActiveUsers.as_view())
+	# path('api/hod/getAllFaculty', GetAllFaculty.as_view()),
+	path('api/hod/activeUserControl', GetActiveUsers.as_view()),
+	path('api/hod/getProfilePhoto/<int:student_id>', GetStudentProfilePhoto.as_view())
 	# path('api/hod/emailCheck', CheckEmail.as_view())
 ]

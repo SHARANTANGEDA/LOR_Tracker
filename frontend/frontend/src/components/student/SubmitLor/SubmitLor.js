@@ -7,6 +7,8 @@ import {Collapse} from "react-collapse";
 import LorSelector from "./LorSelector";
 import FacultySelector from "./FacultySelector";
 import {getFacultyList, getLorForApplication, submitLor} from "../../../actions/lorActions";
+import Modal from "react-modal";
+import Spinner from "../../common/Spinner";
 
 
 const customStyles = {
@@ -30,6 +32,7 @@ class SubmitLor extends Component {
 			isFacultySelectorOpen: false,
 			lorWarning: null,
 			makeLorSelectorInvisible: false,
+			submitSpinner: false,
 			errors: {}
 		};
 
@@ -37,7 +40,11 @@ class SubmitLor extends Component {
 		this.onSubmit = this.onSubmit.bind(this);
 		this.toggleLorSelector = this.toggleLorSelector.bind(this);
 		this.toggleFacultySelector = this.toggleFacultySelector.bind(this);
-		this.onSelectLor = this.onSelectLor.bind(this)
+		this.onSelectLor = this.onSelectLor.bind(this);
+		this.openModal = this.openModal.bind(this);
+		this.afterOpenModal = this.afterOpenModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+
 	}
 
 	componentDidMount() {
@@ -68,9 +75,17 @@ class SubmitLor extends Component {
 			isFacultySelectorOpen: true, makeLorSelectorInvisible: true
 		})
 		}
-
 	}
 
+	openModal(e) {
+		this.setState({submitSpinner: true});
+	}
+	closeModal(e) {
+			this.setState({submitSpinner: false});
+	}
+	afterOpenModal() {
+
+	}
 
 	onSubmit(e) {
 		// this.setState({isFacultySelectorOpen: false})
@@ -85,6 +100,7 @@ class SubmitLor extends Component {
 		e.preventDefault();
 		let dataArray = convertToBackendFormat(this.state.lorId, this.props.checkbox.selected);
 		console.log({data: dataArray})
+		this.setState({submitSpinner: true});
 		this.props.submitLor(dataArray);
 	}
 
@@ -93,7 +109,19 @@ class SubmitLor extends Component {
 		if (this.props.auth.user.role !== 'student') {
 			window.location.href = '/404';
 		}
+
 		let selectLorCode = null, selectFacultyCode = null;
+		let modalContent = (
+			<div className='row container-fluid d-flex justify-content-center'>
+				<div className='row d-flex justify-content-center'>
+					<h5>Submitting the Lor, Don't refresh the tab</h5>
+				</div>
+				<div className='row d-flex justify-content-center'>
+					<Spinner/>
+				</div>
+
+			</div>
+		);
 		if (!this.state.makeLorSelectorInvisible) {
 			selectLorCode = (
 
@@ -143,14 +171,31 @@ class SubmitLor extends Component {
 					{/*<nav className='navbar navbar-expand-sm  col-md-12' style={{background: '#ffa726', width: '100%'}}>*/}
 					{/*	<SearchBar/>*/}
 					{/*</nav>*/}
-					<h3 className='d-flex justify-content-center'>Apply For Letter of Recommendation</h3>
+						<button
+								className="rounded border d-flex justify-content-center align-items-center flex-grow-1 pl-1 w-100 my-3"
+								style={{
+									boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
+										'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+									fontSize: '25px', background: '#000d69', color: 'white'
+								}}>Apply For Letter of Recommendation
+							</button>
 					<div className='row d-flex justify-content-center'>
 						{selectLorCode}
 					</div>
 					<div className='row d-flex justify-content-center'>
 						{selectFacultyCode}
 					</div>
-
+					<Modal
+					isOpen={this.state.submitSpinner}
+					onAfterOpen={this.afterOpenModal}
+					onRequestClose={this.closeModal}
+					style={customStyles}
+					contentLabel="Select Courses and Projects"
+					ariaHideApp={false}
+					shouldCloseOnOverlayClick={false}
+          modalOptions={{ dismissible: false }}
+          shouldCloseOnEsc={false}
+				>{modalContent}</Modal>
 				</div>
 			</div>
 		)

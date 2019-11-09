@@ -1,13 +1,18 @@
+import base64
 import json
+import os
 
 from django.contrib.sessions.models import Session
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
+from django.http import HttpResponse
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from student_lor.permissions import HasGroupPermission
 from student_lor.serializers import *
+from tracker_final.settings import BASE_DIR
 
 
 class GetAllRequests(APIView):
@@ -243,23 +248,23 @@ class GetHodHome(APIView):
 		return Response(result)
 
 
-class GetAllFaculty(APIView):
-	permission_classes = [
-		permissions.IsAuthenticated,
-		HasGroupPermission
-	]
-	required_groups = {
-		'GET': ["hod"],
-	}
-
-	# serializer_class = StudentProfileSerializer
-	def get(self, request):
-		result = []
-		new_requests = AppUser.objects.values("id", "email", "first_name", "last_name", "department_name") \
-			.filter(role='faculty')
-		if not len(new_requests) == 0:
-			result = new_requests
-		return Response(result)
+# class GetAllFaculty(APIView):
+# 	permission_classes = [
+# 		permissions.IsAuthenticated,
+# 		HasGroupPermission
+# 	]
+# 	required_groups = {
+# 		'GET': ["hod"],
+# 	}
+#
+# 	# serializer_class = StudentProfileSerializer
+# 	def get(self, request):
+# 		result = []
+# 		new_requests = AppUser.objects.values("id", "email", "first_name", "last_name", "department_name") \
+# 			.filter(role='faculty')
+# 		if not len(new_requests) == 0:
+# 			result = new_requests
+# 		return Response(result)
 
 
 class GetAllStudents(APIView):
@@ -280,13 +285,17 @@ class GetAllStudents(APIView):
 		if not len(new_requests) == 0:
 			for item in new_requests:
 				details = {}
-				print('here: ', StudentDetails.objects.values("phone", "graduation_status").get(user=item["id"]))
-				# json.loads(serialize('json', StudentDetails.objects.get(user=item["id"])))
-				student_details = StudentDetails.objects.values("phone", "graduation_status", "student_id",
-																'degree').get(user=item["id"])
-				details["basic"] = item
-				details["profile"] = student_details
-				result.append(details)
+				try:
+					# json.loads(serialize('json', StudentDetails.objects.get(user=item["id"])))
+					student_details = StudentDetails.objects.values("phone", "graduation_status", "student_id",
+																	"full_name", "cgpa", 'degree').get(user=item["id"])
+					details["student_details_general"] = item
+					details["student_details_profile"] = student_details
+					result.append(details)
+				except ObjectDoesNotExist as noProfile:
+					details["student_details_general"] = item
+					details["student_details_profile"] = {'dummy': 'done'}
+					result.append(details)
 		return Response(result)
 
 
@@ -317,3 +326,28 @@ class GetActiveUsers(APIView):
 		result["activeUserCnt"] = len(current_users)
 		result["activeUserContent"] = current_users_json
 		return Response(result)
+
+
+class GetStudentProfilePhoto(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ['hod'],
+	}
+
+	def get(self, request, student_id):
+		try:
+			obj = StudentProfilePicture.objects.get(user=student_id)
+			obj_image_url = obj.picture
+			image_path = os.path.join(BASE_DIR, 'media', str(obj_image_url))
+			last_dot = str(obj.picture).rfind('.')
+			image_format = str(obj.picture)[last_dot + 1:len(str(obj.picture))]
+			content_type = "image/" + image_format
+			print(content_type, obj_image_url)
+			with open(image_path, "rb") as image_file:
+				base64string = base64.b64encode(image_file.read())
+				return HttpResponse(base64string, content_type=content_type)
+		except ObjectDoesNotExist:
+			return Response({'status': False})

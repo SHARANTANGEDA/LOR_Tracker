@@ -197,11 +197,6 @@ handleWindowSizeChange = () => {
 							User Control<i className="fas fa-caret-down"/>
 						</Link>
 						<ul className="dropdown-menu " style={{ background: '#ffe36b', width:'100%'}}>
-						<li  >
-						<Link className='nav-link' to="/viewAllFaculty">
-							View Faculty
-						</Link>
-						</li>
 							<li>
 						<Link className='nav-link' to="/viewAllStudents" >
 							View Students

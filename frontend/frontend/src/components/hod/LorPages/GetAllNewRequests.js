@@ -5,7 +5,7 @@ import Spinner from '../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import {getAllNewRequestsHod,} from "../../../actions/lorActions";
-import ViewAllRequests from "./ViewAllRequests/ViewAllRequests";
+import ViewAllRequests from "./ViewAllRequestsRouter";
 
 class GetAllNewRequests extends Component {
 	componentDidMount() {

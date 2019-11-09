@@ -9,7 +9,6 @@ import lorReducer from "./lorReducer";
 import checkboxReducer from "./checkboxReducer";
 import facultyReducer from "./facultyReducer";
 import hodReducer from "./hodReducer";
-import filterSortReducer from "./filterSortReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -22,5 +21,4 @@ export default combineReducers({
   checkbox: checkboxReducer,
   faculty: facultyReducer,
   hod: hodReducer,
-  filterSort: filterSortReducer
 })

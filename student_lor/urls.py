@@ -19,6 +19,7 @@ urlpatterns = [
 	path('api/student/home', GetAppliedLor.as_view()),
 	path('api/student/getUnivList', GetUnivList.as_view()),
 	path('api/student/getAppliedLor', GetAppliedLor.as_view()),
+	path('api/student/getProfilePhoto', ViewProfilePhoto.as_view()),
 	path('api/student/deleteLor/<int:lor_id>', DeleteLor.as_view()),
 	path('api/student/withdrawApplication/<int:faculty>/<int:lor>', WithdrawApplications.as_view()),
 

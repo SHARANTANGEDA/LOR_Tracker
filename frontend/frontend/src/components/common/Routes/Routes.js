@@ -11,13 +11,13 @@ import ViewSavedLor from '../../student/ViewSavedLor/ViewSavedLor'
 import SubmitLor from '../../student/SubmitLor/SubmitLor'
 import ViewLorRequestsStatus from '../../student/ViewLorRequestsStatus/ViewLorRequestsStatus'
 import AcceptLorRequests from '../../faculty/LorPages/AcceptLorRequests'
-import AcceptedLorRequests from '../../faculty/LorPages/AcceptedLorRequests/AcceptedLorRequests'
-import CompletedLorRequests from "../../faculty/LorPages/CompletedLorRequests/CompletedLorRequests";
+import AcceptedLorRequests from '../../faculty/LorPages/AcceptedLorRequests'
+import CompletedLorRequests from "../../faculty/LorPages/CompletedLorRequests";
 import GetAllNewRequests from "../../hod/LorPages/GetAllNewRequests"
 import DisplayCompletedLorRequests from "../../hod/LorPages/DisplayCompletedLorRequests"
 import DisplayAcceptedLorRequests from "../../hod/LorPages/DisplayAcceptedLorRequests"
 import DisplayLorRequests from "../../hod/LorPages/DisplayLorRequests"
-import ViewAllStudents from "../../hod/UserControl/GetAllStudents/ViewAllStudents"
+import ViewAllStudents from "../../hod/UserControl/ViewAllStudents"
 import ActiveUsers from "../../hod/UserControl/ViewActiveUsers/ActiveUsers"
 
 const Routes = () => {

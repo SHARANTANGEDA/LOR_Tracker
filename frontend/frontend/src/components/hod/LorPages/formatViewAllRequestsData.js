@@ -1,10 +1,9 @@
 import React from "react";
-import getLocalDate from "../../utils/getLocalDate";
 
 function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-const formatFacultyDashboardData = (data) => {
+const formatViewAllRequestsData = (data) => {
 	console.log(data)
 	let formatedData = [];
 
@@ -13,14 +12,15 @@ const formatFacultyDashboardData = (data) => {
 			studentId: row.student_details_profile.student_id,
 			studentName: capitalizeFirstLetter(row.student_details_general.first_name + ' '+row.student_details_general.last_name),
 			email: row.student_details_general.email,
-			purpose: row.lor_details.purpose,
-			deadline: getLocalDate(row.lor_details.deadline),
-			viewButton: row
+			contactNo: row.student_details_profile.phone,
+			cgpa: row.student_details_profile.cgpa,
+			graduationStatus: row.student_details_profile,
+			noOfRequests: row.noOfRequests
 		};
 		formatedData.push(content);
 	});
 	return formatedData;
 };
 
-export default formatFacultyDashboardData
+export default formatViewAllRequestsData
 

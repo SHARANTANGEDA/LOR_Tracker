@@ -14,8 +14,9 @@ class UploadFiles extends Component {
       image: null,
       loading: true,
       progress:  0,
-      status: true
-    }
+      status: true,
+			imageContentType: null
+    };
     this.changeHandler = this.changeHandler.bind(this)
   }
   // componentDidMount() {
@@ -29,18 +30,14 @@ class UploadFiles extends Component {
   // }
 componentDidMount(){
     let imageData=null
-    axios.get(`api/student/getProfilePicture`,tokenHeader())
+    axios.get(`api/student/getProfilePhoto`,tokenHeader())
     .then((response) => {
-      console.log(response.data);
+      console.log(response.data, response);
       imageData= response.data;
       if(imageData.status===false) {
         this.setState({status: false})
       }
-      this.setState( {image: 'http://127.0.0.1:8000'+imageData.picture})
-      // axios.get('http://127.0.0.1:8000'+imageData.picture, tokenHeader()).then(res => {
-      //   console.log( res, res.data );
-      //   this.setState( {image: JSON.parse(res.data) })
-      // })
+      this.setState( {image:imageData})
     })
 }
   changeHandler (e) {
@@ -95,8 +92,9 @@ componentDidMount(){
           <button className='btn btn-success ' style={{background: 'blue'}}
                 onClick={this.uploadFile.bind(this)}>Update</button>
         )
-        imageContent = (
-           <img src={this.state.image} height='150px' width='150px' alt={require('../../img/landingIcons/student.png')}
+					imageContent = (
+           <img src={`data:;base64,${this.state.image}`}
+								height='150px' width='150px' alt={require('../../img/landingIcons/student.png')}
                    style={{maxHeight:'250px', width:'225px'}}/>
         )
       } else {

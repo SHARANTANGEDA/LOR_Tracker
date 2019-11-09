@@ -1,9 +1,13 @@
 # Create your views here.
+import base64
 import json
-from datetime import datetime, timezone
+import os
+from datetime import timezone
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.core.serializers import serialize
+from django.http import HttpResponse
 from django.template import Template, Context
 from rest_framework import permissions
 from rest_framework.response import Response
@@ -11,6 +15,8 @@ from rest_framework.views import APIView
 
 from student_lor.models import *
 from student_lor.permissions import HasGroupPermission
+from student_lor.serializers import *
+from tracker_final.settings import BASE_DIR
 
 # Edit my profile
 # class EditProfile(generics.GenericAPIView):
@@ -106,16 +112,21 @@ class GetHome(APIView):
 		result["completedRequests"] = len(completed_requests)
 		deadline_content = []
 		for item in accepted_requests:
-			lor_details = Lor.objects.filter(id=item.lor.id)
-			data = json.loads(serialize('json', lor_details))[0]["fields"]
-			print(data)
-			print(lor_details[0].deadline)
-			diff = (datetime.now(timezone.utc) - lor_details[0].deadline).days
+			lor_details = Lor.objects.get(id=item.lor.id)
+			# data = json.loads(serialize('json', lor_details))[0]["fields"]
+			# print(data)
+			# print(lor_details.deadline)
+			diff = (lor_details.deadline - datetime.now(timezone.utc)).days
+			# print(diff)
 			if 5 >= diff >= 0:
 				details = {}
-				user_details = AppUser.objects.filter(id=lor_details["user"], role='student')
-				details["student_details"] = json.loads(serialize('json', user_details))[0]["fields"]
-				details["lor_details"] = json.loads(serialize('json', lor_details))[0]["fields"]
+				user_details = AppUser.objects.get(id=lor_details.user.id, role='student')
+				details["student_details_general"] = GetStudentSerializer(user_details).data
+				details["student_details_profile"] = StudentProfileSerializer(
+					StudentDetails.objects.get(user=lor_details.user.id)).data
+				details["lor_details"] = ViewSavedLor(lor_details).data
+				details["application_details"] = ViewAppliedFacultyListSerializer(
+					FacultyListLor.objects.get(faculty_id=self.request.user.id, lor_id=lor_details.id)).data
 				deadline_content.append(details)
 		result["upcomingDeadlines"] = deadline_content
 		print(result)
@@ -208,7 +219,7 @@ class AcceptLorRequest(APIView):
 			'Your LOR Request has been Accepted',
 			template.render(context=Context({'faculty': faculty_details, 'student': details})),
 			'ghotden@gmail.com',
-			[student_mail.email],
+			[student_mail['email']],
 			fail_silently=False,
 		)
 		result = FacultyListLor.objects.filter(lor=lor, faculty=faculty).update(application_status='AC')
@@ -264,7 +275,7 @@ class MarkRequestAsComplete(APIView):
 			'Your Letter of Recommendation is Ready',
 			template.render(context=Context({'faculty': faculty_details, 'student': details})),
 			'ghotden@gmail.com',
-			[student_mail.email],
+			[student_mail["email"]],
 			fail_silently=False,
 		)
 		result = FacultyListLor.objects.filter(lor=lor, faculty=faculty).update(application_status='CO')
@@ -303,3 +314,29 @@ class CompletedLorData(APIView):
 			result.append(details)
 		print(result)
 		return Response(result)
+
+
+class GetStudentProfilePhoto(APIView):
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ['faculty'],
+	}
+
+	def get(self, request, student_id):
+		try:
+			obj = StudentProfilePicture.objects.get(user=student_id)
+			obj_image_url = obj.picture
+			image_path = os.path.join(BASE_DIR, 'media', str(obj_image_url))
+			last_dot = str(obj.picture).rfind('.')
+			image_format = str(obj.picture)[last_dot + 1:len(str(obj.picture))]
+			content_type = "image/" + image_format
+			print(content_type, obj_image_url)
+			with open(image_path, "rb") as image_file:
+				base64string = base64.b64encode(image_file.read())
+				return HttpResponse(base64string, content_type=content_type)
+		except ObjectDoesNotExist:
+			return Response({'status': False})
+

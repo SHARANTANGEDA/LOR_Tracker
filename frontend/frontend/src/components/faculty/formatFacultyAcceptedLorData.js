@@ -4,7 +4,7 @@ import getLocalDate from "../../utils/getLocalDate";
 function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-const formatFacultyDashboardData = (data) => {
+const formatFacultyAcceptedLorData = (data) => {
 	console.log(data)
 	let formatedData = [];
 
@@ -15,12 +15,13 @@ const formatFacultyDashboardData = (data) => {
 			email: row.student_details_general.email,
 			purpose: row.lor_details.purpose,
 			deadline: getLocalDate(row.lor_details.deadline),
-			viewButton: row
+			viewButton: row,
+			markAsComplete: row
 		};
 		formatedData.push(content);
 	});
 	return formatedData;
 };
 
-export default formatFacultyDashboardData
+export default formatFacultyAcceptedLorData
 

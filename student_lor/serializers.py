@@ -24,6 +24,12 @@ class GetFacultyListSerializer(serializers.ModelSerializer):
 		fields = ['id', 'email', 'first_name', 'last_name', 'department_name']
 
 
+class GetStudentSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = AppUser
+		fields = ['id', 'email', 'first_name', 'last_name', 'department_name']
+
+
 class ViewAppliedFacultyListSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = FacultyListLor

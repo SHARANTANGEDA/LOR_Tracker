@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import ModalTabContents from "./ModalTabContents";
 import axios from "axios";
 import {tokenHeader} from "../../../utils/headers";
+import StudentProfilePanel from "./StudentProfilePanel";
 
 
-class AcceptLorModal extends Component {
+class ViewStudentProfileModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,7 +18,7 @@ class AcceptLorModal extends Component {
 
 	componentDidMount(){
     let imageData=null
-    axios.get(`api/faculty/getProfilePhoto/${this.props.content.student_details_general.id}`,tokenHeader())
+    axios.get(`api/hod/getProfilePhoto/${this.props.content.student_details_general.id}`,tokenHeader())
     .then((response) => {
       console.log(response.data, response);
       imageData= response.data;
@@ -46,8 +46,8 @@ class AcceptLorModal extends Component {
                    style={{maxHeight:'250px', width:'225px'}}/>)
 		}else {
 			imgContent=(<img src={`data:;base64,${this.state.image}`}
-								height='180px' width='120px' alt=''
-                   style={{maxHeight:'250px', maxWidth:'200px'}}/>)
+								height='180px' width='160px' alt=''
+                   style={{maxHeight:'250px', maxWidth:'225px'}}/>)
 		}
 		return (
 			<div className='row col-md-12' >
@@ -55,7 +55,8 @@ class AcceptLorModal extends Component {
 					{imgContent}
 				</div>
 				<div  className='col-md-9'>
-					<ModalTabContents content={content}/>
+					<StudentProfilePanel studentProfile={content.student_details_profile}
+												 user={content.student_details_general}/>
 				</div>
 			</div>
 		);
@@ -63,7 +64,7 @@ class AcceptLorModal extends Component {
 
 }
 
-AcceptLorModal.propTypes = {
+ViewStudentProfileModal.propTypes = {
 	content: PropTypes.object.isRequired,
 	auth: PropTypes.object.isRequired,
 
@@ -71,4 +72,4 @@ AcceptLorModal.propTypes = {
 const mapStateToProps = state => ({
 	auth: state.auth
 });
-export default connect(mapStateToProps)(AcceptLorModal);
+export default connect(mapStateToProps)(ViewStudentProfileModal);

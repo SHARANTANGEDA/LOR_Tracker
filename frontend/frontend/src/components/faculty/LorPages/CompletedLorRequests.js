@@ -4,39 +4,34 @@ import {connect} from 'react-redux'
 import Spinner from '../../common/Spinner'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
-import {getLorAcceptData} from "../../../actions/lorActions";
+import {completedLorData} from "../../../actions/lorActions";
 import formatFacultyDashboardData from "../../dashboard/formatFacultyDashboardData";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import Modal from "react-modal";
 import AcceptLorModal from "./AcceptLorModal";
-import {acceptLorRequest} from "../../../actions/homeActions";
 
 const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '0',
-    transform: 'translate(-50%, -50%)'
-  }
+	content: {
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '0',
+		transform: 'translate(-50%, -50%)'
+	}
 };
 
-class AcceptLorRequests extends Component {
+class CompletedLorRequests extends Component {
 	constructor() {
 		super();
 		this.state = {
 			modalIsOpen: false,
-			currentData: null,
-			rejectionModal: false
+			currentData: null
 		};
 		this.openModal = this.openModal.bind(this);
 		this.afterOpenModal = this.afterOpenModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
-		this.onRejectionModal=this.onRejectionModal.bind(this);
-    this.closeRejectionModal=this.closeRejectionModal.bind(this);
-    this.onAcceptModal = this.onAcceptModal.bind(this)
 	}
 
 	openModal(e) {
@@ -44,37 +39,32 @@ class AcceptLorRequests extends Component {
 	}
 
 	closeModal() {
-		this.setState({modalIsOpen: false, rejectionModal: false})
+		this.setState({modalIsOpen: false})
 	}
 
 	afterOpenModal() {
 
 	}
-	onRejectionModal() {
-    this.setState({rejectionModal: true})
-  }
-  closeRejectionModal() {
-    this.setState({rejectionModal: false})
-  }
-  onAcceptModal() {
-    this.props.acceptLorRequest(this.state.currentData.application_details.lor, this.state.currentData.application_details.faculty)
-  }
 
 	componentDidMount() {
 		if (this.props.auth.isAuthenticated && this.props.auth.user.role === 'faculty') {
 			console.log('called');
-			this.props.getLorAcceptData(this.props.match.params.id)
+			this.props.completedLorData(this.props.match.params.id)
 		}
 	}
 
-
 	render() {
-		let modalContent;
-    if(!this.state.rejectionModal) {
-      modalContent = (
-        <div id="mainbar" className='row d-flex justify-content-start' >
-          <div className="col-md-12 d-flex justify-content-between" style={{ width: '100%', margin:'5px' }}>
-						<button
+		const viewButton = row => {
+			console.log({row: row.value});
+			return <button onClick={() => this.openModal(row.value)} className='btn btn-sm btn-primary'
+										 style={{overflow:'wrap'}}>View Complete Details</button>
+		};
+		const {completedRequests, completedLoading} = this.props.faculty;
+		let tableData=null, tableContent=null;
+		let modalContent = (
+			<div id="mainbar" className='row d-flex justify-content-start'>
+				<div className="col-md-12 d-flex justify-content-between" style={{width: '100%', margin: '5px'}}>
+					<button
 								className="rounded border d-flex justify-content-start align-items-center flex-grow-1 pl-1 w-100 my-3"
 								style={{
 									boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
@@ -82,59 +72,24 @@ class AcceptLorRequests extends Component {
 									fontSize: '25px', background: '#000d69', color: 'white'
 								}}>Complete Details:
 							</button>
-            <button onClick={this.closeModal} className='btn btn-sm' style={{ background: 'white', color: 'red' }}>
-              <i className="fas fa-times fa-2x"/>
-            </button>
-          </div>
-					<AcceptLorModal content={this.state.currentData}/>
-					<div className="col-md-12 d-flex justify-content-end" style={{ width: '100%', margin:'5px' }}>
-            <button onClick={this.onAcceptModal} className='btn btn-sm' style={{ background: 'green', color: 'white' }}>
-              Accept Request
-            </button>
-            <button onClick={this.onRejectionModal} className='btn btn-sm' style={{ background: 'red', color: 'white' }}>
-              Reject Lor Request
-            </button>
-          </div>
-        </div>
-      );
-    }else {
-      modalContent = (
-        <div id="mainbar" className='row d-flex justify-content-start' >
-          <div className="col-md-12 d-flex justify-content-between" style={{ width: '100%', margin:'5px' }}>
-            <h5>Confirm Rejection:</h5>
-            <button onClick={this.closeModal} className='btn btn-sm' style={{ background: 'white', color: 'red' }}>
-              <i className="fas fa-times fa-2x"/>
-            </button>
-          </div>
-          <h6>Are you sure you want to reject the Lor Request?</h6>
-					<div className="col-md-12 d-flex justify-content-end" style={{ width: '100%', margin:'5px' }}>
-            <button onClick={this.closeModal} className='btn btn-sm btn-primary' >
-              Confirm Reject
-            </button>
-            <button onClick={this.closeRejectionModal} className='btn btn-sm' style={{ background: 'green', color: 'white' }}>
-             Go Back
-            </button>
-          </div>
-        </div>
-      )
-    }
-		const viewButton = row => {
-			console.log({row: row.value});
-			return <button onClick={() => this.openModal(row.value)} className='btn btn-sm btn-primary'
-										 style={{overflow:'wrap'}}>View Details</button>
-		};
-		const {loading, newRequests} = this.props.faculty;
-		let tableData=null, tableContent=null;
-
+					<button onClick={this.closeModal} className='btn btn-sm' style={{background: 'white', color: 'red'}}>
+						<i className="fas fa-times fa-2x"/>
+					</button>
+				</div>
+				<AcceptLorModal content={this.state.currentData}/>
+			</div>
+		);
 		let heading=null;
-		if (loading || newRequests === null) {
+		if (completedLoading || completedRequests === null) {
 			heading = (<Spinner/>)
 		} else {
-			if (newRequests.length === 0) {
-				heading = (<h5>No Requests currently</h5>)
+			if (completedRequests.length === 0) {
+				heading = (
+					<h5>No Requests currently</h5>
+				);
 			} else {
-				console.log(newRequests)
-					tableData = formatFacultyDashboardData(newRequests);
+				console.log(completedRequests);
+					tableData = formatFacultyDashboardData(completedRequests);
 				tableContent = (
 					<ReactTable
 						data={tableData}
@@ -227,6 +182,7 @@ class AcceptLorRequests extends Component {
 						className="-striped -highlight"
 					/>
 				);
+
 			}
 		}
 		return (
@@ -239,7 +195,7 @@ class AcceptLorRequests extends Component {
 									boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
 										'0 6px 20px 0 rgba(0, 0, 0, 0.19)',
 									fontSize: '25px', background: '#000d69', color: 'white'
-								}}>New Lor Requests
+								}}>Completed Lor Requests
 							</button>
 
 						{/*</nav>*/}
@@ -247,7 +203,7 @@ class AcceptLorRequests extends Component {
 						{tableContent}
 					</div>
 				</div>
-				<Modal
+					<Modal
 					isOpen={this.state.modalIsOpen}
 					onAfterOpen={this.afterOpenModal}
 					onRequestClose={this.closeModal}
@@ -261,14 +217,13 @@ class AcceptLorRequests extends Component {
 	}
 }
 
-AcceptLorRequests.propTypes = {
+CompletedLorRequests.propTypes = {
 	auth: PropTypes.object.isRequired,
 	faculty: PropTypes.object.isRequired,
-	getLorAcceptData: PropTypes.func.isRequired,
-	acceptLorRequest: PropTypes.func.isRequired
+	completedLorData: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
 	faculty: state.faculty
 });
-export default connect(mapStateToProps, {getLorAcceptData, acceptLorRequest})(AcceptLorRequests)
+export default connect(mapStateToProps, {completedLorData})(CompletedLorRequests)

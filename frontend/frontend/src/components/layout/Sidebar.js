@@ -67,8 +67,6 @@ class Sidebar extends Component {
 						</a>
           </li>
 						<ul className="sub-menu collapse" id="users" style={{background: '#ffe36b', width: '100%'}}>
-							<li ><Link className='nav-link-Link' to="/viewAllFaculty">View Faculty</Link>
-							</li>
 							<li><Link className='nav-link-Link' to="/viewAllStudents">View Students</Link></li>
 							<li><Link className='nav-link-Link' to="/viewCurrentActiveUsers">View Active Users</Link></li>
 						</ul>
@@ -82,65 +80,45 @@ class Sidebar extends Component {
 			)
 		} else if (isAuthenticated && user.role === 'faculty') {
 			authLinksIII = (
-				<ul className="navbar-nav components d-flex justify-content-around" style={{height: '100%'}}>
+				<ul id="menu-content" className="menu-content collapse out" style={{height:'100%', marginRight:'5px',
+					padding:'2px', width:'220px'}}>
 					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
+						color: 'white', background: '#ffe36b', borderRadius: '5px', padding:'0px'
 					}}>
-						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px'}}>
-							Home
+						<Link className='nav-link' to="/dashboard" style={{borderRadius: '5px', padding:'0px'}}>
+              <i className="fas fa-tachometer-alt fa-lg"/>{'  '}Dashboard
 						</Link>
 					</li>
-
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-					</li>
-					<li className='nav-item' style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
-					}}>
-
-					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px', minWidth: '200px'
-					}}>
-						<Link className="nav-link nav-item d-flex justify-content-between" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-							Lor Requests Control<i className="fas fa-caret-down"/>
-						</Link>
-						<ul className="dropdown-menu " style={{background: '#ffe36b'}}>
-							<li>
-								<Link className='nav-link' to="/viewNewRequests">
-									New Requests
-								</Link>
-							</li>
-							<li>
-								<Link className='nav-link' to="/viewAcceptedLorRequests">
-									Accepted Requests
-								</Link></li>
-							<li>
-								<Link className='nav-link' to="/completedLorRequests">
-									Completed Requests
-								</Link></li>
+					<li data-toggle="collapse" data-target="#lor" className="collapsed active" >
+						<a  href="#"
+									style={{borderRadius: '5px', color:'#000d69'}}>
+              Lor Requests Control<i className="fas fa-caret-down"/>
+						</a>
+          </li>
+						<ul className="sub-menu collapse" id="lor" style={{background: '#ffe36b'}}>
+							<li ><Link className='nav-link-Link' to='/viewNewRequests'>New Requests</Link></li>
+							<li><Link className='nav-link-Link' to='/viewAcceptedLorRequests'>Accepted Requests</Link></li>
+							<li><Link className='nav-link-Link'  to='/completedLorRequests'>Completed Requests</Link></li>
 						</ul>
-					</li>
-					<li className="nav-item dropdown " style={{
-						color: 'white', background: '#ffe36b', borderRadius: '5px'
+					<li className='nav-item' style={{
+						color: 'white', background: '#ffe36b', borderRadius: '5px', padding:'0px'
 					}}>
-						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
-									style={{borderRadius: '5px'}}>
-						</Link>
+						<a className='nav-link' href="#" style={{borderRadius: '5px', padding:'0px'}}>
+              {user.email}
+						</a>
 					</li>
-					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
+					<li className="nav-item " style={{borderRadius: '5px', padding:'0px'}}>
 						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
+									style={{borderRadius: '5px',padding:'0px'}}>
+							<i className="fa fa-power-off fa-lg" />{'  '}
+							Logout</Link>
 					</li>
 				</ul>
 			)
 		} else if (isAuthenticated && user.role === 'student') {
 			authLinksIII = (
-				<ul id="menu-content" className="menu-content collapse out" style={{height:'100%', marginRight:'5px', padding:'2px'}}>
+				<ul id="menu-content" className="menu-content collapse out" style={{height:'100%', marginRight:'5px',
+					padding:'2px', width:'220px'}}>
 					<li className='nav-item' style={{
 						color: 'white', background: '#ffe36b', borderRadius: '5px', padding:'0px'
 					}}>

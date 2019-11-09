@@ -258,7 +258,7 @@ const lorStatus = value => {
 				<div className="displayFolder ">
 					<div className="App-content row d-flex justify-content-center">
 							<button
-								className="rounded border d-flex justify-content-between align-items-center flex-grow-1 pl-1 w-100 my-3"
+								className="rounded border d-flex justify-content-center align-items-center flex-grow-1 pl-1 w-100 my-3"
 								style={{
 									boxShadow: '0 4px 8px 0 rgba(0, 0, 100, 0.2), ' +
 										'0 6px 20px 0 rgba(0, 0, 0, 0.19)',

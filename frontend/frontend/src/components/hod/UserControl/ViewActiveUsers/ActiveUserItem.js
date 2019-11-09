@@ -11,12 +11,12 @@ class ActiveUserItem extends Component {
 
 		return (
 			<tr>
-				<td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.activeUserContent.id}</span></td>
-        <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.activeUserContent.email}</span></td>
+				<td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.id}</span></td>
+        <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.email}</span></td>
         <td><span style={{ fontFamily: 'Arial', fontSize: '16px'  }}>
-          {capitalizeFirstLetter(lorItem.activeUserContent.first_name )}</span></td>
-        <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.activeUserContent.last_name}</span></td>
-        <td><span style={{ fontFamily: 'Arial', fontSize: '16px'  }}>{capitalizeFirstLetter(lorItem.activeUserContent.role)}</span></td>
+          {capitalizeFirstLetter(lorItem.first_name )}</span></td>
+        <td><span style={{ fontFamily: 'Arial', fontSize: '16px' }}>{lorItem.last_name}</span></td>
+        <td><span style={{ fontFamily: 'Arial', fontSize: '16px'  }}>{capitalizeFirstLetter(lorItem.role)}</span></td>
 			</tr>
 
 		)

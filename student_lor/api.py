@@ -1,4 +1,5 @@
 # Create your views here.
+import base64
 import json
 import os
 from datetime import timezone
@@ -6,6 +7,7 @@ from datetime import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.core.serializers import serialize
+from django.http import HttpResponse
 from django.template import Template, Context
 from rest_framework import permissions, generics
 from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
@@ -323,7 +325,8 @@ class EditSubmittedLorCourseDetails(generics.GenericAPIView):
 				print(';;;;')
 				data = request.data
 				updated_details = FacultyListLor.objects.filter(lor_id=lor,
-																faculty_id=faculty).update(courses_done=data['courses_done'],
+																faculty_id=faculty).update(
+					courses_done=data['courses_done'],
 					projects_done=data['projects_done'],
 					thesis_done=data['thesis_done'],
 					status=data['status'],
@@ -367,7 +370,8 @@ class GetMySavedLor(APIView):
 											, expired=False)
 		for entry in update_entries:
 			new_entries = FacultyListLor.objects.filter(lor=entry["id"],
-														   application_status__in=['AC', 'AP']).update(application_status='EX')
+														application_status__in=['AC', 'AP']).update(
+				application_status='EX')
 		update_entries = Lor.objects.filter(user=self.request.user.id, deadline__lte=datetime.now(timezone.utc)
 											, expired=False).update(expired=True)
 		entries = Lor.objects.filter(user=self.request.user.id, hidden=False)
@@ -421,11 +425,12 @@ class GetAppliedLor(APIView):
 	serializer_class = ViewAppliedFacultyListSerializer
 
 	def get(self, request):
-		update_entries = Lor.objects.filter(user=self.request.user.id, deadline__lte=datetime.now(timezone.utc), expired=False)
+		update_entries = Lor.objects.filter(user=self.request.user.id, deadline__lte=datetime.now(timezone.utc),
+											expired=False)
 		# print(update_entries)
 		for entry in update_entries:
 			new_entries = FacultyListLor.objects.filter(lor_id=entry.id,
-														   application_status__in=['AC', 'AP']).update(
+														application_status__in=['AC', 'AP']).update(
 				application_status='EX')
 		update_entries = Lor.objects.filter(user=self.request.user.id, deadline__lte=datetime.now(timezone.utc)
 											, expired=False).update(expired=True)
@@ -460,19 +465,22 @@ class WithdrawApplications(APIView):
 		template = Template(WITHDRAW_TEMPLATE)
 		faculty_details = AppUser.objects.get(id=faculty)
 		details = StudentDetails.objects.get(user=self.request.user.id)
-		check = FacultyListLor.objects.get(lor_id=lor, faculty_id=faculty)
-		if check.application_status== 'AC' or check.application_status== 'AP':
-			FacultyListLor.objects.get(lor=lor, faculty=faculty).delete()
-			send_mail(
-				'Request Withdrawn: Lor Request has been Withdrawn by the student',
-				template.render(context=Context({'faculty': faculty_details, 'student': details})),
-				'ghotden@gmail.com',
-				[faculty_details.email],
-				fail_silently=False,
-			)
-			return Response('Application Withdrawn')
-		else:
-			raise ValidationError({'error_delete': 'You cannot withdraw application at this stage'})
+		try:
+			check = FacultyListLor.objects.get(lor_id=lor, faculty_id=faculty)
+			if check.application_status == 'AC' or check.application_status == 'AP':
+				FacultyListLor.objects.get(lor=lor, faculty=faculty).delete()
+				send_mail(
+					'Request Withdrawn: Lor Request has been Withdrawn by the student',
+					template.render(context=Context({'faculty': faculty_details, 'student': details})),
+					'ghotden@gmail.com',
+					[faculty_details.email],
+					fail_silently=False,
+				)
+				return Response('Application Withdrawn')
+			else:
+				raise ValidationError({'error_delete': 'You cannot withdraw application at this stage'})
+		except ObjectDoesNotExist as notCreated:
+			return Response('Please wait while the photo is deleting')
 
 
 # List of Universities in database
@@ -510,3 +518,29 @@ class GetFacultyList(APIView):
 		entries = AppUser.objects.filter(role='faculty')
 		print(entries)
 		return Response(GetFacultyListSerializer(entries, many=True).data)
+
+
+class ViewProfilePhoto(APIView):
+	# permission_classes = (permissions.AllowAny,)
+	permission_classes = [
+		permissions.IsAuthenticated,
+		HasGroupPermission
+	]
+	required_groups = {
+		'GET': ['student'],
+	}
+
+	def get(self, request):
+		try:
+			obj = StudentProfilePicture.objects.get(user=self.request.user.id)
+			obj_image_url = obj.picture
+			image_path = os.path.join(BASE_DIR, 'media', str(obj_image_url))
+			last_dot = str(obj.picture).rfind('.')
+			image_format = str(obj.picture)[last_dot+1:len(str(obj.picture))]
+			content_type = "image/"+image_format
+			print(content_type, obj_image_url)
+			with open(image_path, "rb") as image_file:
+				base64string = base64.b64encode(image_file.read())
+				return HttpResponse(base64string, content_type=content_type)
+		except ObjectDoesNotExist:
+			return Response({'status': False})
