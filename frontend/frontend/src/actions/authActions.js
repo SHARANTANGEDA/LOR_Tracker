@@ -1,11 +1,11 @@
 import {
-	CLEAR_ERRORS,
-	ENTER_OTP,
-	ENTER_PASSWORD,
-	GET_ERRORS,
-	HOME_LOADING,
-	SET_AUTH_LOADING,
-	SET_CURRENT_USER
+  CLEAR_ERRORS,
+  ENTER_OTP,
+  ENTER_PASSWORD,
+  GET_ERRORS,
+  HOME_LOADING,
+  SET_AUTH_LOADING,
+  SET_CURRENT_USER
 } from './types'
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
@@ -60,6 +60,29 @@ export const loginUser = userData => dispatch => {
   dispatch(clearErrors());
   dispatch(setLoading());
   axios.post('/api/auth/login',userData)
+    .then(res => {
+      //Saving to Local Storage
+      const {token} = res.data;
+      localStorage.setItem('jwtToken',token.toString());
+      setAuthToken(token);
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded));
+
+    })
+    .catch(err => {
+        console.log(err);
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      }
+     );
+};
+
+export const loginGoogleUser = userData => dispatch => {
+  dispatch(clearErrors());
+  dispatch(setLoading());
+  axios.post('/api/auth/googleLogin',userData)
     .then(res => {
       //Saving to Local Storage
       const {token} = res.data;

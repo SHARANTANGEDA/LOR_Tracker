@@ -13,4 +13,5 @@ urlpatterns = [
 	path('api/faculty/markAsComplete/<int:lor>/<int:faculty>', MarkRequestAsComplete.as_view()),
 	path('api/faculty/getProfilePhoto/<int:student_id>', GetStudentProfilePhoto.as_view()),
 	path('api/faculty/completedLorData', CompletedLorData.as_view()),
+
 ]

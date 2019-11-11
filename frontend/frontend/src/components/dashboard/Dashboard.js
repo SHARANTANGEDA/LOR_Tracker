@@ -12,6 +12,7 @@ import formatFacultyDashboardData from "./formatFacultyDashboardData";
 import Modal from "react-modal";
 import AcceptLorModal from "../faculty/LorPages/AcceptLorModal";
 import formatActiveUsersData from "./formatActiveUsersData";
+import {googleLogoutAction} from "../../actions/googleAuthActions";
 
 const customStyles = {
 	content: {
@@ -91,8 +92,12 @@ class Dashboard extends Component {
 
 	render() {
 		let userRole = this.props.auth.user.role;
-		let {errors} = this.state
+		let {errors} = this.state;
 		console.log({role: userRole});
+		 const signOut = dispatch => {
+		 	console.log(dispatch);
+		 	this.props.googleLogoutAction()
+    };
 		if (userRole === 'student') {
 			const {loading, studentHome} = this.props.home;
 			let homeContent;
@@ -122,7 +127,8 @@ class Dashboard extends Component {
 					</div>
 				</div>
 			)
-		} else if (userRole === 'faculty') {
+		}
+		else if (userRole === 'faculty') {
 			const {facLoading, facultyHome} = this.props.home;
 			const viewButton = row => {
 				console.log({row: row.value});
@@ -733,13 +739,14 @@ Dashboard.propTypes = {
 	studentHome: PropTypes.func.isRequired,
 	facultyHome: PropTypes.func.isRequired,
 	hodHome: PropTypes.func.isRequired,
-	markAsComplete: PropTypes.func.isRequired
+	markAsComplete: PropTypes.func.isRequired,
+	googleLogoutAction: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
 	home: state.home,
 	auth: state.auth,
 });
-export default connect(mapStateToProps, {studentHome, facultyHome, hodHome, markAsComplete})(Dashboard)
+export default connect(mapStateToProps, {studentHome, facultyHome, hodHome, markAsComplete, googleLogoutAction})(Dashboard)
 
 //
 // {/*<div className=" input-group md-form form-sm form-2 pl-0" style={{*/}

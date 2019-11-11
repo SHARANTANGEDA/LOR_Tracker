@@ -45,10 +45,13 @@ INSTALLED_APPS = [
 	'student_lor',
 	'faculty_lor',
 	'hod_lor',
-	'allauth',
-	'allauth.account',
-	'allauth.socialaccount',
-	'allauth.socialaccount.providers.google'
+	'oauth2_provider',
+	'rest_framework_social_oauth2',
+	'social_django'
+	# 'allauth',
+	# 'allauth.account',
+	# 'allauth.socialaccount',
+	# 'allauth.socialaccount.providers.google'
 ]
 DATABASES = {
 	'default': {
@@ -73,14 +76,50 @@ CELERY_RESULT_SERIALIZER = 'json'
 AUTH_USER_MODEL = 'api.AppUser'
 
 ################################# GOOGLE OAUTH #######################################
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-)
-SITE_ID = 1
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
+AUTHENTICATION_BACKENDS = (
+	"django.contrib.auth.backends.ModelBackend",
+	'social_core.backends.google.GoogleOAuth2',
+	'rest_framework_social_oauth2.backends.DjangoOAuth2',
+	# "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '373821760819-n464h5ipe9u121o98tqbd5973q4m1djg.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'uvYdbYFXbGTCnqCw_wZ0CmHi'
+OAUTH2_PROVIDER = {
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
+}
+
+
+#TODO
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:3000',
+#     'localhost:8000',
+# )
+CORS_ALLOW_CREDENTIALS = True
+# SITE_ID = 1
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# LOGIN_REDIRECT_URL = '/api/student/home'
+# CLIENT_ID_GOOGLE = '373821760819-n464h5ipe9u121o98tqbd5973q4m1djg.apps.googleusercontent.com'
+# SOCIALACCOUNT_QUERY_EMAIL = True
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     }
+# }
 
 ################################## GMAIL SERVICE #####################################
 EMAIL_USE_TLS = True
@@ -99,6 +138,9 @@ EMAIL_PORT = 587
 REST_FRAMEWORK = {
 	'DEFAULT_AUTHENTICATION_CLASSES': (
 		'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+		'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+		'rest_framework_social_oauth2.authentication.SocialAuthentication',
+		'rest_framework.authentication.SessionAuthentication',
 	),
 	'DEFAULT_PERMISSION_CLASSES': (
 		'rest_framework.permissions.IsAuthenticated',

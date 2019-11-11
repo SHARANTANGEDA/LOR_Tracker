@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logoutUser} from '../../actions/authActions'
+import GoogleLogoutButton from "./GoogleLogoutButton";
 
 class Sidebar extends Component {
 	constructor(props) {
@@ -28,7 +29,7 @@ class Sidebar extends Component {
 
 	onLogoutClick(e) {
 		e.preventDefault();
-		this.props.logoutUser()
+		// this.props.logoutUser()
 	}
 
 
@@ -71,10 +72,7 @@ class Sidebar extends Component {
 							<li><Link className='nav-link-Link' to="/viewCurrentActiveUsers">View Active Users</Link></li>
 						</ul>
 					<li className="nav-item " style={{borderRadius: '5px', padding:'0px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px',padding:'0px'}}>
-							<i className="fa fa-power-off fa-lg" />{'  '}
-							Logout</Link>
+						<GoogleLogoutButton/>
 					</li>
 				</ul>
 			)
@@ -108,10 +106,7 @@ class Sidebar extends Component {
 						</a>
 					</li>
 					<li className="nav-item " style={{borderRadius: '5px', padding:'0px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px',padding:'0px'}}>
-							<i className="fa fa-power-off fa-lg" />{'  '}
-							Logout</Link>
+						<GoogleLogoutButton/>
 					</li>
 				</ul>
 			)
@@ -151,10 +146,7 @@ class Sidebar extends Component {
 						</li>
 					</ul>
 					<li className="nav-item " style={{borderRadius: '5px', padding:'0px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px',padding:'0px'}}>
-							<i className="fa fa-power-off fa-lg" />{'  '}
-							Logout</Link>
+
 					</li>
 				</ul>
 			)

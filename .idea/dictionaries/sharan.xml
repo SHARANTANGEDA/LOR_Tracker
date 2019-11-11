@@ -21,6 +21,7 @@
       <w>simplejwt</w>
       <w>smtp</w>
       <w>socialaccount</w>
+      <w>sociallogin</w>
     </words>
   </dictionary>
 </component>

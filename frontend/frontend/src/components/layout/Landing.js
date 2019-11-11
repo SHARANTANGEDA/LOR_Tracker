@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
 import {connect} from 'react-redux'
-import {loginUser} from '../../actions/authActions'
+import {loginGoogleUser, loginUser} from '../../actions/authActions'
 import 'react-dates/lib/css/_datepicker.css'
 import TextFieldGroup from "../common/TextFieldGroup";
 import {Link} from "react-router-dom";
 import Modal from "react-modal";
+import GoogleLogin from 'react-google-login';
+import {convertGoogleToken} from "../../actions/googleAuthActions";
 
 const customStyles = {
     content: {
@@ -14,7 +16,6 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         marginRight: '0',
-
         transform: 'translate(-50%, -50%)'
     }
 };
@@ -33,7 +34,7 @@ class Landing extends Component {
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this)
-
+        this.googleLogin = this.googleLogin.bind(this)
     }
 
     changeHandler(e) {
@@ -48,6 +49,7 @@ class Landing extends Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         console.log(nextProps.errors);
+        console.log(this.props.auth);
         if (nextProps.auth.isAuthenticated) {
             this.props.history.push('/dashboard');
         }
@@ -61,6 +63,9 @@ class Landing extends Component {
         this.setState({modalIsOpen: true})
     }
 
+    googleLogin(data) {
+        this.props.loginGoogleUser(data);
+    }
     afterOpenModal() {
 
     }
@@ -84,6 +89,21 @@ class Landing extends Component {
     isOutsideRange = () => false;
 
     render() {
+         const responseGoogleSuccess = response => {
+    console.log(response);
+            if (response.profileObj) {
+              localStorage.setItem("google_avatar_url", response.profileObj.imageUrl);
+              localStorage.setItem("google_name", response.profileObj.name);
+              localStorage.setItem("email", response.profileObj.email);
+            }
+            this.props.convertGoogleToken(response.Zi.access_token);
+          };
+          const responseGoogleFailure = response => {
+            console.log(response);
+            alert('This error might occur if you are not logged in from your bits account, ' +
+              'please recheck that you are logged in to bits account')
+          };
+
         const {errors} = this.state;
         return (
             <div className="login landing " style={{maxHeight: '100%'}}>
@@ -123,8 +143,18 @@ class Landing extends Component {
                                     <hr/>
                                 </form>
                                 <hr/>
+                                <GoogleLogin
+                                    clientId="373821760819-n464h5ipe9u121o98tqbd5973q4m1djg.apps.googleusercontent.com"
+                                    buttonText="LOGIN WITH GOOGLE"
+                                    onSuccess={responseGoogleSuccess}
+                                    onFailure={responseGoogleFailure}
+                                  />
+
                             </div>
                         </div>
+                        {/*<button onClick={this.googleLogin}>Log In with Gmail</button>*/}
+                        {/*<a href={`http://127.0.0.1:8000/accounts/google/login`}>Log In with Gmail</a>*/}
+
                     </div>
                 </div>
                 <Modal
@@ -172,6 +202,8 @@ Landing.propTypes = {
     auth: PropTypes.object.isRequired,
     loginUser: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
+    loginGoogleUser: PropTypes.func.isRequired,
+    convertGoogleToken: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -179,4 +211,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps, {loginUser})(Landing);
+export default connect(mapStateToProps, {loginUser, loginGoogleUser, convertGoogleToken})(Landing);

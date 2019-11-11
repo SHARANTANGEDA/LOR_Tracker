@@ -22,6 +22,7 @@ urlpatterns = [
 	path('api/student/getProfilePhoto', ViewProfilePhoto.as_view()),
 	path('api/student/deleteLor/<int:lor_id>', DeleteLor.as_view()),
 	path('api/student/withdrawApplication/<int:faculty>/<int:lor>', WithdrawApplications.as_view()),
+	path('api/student/test', GoogleCallBackTest.as_view()),
 
 ]
 

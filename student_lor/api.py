@@ -544,3 +544,11 @@ class ViewProfilePhoto(APIView):
 				return HttpResponse(base64string, content_type=content_type)
 		except ObjectDoesNotExist:
 			return Response({'status': False})
+
+
+class GoogleCallBackTest(APIView):
+	permission_classes = (permissions.AllowAny,)
+
+	def get(self, request):
+		print(request.user, request.data)
+		return Response(request.user)

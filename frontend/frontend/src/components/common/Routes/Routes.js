@@ -4,7 +4,7 @@ import PrivateRoute from './PrivateRoute'
 import Dashboard from '../../dashboard/Dashboard'
 import ChangePassword from '../../MyAccount/ChangePassword'
 import NotFound from '../../layout/NotFound'
-import UploadForm from '../../upload/UploadForm'
+// import UploadForm from '../../upload/UploadForm'
 import EditProfile from '../../MyAccount/EditProfile'
 import CreateLor from '../../student/CreateLor'
 import ViewSavedLor from '../../student/ViewSavedLor/ViewSavedLor'
@@ -27,7 +27,7 @@ const Routes = () => {
       <Switch>
         <PrivateRoute exact path='/dashboard' component={Dashboard}/>
         <PrivateRoute exact path='/changePassword' component={ChangePassword}/>
-        <PrivateRoute exact path='/uploadForm' component={UploadForm}/>
+        {/*<PrivateRoute exact path='/uploadForm' component={UploadForm}/>*/}
         <PrivateRoute exact path='/editProfile' component={EditProfile}/>
         <PrivateRoute exact path='/fillLor' component={CreateLor}/>
         <PrivateRoute exact path='/viewMyLor' component={ViewSavedLor}/>

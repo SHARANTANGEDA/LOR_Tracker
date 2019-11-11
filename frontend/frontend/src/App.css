@@ -224,6 +224,24 @@ Link:focus {
   color: #000d69;
   border: #000d69;
 }
+
+/*.google_logout_style {*/
+/*  background:#ffe36b;*/
+/*  color: #000d69;*/
+/*  border: #000d69;*/
+/*  float:none;*/
+/*  position:static;*/
+/*  display:block;*/
+/*  margin:auto;*/
+/*  width:max-content;*/
+/*}*/
+/*.google_logout_style:hover {*/
+/*  background:#ffe36b;*/
+/*  color: #000d69;*/
+/*  border: #000d69;*/
+/*}*/
+
+
 .ul {
   background:#ffc643;
 

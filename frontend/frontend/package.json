@@ -26,6 +26,7 @@
     "react-dates": "^20.2.5",
     "react-day-picker": "^7.3.0",
     "react-dom": "^16.9.0",
+    "react-google-login": "^5.0.7",
     "react-modal": "^3.8.1",
     "react-motion": "^0.5.2",
     "react-pdf": "^4.1.0",
@@ -41,10 +42,11 @@
     "react-table": "^6.10.3",
     "reactjs-popup": "^1.4.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "url-search-params": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

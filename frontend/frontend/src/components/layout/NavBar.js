@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logoutUser} from '../../actions/authActions'
+import GoogleLogoutButton from "./GoogleLogoutButton";
 
 class Navbar extends Component {
 	constructor(props) {
@@ -117,7 +118,8 @@ handleWindowSizeChange = () => {
 				</div>
 
 				<div className="row col-md-4 d-flex justify-content-end align-items-center" style={{color: 'white'}}>
-					<div style={{color:'white'}}><i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"/></div>
+						<GoogleLogoutButton/>
+						<div style={{color:'white', marginLeft:'10px'}}><i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"/></div>
 				</div>
 			</div>
 
@@ -216,10 +218,7 @@ handleWindowSizeChange = () => {
 						</Link>
 					</li>
 					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
+						<GoogleLogoutButton/>
 					</li>
 				</ul>
 			)
@@ -274,10 +273,7 @@ handleWindowSizeChange = () => {
 						</Link>
 					</li>
 					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
+						<GoogleLogoutButton/>
 					</li>
 				</ul>
 			)
@@ -345,10 +341,7 @@ handleWindowSizeChange = () => {
 						</ul>
 					</li>
 					<li className="nav-item pull-right" style={{borderRadius: '5px'}}>
-						<Link className="nav-link" to="/" onClick={this.onLogoutClick.bind(this)}
-									style={{borderRadius: '5px'}}>
-							<i className="fa fa-power-off" aria-hidden="true"/>
-							{'  '}Logout</Link>
+						<GoogleLogoutButton/>
 					</li>
 				</ul>
 			)

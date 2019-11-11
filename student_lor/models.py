@@ -21,7 +21,8 @@ class StudentDetails(models.Model):
 
 
 class StudentProfilePicture(models.Model):
-	picture = models.ImageField(upload_to='student_profile_pics')
+	picture = models.ImageField(upload_to='student_profile_pics', blank=True)
+	picture_url_google = models.URLField(blank=True, editable=True)
 	user = models.OneToOneField(AppUser, on_delete=models.CASCADE, primary_key=True)
 
 

@@ -103,8 +103,8 @@ componentDidMount(){
                 onClick={this.uploadFile.bind(this)}>Upload</button>
         )
         imageContent = (
-           <img src={require('../../img/landingIcons/student.png')} height='150px' width='150px' alt=''
-                   style={{maxHeight:'250px', width:'225px'}}/>
+           <img src={localStorage.getItem('google_avatar_url')}  height='150px' width='150px' alt=''
+                   style={{maxHeight:'250px', width:'225px', borderRadius:'50%'}}/>
         )
       }
       let info=null;

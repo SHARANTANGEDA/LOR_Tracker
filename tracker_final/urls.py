@@ -15,19 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_jwt.views import refresh_jwt_token
-from rest_framework_jwt.views import verify_jwt_token
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('api.urls')),
-    path('', include('student_lor.urls')),
-    path('', include('faculty_lor.urls')),
-    path('', include('hod_lor.urls')),
-    # path('accounts/', include('allauth.urls')),  # new
-    path(r'^auth-jwt/', obtain_jwt_token),
-    path(r'^auth-jwt-refresh/', refresh_jwt_token),
-    path(r'^auth-jwt-verify/', verify_jwt_token),
+	path('admin/', admin.site.urls),
+	path('auth/', include('rest_framework_social_oauth2.urls')),
+	path('', include('api.urls')),
+	path('', include('student_lor.urls')),
+	path('', include('faculty_lor.urls')),
+	path('', include('hod_lor.urls')),
+	# path('accounts/', include('allauth.urls')),  # new
+	# path(r'^auth-jwt/', obtain_jwt_token),
+	# path(r'^auth-jwt-refresh/', refresh_jwt_token),
+	# path(r'^auth-jwt-verify/', verify_jwt_token),
+
 ]
 # urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
