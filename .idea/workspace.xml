@@ -2,53 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7022dd86-529b-4f3e-99a4-b2159242c198" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/api/google/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/google/adapters.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/google/providers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/googleAuthActions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/GoogleLogoutButton.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/googleInfoReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sharan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tracker_final.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tracker_final.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/0002_auto_20191023_0502.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/0003_appuser_is_staff.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/0004_auto_20191026_1448.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/migrations/0002_auto_20191111_1455.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/migrations/0005_auto_20191026_1450.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/migrations/0003_auto_20191111_1503.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faculty_lor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/faculty_lor/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/authActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/UploadFiles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/PrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/PrivateRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/common/Routes/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/actions/googleAuthActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/actions/googleAuthActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/MyAccount/EditProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Landing.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Landing.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/layout/Sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CPTSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CPTSelector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CoursesDone.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/CoursesDone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ProjectsDone.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ProjectsDone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ThesisDone.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/CPT/ThesisDone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/FacultySelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/student/SubmitLor/FacultySelector.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadFiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadFiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/components/upload/UploadForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/frontend/src/validation/validateLorSubmission.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/frontend/src/validation/validateLorSubmission.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student_lor/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/migrations/0002_auto_20191023_0502.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/migrations/0003_auto_20191104_0523.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/migrations/0004_lor_hidden.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/migrations/0005_studentprofilepicture.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/migrations/0006_auto_20191105_0929.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/migrations/0007_auto_20191107_1646.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student_lor/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/permissions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student_lor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tracker_final/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker_final/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tracker_final/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tracker_final/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student_lor/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student_lor/validations/validate_lor_submission.py" beforeDir="false" afterPath="$PROJECT_DIR$/student_lor/validations/validate_lor_submission.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +123,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Django server.Server">
     <configuration name="Server" type="Python.DjangoServer" factoryName="Django server">
       <module name="tracker_final" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -314,7 +286,8 @@
       <workItem from="1573267872639" duration="7241000" />
       <workItem from="1573291345550" duration="19682000" />
       <workItem from="1573385837932" duration="17488000" />
-      <workItem from="1573456125454" duration="28416000" />
+      <workItem from="1573456125454" duration="28605000" />
+      <workItem from="1573532217398" duration="13603000" />
     </task>
     <task id="LOCAL-00001" summary="#Initial Commit&#10;#Completed Authentication&#10;#Created add_lor and User Models">
       <created>1565873737853</created>
@@ -421,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573312178846</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="# Added Google OAuth&#10;# Alpha Release Version">
+      <created>1573503286172</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1573503286172</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,7 +436,8 @@
     <MESSAGE value="# Added Upload Profile picture option&#10;# Made many bug fixes&#10;# TODO: Check filter functionality" />
     <MESSAGE value="# Changed All most all UI components&#10;# Added Filters to all&#10;# Completed Student Side&#10;# Completed Sidebar for mobile view&#10;# Tuned some components for Mobile view&#10;# Added profile picture upload feature" />
     <MESSAGE value="# Completed All UI Changes for HOD&#10;# Completed All UI Changes for Faculty&#10;# Completed All UI Changes for Student&#10;# Removed few security bugs&#10;# Alpha Release Version" />
-    <option name="LAST_COMMIT_MESSAGE" value="# Completed All UI Changes for HOD&#10;# Completed All UI Changes for Faculty&#10;# Completed All UI Changes for Student&#10;# Removed few security bugs&#10;# Alpha Release Version" />
+    <MESSAGE value="# Added Google OAuth&#10;# Alpha Release Version" />
+    <option name="LAST_COMMIT_MESSAGE" value="# Added Google OAuth&#10;# Alpha Release Version" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="masterDetails">

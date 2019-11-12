@@ -212,6 +212,8 @@ handleWindowSizeChange = () => {
 					<li className="nav-item dropdown " style={{
 						color: 'white', background: '#ffe36b', borderRadius: '5px'
 					}}>
+													{/*<img src={localStorage.getItem('google_avatar_url')} alt='' style={{maxWidth:'50px', maxHeight:'50px',borderRadius:'50%' }}/>*/}
+
 						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
 									style={{borderRadius: '5px'}}>
 							{user.email}
@@ -268,6 +270,8 @@ handleWindowSizeChange = () => {
 					<li className="nav-item dropdown " style={{
 						color: 'white', background: '#ffe36b', borderRadius: '5px'
 					}}>
+						{/*<img src={localStorage.getItem('google_avatar_url')} alt='' style={{maxWidth:'50px', maxHeight:'50px',borderRadius:'50%' }}/>*/}
+
 						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
 									style={{borderRadius: '5px'}}>
 						</Link>
@@ -331,6 +335,7 @@ handleWindowSizeChange = () => {
 					}}>
 						<Link className="nav-link nav-item d-flex justify-content-around" to="" data-toggle="dropdown"
 									style={{borderRadius: '5px'}}>
+							{/*<img src={localStorage.getItem('google_avatar_url')} alt='' style={{maxWidth:'50px', maxHeight:'50px',borderRadius:'50%' }}/>*/}
 							{user.email}<i className="fas fa-caret-down"/>
 						</Link>
 						<ul className="dropdown-menu " style={{width: '100%'}}>

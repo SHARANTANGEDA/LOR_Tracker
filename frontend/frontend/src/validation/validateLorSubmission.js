@@ -32,6 +32,9 @@ const validateLorSubmission = data => {
 				if(item.year===null || item.year==='' || item.year.length===0) {
 					errors.projects_done[data.projects_done.indexOf(item)].year="You must select the year"
 				}
+				if(item.sem===null || item.sem==='' || item.sem.length===0) {
+					errors.projects_done[data.projects_done.indexOf(item)].sem="You must select the semester"
+				}
 			})
 		}
 		if(data.thesis_done.length!==0) {
@@ -41,6 +44,9 @@ const validateLorSubmission = data => {
 				}
 				if(item.year===null || item.year==='' || item.year.length===0) {
 					errors.thesis_done[data.thesis_done.indexOf(item)].year="You must select the year"
+				}
+				if(item.sem===null || item.sem==='' || item.sem.length===0) {
+					errors.thesis_done[data.thesis_done.indexOf(item)].sem="You must select the semester"
 				}
 			})
 		}

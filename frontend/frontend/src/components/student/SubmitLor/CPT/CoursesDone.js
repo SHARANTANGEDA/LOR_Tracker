@@ -20,7 +20,8 @@ class CoursesDone extends Component {
 			years: ['year-0'],
 			courseCodes: ['course-0'],
 			yearsControl: [],
-			semControl: []
+			semControl: [],
+			errors: {}
 		};
 		this.changeHandler = this.changeHandler.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -28,9 +29,12 @@ class CoursesDone extends Component {
 		this.onRemove=this.onRemove.bind(this)
 	}
 
-	// changeHandler(e) {
-	// 	console.log({[e.target.name]: e.target.value})
-	// 	this.setState({[e.target.name]: e.target.value});
+
+	// componentWillReceiveProps(nextProps, nextContext) {
+	// 	if (nextProps) {
+	// 		this.setState({front_errors: nextProps.front_errors})
+	// 		console.log({RECIEVED: this.state.front_errors})
+	// 	}
 	// }
 	changeHandler = (i, type) => e => {
 		console.log({HANDLER_LOG: {i: i, type: type, e: e, eValue: e.target}})
@@ -62,9 +66,10 @@ class CoursesDone extends Component {
 			}
 		})
 	}
-	componentDidMount() {
-		// this.setState({courses: this.props.checkbox.selected[this.props.selectionIndex].courses_done});
-	}
+	// componentDidMount(){
+	// 	this.setState({front_errors: this.props.front_errors})
+	//
+	// }
 
 
 	onRemove(index) {
@@ -131,21 +136,8 @@ class CoursesDone extends Component {
 		this.props.checkbox.selected = getSelected
 	}
 
-	onUnSelect(e) {
-		this.setState({selected: false});
-		let unSelect = this.props.checkbox.selected;
-		// let index=-1;
-		unSelect = unSelect.filter(item => item.faculty_id !== e);
-		// let index = unSelect.indexOf(e);
-		// if (index !== -1) {
-		//   unSelect.splice(index, 1);
-		// }
-		this.props.checkbox.selected = unSelect;
-		console.log({selected: this.props.checkbox.selected})
-	}
 
 	render() {
-		const {errors} = this.state;
 		const customSelectStyles = {
 			control: (base, state) => ({
 				...base,
@@ -176,14 +168,17 @@ class CoursesDone extends Component {
 					<button onClick={() => this.onRemove(i)}
 									style={{background:'none', color:'black', borderStyle:'none'}}><i className="fas fa-times"/></button>
 				</div>
-				<div className='row col-md-12'>
-					<TextFieldGroup placeholder="Enter Course Code" error={errors.courseCode}
+				<div className='row'>
+					<div className='col-md-12'>
+						<TextFieldGroup placeholder="Enter Course Code" error={errors.courseCode}
 												type="text" onChange={this.changeHandler(i, 'courseCode')}
 												value={this.state.courses[i].courseCode}
 												name={this.state.courseCodes[i]}/>
+					</div>
+
 				</div>
 				<div className='row'>
-					<div className='col-md-6'>
+					<div className='col-md-6' style={{marginRight:'2px'}}>
 						<Select options={yearSelector}
 										className={classnames('isSearchable', {'is-invalid':errors.year})}
 										styles={customSelectStyles}
@@ -195,7 +190,8 @@ class CoursesDone extends Component {
               <div className="invalid-feedback">{errors.year}</div>
             )}
 					</div>
-					<div className='col-md-6'>
+
+					<div className='col-md-6' >
 						<Select options={[{value: 'Sem-I', label: 'Sem-I'}, {value: 'Sem-II', label: 'Sem-II'}]}
 										className={classnames('isSearchable', {'is-invalid': errors.sem})}
 										styles={customSelectStyles}
@@ -207,9 +203,7 @@ class CoursesDone extends Component {
               <div className="invalid-feedback">{errors.sem}</div>
             )}
 					</div>
-
 				</div>
-
 				<hr/>
 			</div>)
 		}
@@ -240,7 +234,7 @@ CoursesDone.propTypes = {
 	errors: PropTypes.object.isRequired,
 	facultyId: PropTypes.number.isRequired,
 	checkbox: PropTypes.object.isRequired,
-	selectionIndex: PropTypes.number.isRequired
+	selectionIndex: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({

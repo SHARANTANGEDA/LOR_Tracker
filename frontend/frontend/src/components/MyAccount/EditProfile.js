@@ -8,20 +8,19 @@ import TextFieldGroup from '../common/TextFieldGroup'
 import Select from 'react-select'
 import {Collapse} from 'react-collapse'
 // import './switch.css'
-import {MDBFormInline, MDBInput} from "mdbreact";
 import UploadFiles from "../upload/UploadFiles";
 
 class EditProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			studentId: '',
-			fullName: '',
-			emailPersonal: '',
+			student_id: '',
+			full_name: '',
+			email: '',
 			phone: '',
 			cgpa: '',
-			graduationStatus: false,
-			degree: null,
+			graduation_status: false,
+			degree: '',
 			isProfileOpen: true,
 			errors: {}
 		};
@@ -37,31 +36,52 @@ class EditProfile extends Component {
 		if (nextProps.errors) {
 			this.setState({errors: nextProps.errors})
 		}
-		if (nextProps.account.loading === false && nextProps.account.details !== null) {
+		console.log({DETAILS: nextProps.account.details});
+		if (nextProps.account.loading === false && nextProps.account.details !== null &&
+			(!nextProps.account.details.status===true)) {
 			if (nextProps.auth.user.role === 'student') {
-				this.setState({
-					studentId: nextProps.account.details.student_id,
-					fullName: nextProps.account.details.full_name,
-					emailPersonal: nextProps.account.details.email,
-					phone: nextProps.account.details.phone,
-					graduationStatus: nextProps.account.details.graduation_status,
-				})
-				if(nextProps.account.details.cgpa) {
+				console.log({DETAILS: nextProps.account.details});
+				console.log({student_id: nextProps.account.details.student_id, full_name: nextProps.account.details.full_name,
+				email: nextProps.account.details.email, phone: nextProps.account.details.phone,
+					cgpa: nextProps.account.details.cgpa, graduation_status: nextProps.account.details.graduation_status,
+				degree: nextProps.account.details.degree})
+				if(nextProps.account.details.student_id!==null) {
+					this.setState({student_id: nextProps.account.details.student_id})
+				}
+				if( nextProps.account.details.full_name!==null) {
+					this.setState({full_name: nextProps.account.details.full_name})
+				}
+				if(nextProps.account.details.email!==null) {
+					this.setState({email: nextProps.account.details.email})
+				}
+				if(nextProps.account.details.phone!==null) {
+					this.setState({phone: nextProps.account.details.phone})
+				}
+				if(nextProps.account.details.cgpa!==null) {
 					this.setState({cgpa: nextProps.account.details.cgpa})
+				}
+				if(nextProps.account.details.graduation_status===null) {
+					this.setState({graduation_status: false})
+				}else {
+					this.setState({graduation_status: nextProps.account.details.graduation_status})
 				}
 				if(nextProps.account.details.graduation_status) {
 					this.setState({degree: {value: nextProps.account.details.degree, label: nextProps.account.details.degree}})
 				}else {
 					this.setState({degree: nextProps.account.details.degree})
 				}
+				console.log({student_id: this.state.student_id, full_name: this.state.full_name,
+				email: this.state.email, phone: this.state.phone,
+					cgpa: this.state.cgpa, graduation_status: this.state.graduation_status,
+				degree: this.state.degree})
 			}
-
 		}
 	}
 
 	componentDidMount() {
-		this.props.getProfileInfo(this.props.match.params.id)
-
+		if (this.props.auth.user.role === 'student') {
+			this.props.getProfileInfo(this.props.match.params.id)
+		}
 	}
 
 	toggleProfile(e) {
@@ -69,17 +89,24 @@ class EditProfile extends Component {
 	}
 
 	onChange(e) {
-		this.setState({[e.target.name]: e.target.value})
+		this.setState({[e.target.name]: e.target.value});
+		console.log({student_id: this.state.student_id, full_name: this.state.full_name,
+				email: this.state.email, phone: this.state.phone,
+					cgpa: this.state.cgpa, graduation_status: this.state.graduation_status,
+				degree: this.state.degree})
 	}
 
 	onSwitch(e) {
-		if(!this.state.graduationStatus) {
+		if(!this.state.graduation_status) {
 			this.setState({degree: null})
 		}else {
 			this.setState({degree: ''})
 		}
-		this.setState({graduationStatus: !this.state.graduationStatus})
+		this.setState({graduation_status: !this.state.graduation_status})
+
+
 	}
+
 
 	onCatChange(e) {
 		this.setState({degree: e})
@@ -88,40 +115,32 @@ class EditProfile extends Component {
 	onSubmit(e) {
 		e.preventDefault();
 		if (this.props.auth.user.role === 'student') {
-			console.log({
-				setUp: {
-					student_id: this.state.studentId,
-					full_name: this.state.fullName,
-					email: this.state.emailPersonal,
-					phone: this.state.phone,
-					cgpa: this.state.cgpa,
-					graduation_status: this.state.graduationStatus,
-					degree: this.state.degree
-				}
-			})
 			console.log(this.state.degree, this.state.degree.length);
+			// if(this.state.graduation_status===null) {
+			// 	this.setState({graduation_status: false})
+			// }
 			if(this.state.degree.length) {
 				const profileData = {
-				student_id: this.state.studentId,
-				full_name: this.state.fullName,
-				email: this.state.emailPersonal,
-				phone: this.state.phone,
-				cgpa: this.state.cgpa,
-				graduation_status: this.state.graduationStatus.toString(),
-				degree: this.state.degree
-			};
+					student_id: this.state.student_id,
+					full_name: this.state.full_name,
+					email: this.state.email,
+					phone: this.state.phone,
+					cgpa: this.state.cgpa,
+					graduation_status: this.state.graduation_status,
+					degree: this.state.degree
+				};
 			this.props.updateInfo(profileData);
 			console.log(profileData)
 			}else {
 				const profileData = {
-				student_id: this.state.studentId,
-				full_name: this.state.fullName,
-				email: this.state.emailPersonal,
-				phone: this.state.phone,
-				cgpa: this.state.cgpa,
-				graduation_status: this.state.graduationStatus.toString(),
-				degree: this.state.degree.value
-			};
+					student_id: this.state.student_id,
+					full_name: this.state.full_name,
+					email: this.state.email,
+					phone: this.state.phone,
+					cgpa: this.state.cgpa,
+					graduation_status: this.state.graduation_status,
+					degree: this.state.degree.value
+				};
 			this.props.updateInfo(profileData);
 			console.log(profileData)
 			}
@@ -137,19 +156,24 @@ class EditProfile extends Component {
 				height: '50px',
 				'min-height': '34px',
 				'max-height': '50px',
-				'min-width':'250px'
+				'min-width':'300px'
 			}),
 			menuList: base => ({
 				...base,
 				minHeight: '200px',
 				height: '200px',
-				minWidth:'250px'
+				minWidth:'300px'
 			}),
 		};
+	// 	const onSwitch = name => event => {
+	// 		console.log('GRADCHANGEAFTER', this.state.graduation_status)
+  //   this.setState({ [name]: event.target.checked });
+  //   console.log('GRADCHANGEAFTER', this.state.graduation_status)
+  // };
 		const degreeOptions = [
 			{value: 'BE(Hons.)', label: 'BE(Hons.)'},
 			{value: 'ME', label: 'ME'},
-			{value: 'PHD', label: 'PHD'}
+			{value: 'PhD', label: 'PhD'}
 		];
 		const {loading, details} = this.props.account;
 		let profileContent = null;
@@ -158,7 +182,7 @@ class EditProfile extends Component {
 		} else {
 			if (this.props.auth.user.role === 'student') {
 				let graduationSelect;
-				if(this.state.graduationStatus) {
+				if(this.state.graduation_status) {
 					graduationSelect= (
 						<div className='form-group row'>
 															{/*<label className='d-flex justify-content-start */}
@@ -223,41 +247,41 @@ class EditProfile extends Component {
 															placeholder="Please enter your personal Email Address"
 															error={errors.email}
 															type="text" onChange={this.onChange}
-															value={this.state.emailPersonal}
-															name="emailPersonal"
+															value={this.state.email}
+															name="email"
 														/>
 													</div>
 													<div className="form-group col-md-5">
 														<label className='d-flex justify-content-start'
-																	 htmlFor="Full_Name"><h6>Full Name</h6></label>
+																	 htmlFor="full_name"><h6>Full Name</h6></label>
 														<TextFieldGroup
 															placeholder="Enter your full name as per Records"
 															error={errors.full_name}
 															type="text" onChange={this.onChange}
-															value={this.state.fullName}
-															name="fullName"
+															value={this.state.full_name}
+															name="full_name"
 														/>
 													</div>
 													<div className="form-group col-md-2">
 														<label className='d-flex justify-content-start'
-																	 htmlFor="state"><h6>CGPA/GPA</h6></label>
+																	 htmlFor="cgpa"><h6>CGPA/GPA</h6></label>
 
 														<TextFieldGroup placeholder="CGPA out of 10"
 																						error={errors.cgpa}
 																						type="text" onChange={this.onChange}
-																						value={this.state.cgpa.toString()} name="cgpa"
+																						value={this.state.cgpa} name="cgpa"
 														/>
 													</div>
 												</div>
 												<div className="row">
 													<div className="col-md-4">
 														<label className='d-flex justify-content-start'
-																	 htmlFor="studentId"><h6>Student Id</h6></label>
+																	 htmlFor="student_id"><h6>Student Id</h6></label>
 														<TextFieldGroup placeholder="Enter your College ID"
 																						error={errors.student_id}
 																						type="text" onChange={this.onChange}
-																						value={this.state.studentId}
-																						name="studentId"
+																						value={this.state.student_id}
+																						name="student_id"
 														/>
 													</div>
 													<div className="col-md-4">
@@ -273,25 +297,42 @@ class EditProfile extends Component {
 												</div>
 												<div className="row">
 													<div className='col-md-6'>
-														<h6 className='d-flex justify-content-start'
-																	 htmlFor="phone"><h6>Graduation Status</h6></h6>
-														<MDBFormInline>
-															<MDBInput gap onClick={this.onSwitch}
-																				checked={this.state.graduationStatus}
-																				label="Yes, I have completed my graduation"
-																				type="radio"
-															/>
-															<MDBInput gap onClick={this.onSwitch}
-																				checked={!this.state.graduationStatus}
-																				label="On going" type="radio"
-															/>
-														</MDBFormInline>
+														<h6 className='d-flex justify-content-start'>Graduation Status</h6>
+														{/*<label>*/}
+														{/*	{this.state.graduation_status ? <label>Yes, I have completed my graduation</label> :*/}
+														{/*	<label>Yet to be graduated</label>}*/}
+														{/*	<Switch onChange={this.onSwitch} checked={this.state.graduation_status} />*/}
+														{/*</label>*/}
+														<div>
+															<input type="radio" name="graduation_status"
+                                   value='Yes, I have completed my graduation'
+                                   checked={this.state.graduation_status}
+                                   onChange={this.onSwitch} />Yes, I have completed my graduation
+														</div>
+														<div>
+															<input type="radio" name="graduation_status"
+                                   value='Yet to be graduated'
+                                   checked={!this.state.graduation_status}
+                                   onChange={this.onSwitch} />Yet to be graduated
+														</div>
+
+														{/*<MDBFormInline>*/}
+														{/*	<MDBInput gap onClick={this.onSwitch}*/}
+														{/*						checked={this.state.graduation_status}*/}
+														{/*						label="Yes, I have completed my graduation"*/}
+														{/*						type="radio"*/}
+														{/*	/>*/}
+														{/*	<MDBInput gap onClick={this.onSwitch}*/}
+														{/*						checked={!this.state.graduation_status}*/}
+														{/*						label="On going" type="radio"*/}
+														{/*	/>*/}
+														{/*</MDBFormInline>*/}
 													</div>
 													{graduationSelect}
 													</div>
 												<div className="form-group row d-flex justify-content-end">
-														<button className="btn btn-primary w-30 my-1"
-																		type="submit">Update Information
+														<button className="btn btn-primary w-30 my-1" type='submit'
+																		>Update Information
 														</button>
 												</div>
 											</form>

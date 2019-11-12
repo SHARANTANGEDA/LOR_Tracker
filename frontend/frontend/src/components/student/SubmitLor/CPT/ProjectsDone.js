@@ -13,12 +13,15 @@ class ProjectsDone extends Component {
 			projects: [{
 				projectTitle: '',
 				year: '',
+				sem: '',
 			}],
 			errors: {},
 			projectCnt: 1,
 			years: ['year-0'],
 			projectTitles: ['project-0'],
 			yearsControl: [],
+			semesters: ['sem-0'],
+			semControl: []
 		};
 		this.changeHandler = this.changeHandler.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -26,10 +29,9 @@ class ProjectsDone extends Component {
 		this.onRemove = this.onRemove.bind(this);
 	}
 
-	// changeHandler(e) {
-	// 	console.log({[e.target.name]: e.target.value})
-	// 	this.setState({[e.target.name]: e.target.value});
-	// }
+	componentDidMount(){
+		this.setState({errors: this.props.front_errors})
+	}
 	changeHandler = (i, type) => e => {
 		console.log({HANDLER_LOG: {i: i, type: type, e: e, eValue: e.target}});
 		let projectHandler = this.state.projects;
@@ -40,6 +42,11 @@ class ProjectsDone extends Component {
 			let yearsChange = this.state.yearsControl;
 			yearsChange[i] = e;
 			this.setState({yearsControl: yearsChange})
+		} else if (type === 'sem') {
+			projectHandler[i].sem = e.value;
+			let semChange = this.state.semControl;
+			semChange[i] = e;
+			this.setState({semControl: semChange})
 		}
 		this.setState({
 			projects: projectHandler
@@ -48,24 +55,27 @@ class ProjectsDone extends Component {
 		getSelected[this.props.selectionIndex].projects_done=projectHandler;
 		this.props.checkbox.selected = getSelected;
 		console.log({STATE_LOG:
-				{projects: this.state.projects, handler: projectHandler, yearsControl: this.state.yearsControl}})
+				{projects: this.state.projects, handler: projectHandler, yearsControl: this.state.yearsControl,semControl: this.state.semControl}})
 	};
 
 
 	onAddProject() {
-		let newProjectArray = this.state.projectTitles,newYearArray = this.state.years,
+		let newProjectArray = this.state.projectTitles,newYearArray = this.state.years,newSemArray = this.state.semesters,
 			newProjects = this.state.projects;
 		newProjectArray.push('project-' + this.state.projectCnt);
 		newYearArray.push('year-' + this.state.projectCnt);
+		newSemArray.push('sem-' + this.state.projectCnt);
 		newProjects.push({
 			projectTitle: '',
-			year: ''
+			year: '',
+			sem: ''
 		});
 		this.setState({
 			projectCnt: this.state.projectCnt + 1,
 			years: newYearArray,
 			projectTitles: newProjectArray,
-			projects: newProjects
+			projects: newProjects,
+			semesters: newSemArray
 		})
 
 	}
@@ -80,9 +90,11 @@ class ProjectsDone extends Component {
 		this.setState({projects: [{
 				projectTitle: '',
 				year: '',
+				sem: ''
 			}],
 			years: ['year-0'],
-			projectTitles: ['project-0'],});
+			projectTitles: ['project-0'],
+			semesters: ['sem-0'],});
 		let getSelected = this.props.checkbox.selected;
 		getSelected[this.props.selectionIndex].projects_done=this.state.projects;
 		this.props.checkbox.selected = getSelected
@@ -90,30 +102,19 @@ class ProjectsDone extends Component {
 		this.state.projects.splice(index,1);
 		this.state.years.splice(index,1);
 		this.state.projectTitles.splice(index, 1);
+		this.state.semesters.splice(index,1);
 		this.setState({projects:this.state.projects,projectCnt:this.state.projectCnt-1,
 		years: this.state.years,
 			projectTitles: this.state.projectTitles,
+			semesters: this.state.semesters
 		});
 		let getSelected = this.props.checkbox.selected;
 		getSelected[this.props.selectionIndex].projects_done=this.state.projects;
 		this.props.checkbox.selected = getSelected
 		}
 	}
-	onUnSelect(e) {
-		this.setState({selected: false});
-		let unSelect = this.props.checkbox.selected;
-		// let index=-1;
-		unSelect = unSelect.filter(item => item.faculty_id !== e);
-		// let index = unSelect.indexOf(e);
-		// if (index !== -1) {
-		//   unSelect.splice(index, 1);
-		// }
-		this.props.checkbox.selected = unSelect;
-		console.log({selected: this.props.checkbox.selected})
-	}
 
 	render() {
-		const {errors} = this.state;
 		const customSelectStyles = {
 			control: (base, state) => ({
 				...base,
@@ -144,23 +145,40 @@ class ProjectsDone extends Component {
 									style={{background:'none', color:'black', borderStyle:'none'}}><i className="fas fa-times"/></button>
 
 				</div>
-				<div className='row col-md-12'>
+				<div className='row'>
+					<div className='col-md-12'>
 					<TextFieldGroup placeholder="Enter Project Title" error={errors.projectTitle}
 												type="text" onChange={this.changeHandler(i, 'projectTitle')}
 												value={this.state.projects[i].projectTitle}
 												name={this.state.projectTitles[i]}/>
+					</div>
 				</div>
 				<div className='row'>
+					<div className='col-md-6' style={{marginRight:'2px'}}>
 						<Select options={yearSelector}
-										className={classnames('isSearchable', {'is-invalid': errors.year})}
+										className={classnames('isSearchable', {'is-invalid':errors.year})}
 										styles={customSelectStyles}
 										placeholder="Select year"
 										name={this.state.years[i]} value={this.state.yearsControl[i]}
 										onChange={this.changeHandler(i, 'year')}>
 						</Select>
-					{errors.year && (
+						{errors.year && (
               <div className="invalid-feedback">{errors.year}</div>
-					)}
+            )}
+					</div>
+
+					<div className='col-md-6' >
+						<Select options={[{value: 'Sem-I', label: 'Sem-I'}, {value: 'Sem-II', label: 'Sem-II'}]}
+										className={classnames('isSearchable', {'is-invalid': errors.sem})}
+										styles={customSelectStyles}
+										placeholder="Select semester"
+										name={this.state.semesters[i]} value={this.state.semControl[i]}
+										onChange={this.changeHandler(i, 'sem')}>
+						</Select>
+						{errors.sem && (
+              <div className="invalid-feedback">{errors.sem}</div>
+            )}
+					</div>
 				</div>
 				<hr/>
 			</div>)
@@ -175,7 +193,6 @@ class ProjectsDone extends Component {
 					{/*	<hr/>*/}
 					{/*</div>*/}
 					{inputs}
-					<hr/>
 					<div className="row text-center d-flex justify-content-center">
 						<button type="submit" onClick={this.onAddProject} className="btn-sm  text-center"
 										style={{background: 'green', color: 'white', borderRadius: '5px'}}>
@@ -193,7 +210,7 @@ ProjectsDone.propTypes = {
 	errors: PropTypes.object.isRequired,
 	facultyId: PropTypes.number.isRequired,
 	checkbox: PropTypes.object.isRequired,
-	selectionIndex: PropTypes.number.isRequired
+	selectionIndex: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({

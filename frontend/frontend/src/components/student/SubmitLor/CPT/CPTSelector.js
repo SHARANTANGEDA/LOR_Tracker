@@ -44,15 +44,10 @@ class CPTSelector extends Component {
 		this.props.checkbox.selected[this.props.selectionIndex].thesis_done=[];
 		this.props.checkbox.selected[this.props.selectionIndex].status=true;
 	}
-	// onSubmit(e) {
-	// 	this.setState({selected: true});
-	// 	let getSelected = this.props.checkbox.selected;
-	// 	if(this.props.checkbox.selected[this.props.selectionIndex].status===true) {
-	// 		this.props.checkbox.selected[this.props.selectionIndex].others=this.state.others
-	// 	}
-	// 	getSelected.push(e);
-	// 	this.props.checkbox.selected = getSelected
-	// }
+	componentDidMount() {
+			this.setState({errors: this.props.errors});
+		console.log({LOAD: this.state.errors, LOADER: this.props.errors})
+	}
 
 	onBack() {
 		this.setState({showOthers: false});
@@ -63,18 +58,18 @@ class CPTSelector extends Component {
 		this.props.checkbox.selected[this.props.selectionIndex].others='';
 
 	}
-	onUnSelect(e) {
-		this.setState({selected: false});
-		let unSelect = this.props.checkbox.selected;
-		// let index=-1;
-		unSelect = unSelect.filter(item => item.faculty_id !== e);
-		// let index = unSelect.indexOf(e);
-		// if (index !== -1) {
-		//   unSelect.splice(index, 1);
-		// }
-		this.props.checkbox.selected = unSelect;
-		console.log({selected: this.props.checkbox.selected})
-	}
+	// onUnSelect(e) {
+	// 	this.setState({selected: false});
+	// 	let unSelect = this.props.checkbox.selected;
+	// 	// let index=-1;
+	// 	unSelect = unSelect.filter(item => item.faculty_id !== e);
+	// 	// let index = unSelect.indexOf(e);
+	// 	// if (index !== -1) {
+	// 	//   unSelect.splice(index, 1);
+	// 	// }
+	// 	this.props.checkbox.selected = unSelect;
+	// 	console.log({selected: this.props.checkbox.selected})
+	// }
 
 	codeSelect(e) {
 		this.setState({campusCode: e})
@@ -82,30 +77,16 @@ class CPTSelector extends Component {
 
 	render() {
 		const {errors} = this.state;
-		const customSelectStyles = {
-			control: (base, state) => ({
-				...base,
-				height: '50px',
-				'min-height': '34px',
-				'max-height': '50px',
-				'min-width': '250px'
-			}),
-			menuList: base => ({
-				...base,
-				minHeight: '200px',
-				height: '200px',
-				minWidth: '250px'
-			}),
-		};
 		let normalHeaders = (
 			<div className="row text-center">
 						<p>
-							You have not done anything under the faculty?, but want to apply for LOR,<button type="submit" onClick={this.onClickOthers} className="  text-center"
+							You have not done anything under the faculty?, but want to apply for LOR,
+							<button type="submit" onClick={this.onClickOthers} className="  text-center"
 										style={{border: 'none', color: 'blue', borderStyle:'none', background:'none', margin:'0', padding:'0'}}>
 							Click Here
 						</button>
 						</p>
-						<hr/>
+				<hr/>
 					</div>
 		);
 		let normalContent = (
@@ -117,19 +98,21 @@ class CPTSelector extends Component {
 										fontSize: '20px', background: '#000d69', color: 'white', borderRadius:'5px', padding:'5px'
 									}}>Add Courses</h4>
 							</div>
-							<CoursesDone facultyId={this.props.facultyId} selectionIndex={this.props.selectionIndex}/>
+							<CoursesDone facultyId={this.props.facultyId} selectionIndex={this.props.selectionIndex}
+													 front_errors={this.props.errors}/>
 						</div>
-						<div className='verticalLine'/>
-						<div className='col-lg-3'>
+						{/*<div className='verticalLine'/>*/}
+						<div className='col-md-4'>
 							<div className='row d-flex justify-content-center'>
 								<h4 	style={{
 
 										fontSize: '20px', background: '#000d69', color: 'white', borderRadius:'5px', padding:'5px'
 									}}>Add Projects</h4>
 							</div>
-							<ProjectsDone facultyId={this.props.facultyId} selectionIndex={this.props.selectionIndex}/>
+							<ProjectsDone facultyId={this.props.facultyId} selectionIndex={this.props.selectionIndex}
+														 />
 						</div>
-						<div className='verticalLine'/>
+						{/*<div className='verticalLine'/>*/}
 						<div className='col-md-4'>
 							<div className='row d-flex justify-content-center'>
 								<h4 	style={{
@@ -137,7 +120,8 @@ class CPTSelector extends Component {
 										fontSize: '20px', background: '#000d69', color: 'white', borderRadius:'5px', padding:'5px'
 									}}>Add Thesis</h4>
 							</div>
-							<ThesisDone facultyId={this.props.facultyId} selectionIndex={this.props.selectionIndex}/>
+							<ThesisDone facultyId={this.props.facultyId} selectionIndex={this.props.selectionIndex}
+													/>
 						</div>
 					</div>
 		);
@@ -175,7 +159,7 @@ CPTSelector.propTypes = {
 	errors: PropTypes.object.isRequired,
 	facultyId: PropTypes.number.isRequired,
 	checkbox: PropTypes.object.isRequired,
-	selectionIndex: PropTypes.number.isRequired
+	selectionIndex: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -45,7 +45,9 @@ export const setCurrentUserGoogle = ()=> {
 	let roleData = {
 		role:localStorage.getItem('role'),
 		email: localStorage.getItem('email'),
-		id:localStorage.getItem('id')
+		id:localStorage.getItem('id'),
+		first_name:localStorage.getItem('google_name'),
+		last_name:''
 	};
   return {
     type: CONVERT_GOOGLE_TOKEN_SUCCESS,

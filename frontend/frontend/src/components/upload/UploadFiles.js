@@ -158,7 +158,7 @@ componentDidMount(){
 }
 
 UploadFiles.propTypes = {
-  user: PropTypes.number.isRequired,
+  user: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired
 };
 

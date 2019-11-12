@@ -73,7 +73,6 @@ class CreateProfileSerializer(serializers.ModelSerializer):
 			phone=validated_data['phone'],
 			cgpa=validated_data['cgpa'],
 			graduation_status=validated_data['graduation_status'],
-			picture=validated_data['picture'],
 			degree=validated_data['degree'],
 			user=AppUser.objects.get(id=self.context['request'].user.id)
 		)
@@ -86,7 +85,6 @@ class CreateProfileSerializer(serializers.ModelSerializer):
 		instance.phone = validated_data.get('phone', instance.phone)
 		instance.cgpa = validated_data.get('cgpa', instance.cgpa)
 		instance.graduation_status = bool(validated_data.get('graduation_status', instance.graduation_status))
-		instance.picture = validated_data.get('picture', instance.picture)
 		instance.degree = validated_data.get('degree', instance.degree)
 		instance.save()
 		return instance

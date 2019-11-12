@@ -13,12 +13,15 @@ class ThesisDone extends Component {
 			thesis: [{
 				thesisTitle: '',
 				year: '',
+				sem: '',
 			}],
 			errors: {},
 			thesisCnt: 1,
 			years: ['year-0'],
 			thesisTitles: ['thesis-0'],
 			yearsControl: [],
+			semControl: [],
+			semesters: ['sem-0'],
 		};
 		this.changeHandler = this.changeHandler.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -28,7 +31,6 @@ class ThesisDone extends Component {
 
 	// changeHandler(e) {
 	// 	console.log({[e.target.name]: e.target.value})
-	// 	this.setState({[e.target.name]: e.target.value});
 	// }
 	changeHandler = (i, type) => e => {
 		console.log({HANDLER_LOG: {i: i, type: type, e: e, eValue: e.target}});
@@ -40,6 +42,11 @@ class ThesisDone extends Component {
 			let yearsChange = this.state.yearsControl;
 			yearsChange[i] = e;
 			this.setState({yearsControl: yearsChange})
+		} else if (type === 'sem') {
+			thesisHandler[i].sem = e.value;
+			let semChange = this.state.semControl;
+			semChange[i] = e;
+			this.setState({semControl: semChange})
 		}
 		this.setState({
 			thesis: thesisHandler
@@ -48,30 +55,32 @@ class ThesisDone extends Component {
 		getSelected[this.props.selectionIndex].thesis_done=thesisHandler;
 		this.props.checkbox.selected = getSelected
 		console.log({STATE_LOG:
-				{thesis: this.state.thesis, handler: thesisHandler, yearsControl: this.state.yearsControl}})
+				{thesis: this.state.thesis, handler: thesisHandler, yearsControl: this.state.yearsControl, semControl: this.state.semControl}})
 	};
 
 
-	componentWillReceiveProps(nextProps, nextContext) {
-		if (nextProps) {
-			this.setState({errors: nextProps.errors})
-		}
+	// 	this.setState({[e.target.name]: e.target.value});
+	componentDidMount(){
+		this.setState({errors: this.props.front_errors})
 	}
 
 	onAddThesis() {
-		let newThesisArray = this.state.thesisTitles,newYearArray = this.state.years,
+		let newThesisArray = this.state.thesisTitles,newYearArray = this.state.years, newSemArray = this.state.semesters,
 			newThesis = this.state.thesis;
 		newThesisArray.push('thesis-' + this.state.thesisCnt);
 		newYearArray.push('year-' + this.state.thesisCnt);
+		newSemArray.push('sem-' + this.state.courseCnt);
 		newThesis.push({
 			thesisTitle: '',
-			year: ''
+			year: '',
+			sem: ''
 		});
 		this.setState({
 			thesisCnt: this.state.thesisCnt + 1,
 			years: newYearArray,
 			thesisTitles: newThesisArray,
-			thesis: newThesis
+			thesis: newThesis,
+			semesters: newSemArray
 		})
 
 	}
@@ -80,8 +89,9 @@ class ThesisDone extends Component {
 			this.setState({thesis: [{
 				thesisTitle: '',
 				year: '',
+				sem: '',
 			}],years: ['year-0'],
-			thesisTitles: ['thesis-0'],});
+			thesisTitles: ['thesis-0'], semesters: ['sem-0'],});
 			let getSelected = this.props.checkbox.selected;
 		getSelected[this.props.selectionIndex].thesis_done=this.state.thesis;
 		this.props.checkbox.selected = getSelected
@@ -89,9 +99,11 @@ class ThesisDone extends Component {
 		this.state.thesis.splice(index,1);
 		this.state.years.splice(index,1);
 		this.state.thesisTitles.splice(index, 1);
+		this.state.semesters.splice(index,1);
 		this.setState({thesis:this.state.thesis,thesisCnt:this.state.thesisCnt-1,
 		years: this.state.years,
 			thesisTitles: this.state.thesisTitles,
+			semesters: this.state.semesters
 		});
 		let getSelected = this.props.checkbox.selected;
 		getSelected[this.props.selectionIndex].thesis_done=this.state.thesis;
@@ -104,18 +116,6 @@ class ThesisDone extends Component {
 		this.props.checkbox.selected = getSelected
 	}
 
-	onUnSelect(e) {
-		this.setState({selected: false});
-		let unSelect = this.props.checkbox.selected;
-		// let index=-1;
-		unSelect = unSelect.filter(item => item.faculty_id !== e);
-		// let index = unSelect.indexOf(e);
-		// if (index !== -1) {
-		//   unSelect.splice(index, 1);
-		// }
-		this.props.checkbox.selected = unSelect;
-		console.log({selected: this.props.checkbox.selected})
-	}
 
 	render() {
 		const {errors} = this.state;
@@ -149,23 +149,40 @@ class ThesisDone extends Component {
 									style={{background:'none', color:'black', borderStyle:'none'}}><i className="fas fa-times"/></button>
 
 				</div>
-				<div className='row col-md-12'>
+				<div className='row'>
+					<div className='col-md-12'>
 					<TextFieldGroup placeholder="Enter Thesis Titles" error={errors.thesisTitle}
 												type="text" onChange={this.changeHandler(i, 'thesisTitle')}
 												value={this.state.thesis[i].thesisTitle}
 												name={this.state.thesisTitles[i]}/>
+					</div>
 				</div>
 				<div className='row'>
+					<div className='col-md-6' style={{marginRight:'2px'}}>
 						<Select options={yearSelector}
-										className={classnames('isSearchable', {'is-invalid': errors.year})}
+										className={classnames('isSearchable', {'is-invalid':errors.year})}
 										styles={customSelectStyles}
 										placeholder="Select year"
 										name={this.state.years[i]} value={this.state.yearsControl[i]}
 										onChange={this.changeHandler(i, 'year')}>
 						</Select>
-					{errors.year && (
+						{errors.year && (
               <div className="invalid-feedback">{errors.year}</div>
             )}
+					</div>
+
+					<div className='col-md-6' >
+						<Select options={[{value: 'Sem-I', label: 'Sem-I'}, {value: 'Sem-II', label: 'Sem-II'}]}
+										className={classnames('isSearchable', {'is-invalid': errors.sem})}
+										styles={customSelectStyles}
+										placeholder="Select semester"
+										name={this.state.semesters[i]} value={this.state.semControl[i]}
+										onChange={this.changeHandler(i, 'sem')}>
+						</Select>
+						{errors.sem && (
+              <div className="invalid-feedback">{errors.sem}</div>
+            )}
+					</div>
 				</div>
 				<hr/>
 			</div>)
@@ -180,7 +197,6 @@ class ThesisDone extends Component {
 					{/*	<hr/>*/}
 					{/*</div>*/}
 					{inputs}
-					<hr/>
 					<div className="row text-center d-flex justify-content-center">
 						<button type="submit" onClick={this.onAddThesis} className="btn-sm  text-center"
 										style={{background: 'green', color: 'white', borderRadius: '5px'}}>
@@ -198,7 +214,8 @@ ThesisDone.propTypes = {
 	errors: PropTypes.object.isRequired,
 	facultyId: PropTypes.number.isRequired,
 	checkbox: PropTypes.object.isRequired,
-	selectionIndex: PropTypes.number.isRequired
+	selectionIndex: PropTypes.number.isRequired,
+
 };
 
 const mapStateToProps = state => ({

@@ -35,11 +35,11 @@ def validate_lor_submission(data):
 				errors["courses_done"] = "You have not entered the input properly, the request could not be submitted"
 				raise ValidationError(errors)
 		for project in projects_done:
-			if len(project['projectTitle']) == 0 or not project['year']:
+			if len(project['projectTitle']) == 0 or not project['year'] or not project['sem']:
 				errors["projects_done"] = "You have not entered the input properly, the request could not be submitted"
 				raise ValidationError(errors)
 		for thesis in thesis_done:
-			if len(thesis['thesisTitle']) == 0 or not thesis['year']:
+			if len(thesis['thesisTitle']) == 0 or not thesis['year'] or not thesis['sem']:
 				errors["thesis_done"] = "You have not entered the input properly, the request could not be submitted"
 				raise ValidationError(errors)
 

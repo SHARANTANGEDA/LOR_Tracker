@@ -39,6 +39,7 @@
     "react-share": "^3.0.0",
     "react-star-rating-component": "^1.4.1",
     "react-swipeable-views": "^0.13.1",
+    "react-switch": "^5.0.1",
     "react-table": "^6.10.3",
     "reactjs-popup": "^1.4.1",
     "redux": "^4.0.1",

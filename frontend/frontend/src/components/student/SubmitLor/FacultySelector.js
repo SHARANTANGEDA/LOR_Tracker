@@ -33,7 +33,8 @@ class FacultySelector extends Component {
 			selected: false,
 			modalIsOpen: false,
 			currentFid: '',
-			currentIndex:''
+			currentIndex:'',
+			errors: {}
 		};
 		this.onSelect = this.onSelect.bind(this);
     this.onUnSelect = this.onUnSelect.bind(this);
@@ -68,6 +69,7 @@ class FacultySelector extends Component {
 		if(!isEmpty(errors)) {
 			console.log(errors)
 			this.props.checkbox.errors=errors;
+			this.setState({errors: errors})
 		}else {
 			this.setState({ modalIsOpen: false });
 		}
@@ -89,6 +91,13 @@ class FacultySelector extends Component {
   }
 	render() {
 		const {facLoading, facList} = this.props.lor;
+		let errors_display = this.state.errors, displayAllEmptyMess = null;
+		console.log(errors_display);
+		if(errors_display) {
+			if(errors_display.allEmpty) {
+				displayAllEmptyMess = <h6 style={{color: 'red'}}>{errors_display.allEmpty}</h6>
+			}
+		}
 
 		let heading=null, tableData=null, tableContent=null;
 		let modalContent = (
@@ -98,10 +107,10 @@ class FacultySelector extends Component {
 										style={{background: 'green', color: 'white', borderRadius: '5px', fontSize:'18px'}}>
 							Done
 						</button>
-
 					</div>
+					{displayAllEmptyMess}
 					<div className='row'>
-						<CPTSelector facultyId={this.state.currentFid} selectionIndex={this.state.currentIndex}/>
+						<CPTSelector facultyId={this.state.currentFid} selectionIndex={this.state.currentIndex} />
 					</div>
 				</div>
 			);

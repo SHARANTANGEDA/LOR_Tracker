@@ -6,8 +6,7 @@ def is_in_group(user, group_name):
     """
     Takes a user and a group name, and returns `True` if the user is in that group.
     """
-    print('PERM', user)
-    print(user, group_name)
+
     try:
         return Group.objects.get(name=group_name).user_set.filter(id=user.id).exists()
     except Group.DoesNotExist:
@@ -21,9 +20,7 @@ class HasGroupPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
         # Get a mapping of methods -> required group.
-        print('PERM', request)
-        print(request.user)
-        print(view)
+
         required_groups_mapping = getattr(view, "required_groups", {})
 
         # Determine the required groups for this particular request method.
